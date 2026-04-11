@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="images/logo-favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/logo-favicon-16x16.png">
+<link rel="apple-touch-icon" href="images/logo-favicon-apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+
+<title>Why Your Cloud Marketplace Listing Is Silent And What Fixes It</title>
+<meta name="description" content="Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn 3 execution gaps keeping ISVs silent. SaaSNova deploys the fix in 90 days."/>
+
+<meta property="og:title" content="Why Your Cloud Marketplace Listing Is Silent And What Fixes It" />
+<meta property="og:description" content="Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn 3 execution gaps keeping ISVs silent. SaaSNova deploys the fix in 90 days." />
+<meta property="og:image" content="images/blogs/cloud-marketplace-listing.png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="blog-cloud-marketplace-listing-silent-fix.html" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Why Your Cloud Marketplace Listing Is Silent And What Fixes It" />
+<meta name="twitter:description" content="Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn 3 execution gaps keeping ISVs silent. SaaSNova deploys the fix in 90 days." />
+<meta name="twitter:image" content="images/blogs/cloud-marketplace-listing.png" />
+
+<style>
+/* ── BLOG HERO, vibrant gradient mesh ── */
+.blog-hero {
+  margin-top:64px;
+  position:relative;overflow:hidden;
+  padding:68px 0 56px;
+  background:linear-gradient(135deg,#0A1628 0%,#0D1F45 40%,#1A0A2E 100%);
+}
+.blog-hero::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 70% at 85% 20%,rgba(0,139,248,.22) 0%,transparent 55%),
+    radial-gradient(ellipse 45% 55% at 10% 75%,rgba(250,15,156,.15) 0%,transparent 50%),
+    radial-gradient(ellipse 35% 40% at 55% 10%,rgba(241,153,83,.1) 0%,transparent 45%);
+}
+.blog-hero-inner {
+  max-width:800px;margin:0 auto;padding:0 24px;
+  position:relative;z-index:2;text-align:center;
+}
+.blog-hero-tag {
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 14px;border-radius:999px;
+  background:rgba(0,139,248,.15);border:1px solid rgba(0,139,248,.25);
+  font-size:11px;font-weight:700;color:rgba(100,195,255,.95);
+  margin-bottom:16px;text-transform:uppercase;letter-spacing:.1em;
+}
+.blog-hero h1 {
+  font-size:clamp(32px,4.5vw,52px);font-weight:800;
+  line-height:1.08;letter-spacing:-.025em;color:#fff;margin-bottom:14px;
+}
+.blog-hero p {
+  font-size:17px;color:rgba(255,255,255,.62);line-height:1.8;max-width:540px;
+}
+
+/* ── CATEGORY FILTER ── */
+.blog-filters {
+  background:#fff;border-bottom:1px solid var(--border-light);
+  padding:16px 0;position:sticky;top:64px;z-index:50;
+}
+.blog-filters-inner {
+  max-width:1200px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.blog-filter-btn {
+  padding:7px 16px;border-radius:999px;font-size:13px;font-weight:600;
+  border:1.5px solid var(--border-light);background:#fff;color:var(--text-muted);
+  cursor:pointer;transition:all .15s;font-family:inherit;
+}
+.blog-filter-btn:hover,.blog-filter-btn.active {
+  border-color:var(--blue);background:rgba(0,139,248,.06);color:var(--blue);
+}
+.blog-filter-btn.active { background:var(--blue);color:#fff;border-color:var(--blue); }
+
+/* ── FEATURED POST ── */
+.blog-featured {
+  background:linear-gradient(135deg,#EBF5FF 0%,#F5EEFF 100%);
+  padding:56px 0;
+}
+.blog-featured-card {
+  max-width:900px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  background:#fff;border:1px solid var(--border-light);border-radius:var(--r-2xl);
+  overflow:hidden;box-shadow:0 8px 40px rgba(0,139,248,.1);
+}
+.blog-feat-visual {
+  height:100%;min-height:280px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.blog-feat-content {padding:36px 32px;display:flex;flex-direction:column;justify-content:center;}
+
+/* ── POST GRID ── */
+.blog-grid-section {
+  background:#FAFBFF;padding:56px 0;
+}
+.blog-grid {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);
+}
+.blog-card {
+  background:#fff;border:1px solid var(--border-light);border-radius:var(--r-xl);
+  overflow:hidden;transition:all .22s;display:flex;flex-direction:column;
+  text-decoration:none;color:inherit;
+}
+.blog-card:hover {transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,139,248,.1);border-color:rgba(0,139,248,.2);}
+.blog-card-visual {
+  height:160px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+}
+.blog-card-body {padding:20px;flex:1;display:flex;flex-direction:column;}
+.blog-card-cat {font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px;}
+.blog-card-h {font-size:15px;font-weight:700;line-height:1.45;margin-bottom:8px;flex:1;}
+.blog-card-meta {display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--border-light);}
+
+/* ── CTA STRIP ── */
+.blog-cta {
+  background:linear-gradient(135deg,#0A1628,#1A0A2E);
+  padding:56px 0;text-align:center;position:relative;overflow:hidden;
+}
+.blog-cta::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,139,248,.12) 0%,transparent 60%);
+}
+
+@media(max-width:900px){
+  .blog-featured-card{grid-template-columns:1fr;}
+  .blog-feat-visual{min-height:200px;}
+  .blog-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){.blog-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<section class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="blog-hero-tag reveal">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3h6M2 5.5h5M2 8h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      SaaSNova Blog
+    </div>
+    <h1 class="reveal delay-1" style="color:#ffffff">
+      Cloud GTM intelligence.<br/>Written by a practitioner.
+    </h1>
+    <p class="reveal delay-2" style="max-width:580px;margin:0 auto">
+      Actionable insights on co-sell execution, marketplace listing, field team motions, and board-ready proof, across AWS, Azure, and GCP. From Jen Dawson. Not an agency.
+    </p>
+  </div>
+</section>
+
+<div class="blog-filters">
+  <div class="blog-filters-inner">
+    <button class="blog-filter-btn active" onclick="filterPost(this,'all')">All Posts</button>
+    <button class="blog-filter-btn" onclick="filterPost(this,'aws')">AWS Co-Sell</button>
+    <button class="blog-filter-btn" onclick="filterPost(this,'multi')">Multi-Cloud</button>
+    <button class="blog-filter-btn" onclick="filterPost(this,'board')">Board Proof</button>
+    <button class="blog-filter-btn" onclick="filterPost(this,'isv')">ISV Programs</button>
+  </div>
+</div>
+
+<section class="blog-featured">
+  <div class="container">
+    <div style="margin-bottom:24px">
+      <span class="eyebrow" style="color:var(--blue)">Featured Post</span>
+    </div>
+    <a href="blog-cloud-marketplace-listing-silent-fix.html" class="blog-featured-card reveal" style="text-decoration:none;color:inherit;display:grid">
+      <div class="blog-feat-visual" style="background:#0a1628">
+        <img src="images/blogs/cloud-marketplace-listing.png" alt="Cloud Marketplace Listing" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.9"/>
+      </div>
+      <div class="blog-feat-content">
+        <span style="display:inline-block;padding:3px 10px;border-radius:var(--r-full);background:rgba(0,139,248,.1);color:var(--blue);font-size:11px;font-weight:700;margin-bottom:14px">ISV Marketplace Activation</span>
+        <h2 style="font-size:clamp(20px,2.4vw,27px);margin-bottom:12px;line-height:1.3">Why Your Cloud Marketplace Listing Is Silent And What Actually Fixes It</h2>
+        <p style="font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:20px">Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn the 3 execution gaps keeping ISVs silent. SaaSNova deploys the fix in 90 days.</p>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:8px">
+            <img src="images/jen-dp.jpg" alt="Jen Dawson" style="width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:top"/>
+            <span style="font-size:13px;font-weight:600;color:var(--text-secondary)">Jen Dawson</span>
+          </div>
+          <span style="font-size:12px;color:var(--text-muted)">April 2026 · 8 min read</span>
+          <span style="margin-left:auto;font-size:14px;font-weight:600;color:var(--blue)">Read </span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="blog-grid-section">
+  <div class="container">
+    <h2 style="margin-bottom:var(--sp-4)" class="reveal">All Posts</h2>
+    <div class="blog-grid">
+
+      <a href="blog-cloud-marketplace-listing-silent-fix.html" class="blog-card reveal delay-1" data-cat="isv multi">
+        <div class="blog-card-visual" style="background:#0A1628;">
+          <img src="images/blogs/cloud-marketplace-listing.png" alt="Cloud Marketplace Listing" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.85"/>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat" style="color:var(--blue)">ISV Marketplace Activation</div>
+          <div class="blog-card-h">Why Your Cloud Marketplace Listing Is Silent And What Actually Fixes It</div>
+          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn the 3 execution gaps.</p>
+          <div class="blog-card-meta">
+            <span style="font-size:12px;color:var(--text-muted)">April 2026 · 8 min</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="blog-board-proof.html" class="blog-card reveal delay-2" data-cat="board">
+        <div class="blog-card-visual" style="background:linear-gradient(135deg,#1a0a25,#2d0f40,#1a0018)">
+          <svg width="200" height="160" viewBox="0 0 200 160" fill="none" style="position:absolute;inset:0;opacity:.7">
+            <rect x="18" y="125" width="24" height="22" fill="rgba(250,15,156,.15)" rx="3"/>
+            <rect x="54" y="100" width="24" height="47" fill="rgba(250,15,156,.22)" rx="3"/>
+            <rect x="90" y="72" width="24" height="75" fill="rgba(250,15,156,.32)" rx="3"/>
+            <rect x="126" y="44" width="24" height="103" fill="rgba(250,15,156,.44)" rx="3"/>
+            <rect x="162" y="18" width="24" height="129" fill="rgba(250,15,156,.58)" rx="3"/>
+            <path d="M18 125 Q60 95 90 72 Q130 42 174 18" stroke="rgba(250,15,156,.65)" stroke-width="1.5" fill="none"/>
+          </svg>
+          <div style="position:relative;text-align:center">
+            <div style="width:48px;height:48px;border-radius:12px;background:rgba(250,15,156,.18);border:1px solid rgba(250,15,156,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="1.4" fill="none"/><path d="M7 16l4-5 4 3 4-7" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase">Board Proof</div>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat" style="color:var(--pink)">Board Proof</div>
+          <div class="blog-card-h">What Board-Ready Cloud GTM Proof Actually Looks Like</div>
+          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">A practical framework for producing investor-grade cloud marketplace evidence boards can present directly.</p>
+          <div class="blog-card-meta">
+            <span style="font-size:12px;color:var(--text-muted)">March 2026 · 10 min</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="blog-isv-accelerate.html" class="blog-card reveal delay-3" data-cat="isv">
+        <div class="blog-card-visual" style="background:linear-gradient(135deg,#1a1000,#2d1e00,#1a1200)">
+          <svg width="200" height="160" viewBox="0 0 200 160" fill="none" style="position:absolute;inset:0;opacity:.7">
+            <circle cx="100" cy="80" r="70" stroke="rgba(255,153,0,.08)" stroke-width="1" fill="none"/>
+            <circle cx="100" cy="80" r="48" stroke="rgba(255,153,0,.12)" stroke-width="1" fill="none"/>
+            <circle cx="100" cy="80" r="26" stroke="rgba(255,153,0,.18)" stroke-width="1" fill="none"/>
+            <path d="M76 120 L100 52 L124 120" stroke="rgba(255,153,0,.4)" stroke-width="1.5" fill="none"/>
+            <path d="M84 104 L116 104" stroke="rgba(255,153,0,.4)" stroke-width="1.5" fill="none"/>
+          </svg>
+          <div style="position:relative;text-align:center">
+            <div style="width:48px;height:48px;border-radius:12px;background:rgba(255,153,0,.18);border:1px solid rgba(255,153,0,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.2 6.5L21 9.3l-5.2 4.7 1.4 6.7L12 17.5l-5.2 3.2 1.4-6.7L3 9.3l6.8-.8z" stroke="#FF9900" stroke-width="1.4" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase">ISV Accelerate</div>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat" style="color:var(--aws)">AWS Marketplace</div>
+          <div class="blog-card-h">ISV Accelerate: What It Actually Takes to Qualify, and Why Most ISVs Miss It</div>
+          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">The real qualification criteria, common disqualifiers, and the execution path that gets ISVs accepted and active.</p>
+          <div class="blog-card-meta">
+            <span style="font-size:12px;color:var(--text-muted)">March 2026 · 10 min</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
+          </div>
+        </div>
+      </a>
+
+      <a href="blog-multi-cloud-gtm.html" class="blog-card reveal delay-1" data-cat="multi">
+        <div class="blog-card-visual" style="background:linear-gradient(135deg,#0d1f3c,#12294f,#0d2218)">
+          <svg width="200" height="160" viewBox="0 0 200 160" fill="none" style="position:absolute;inset:0;opacity:.6">
+            <circle cx="100" cy="80" r="65" stroke="rgba(255,153,0,.1)" stroke-width="1.5" fill="none"/>
+            <circle cx="100" cy="80" r="42" stroke="rgba(0,120,212,.1)" stroke-width="1.5" fill="none"/>
+            <circle cx="100" cy="80" r="22" stroke="rgba(52,168,83,.1)" stroke-width="1.5" fill="none"/>
+          </svg>
+          <div style="position:relative;text-align:center">
+            <div style="width:48px;height:48px;border-radius:12px;background:rgba(241,153,83,.18);border:1px solid rgba(241,153,83,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.4" fill="none"/><ellipse cx="12" cy="12" rx="4" ry="9" stroke="white" stroke-width="1.4" fill="none"/><path d="M3 12h18" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase">Multi-Cloud</div>
+          </div>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-cat" style="color:var(--orange)">Multi-Cloud Strategy</div>
+          <div class="blog-card-h">The Multi-Cloud GTM Playbook: AWS, Azure, and GCP in One Coordinated Motion</div>
+          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">A structured framework for ISVs running co-sell across all three clouds without tripling the operational overhead.</p>
+          <div class="blog-card-meta">
+            <span style="font-size:12px;color:var(--text-muted)">March 2026 · 11 min</span>
+            <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
+          </div>
+        </div>
+      </a>
+
+      <div class="blog-card reveal delay-2" style="border:2px dashed var(--border-light);background:linear-gradient(135deg,#F0F7FF,#FFF5FB);cursor:default">
+        <div style="padding:32px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;min-height:300px">
+          <div class="icon-wrap icon-orange" style="margin-bottom:16px">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="1.5" y="4" width="17" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M1.5 7l8.5 5 8.5-5" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3 style="font-size:18px;margin-bottom:8px">Get the Weekly Brief</h3>
+          <p class="text-sm" style="color:var(--text-muted);margin-bottom:18px;max-width:220px;line-height:1.65">Co-sell tactics, marketplace updates, and GTM intelligence, every week from Jen Dawson.</p>
+          <a href="newsletter" class="btn btn-primary btn-sm">Subscribe Free </a>
+        </div>
+      </div>
+
+      <div class="blog-card reveal delay-3" style="border:2px dashed var(--border-light);background:#FAFBFF;cursor:default">
+        <div style="padding:32px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;min-height:300px">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--light-200);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:14px">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 5v8M5 9h8" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3 style="font-size:16px;margin-bottom:6px;color:var(--text-muted)">More posts monthly</h3>
+          <p class="text-sm" style="color:var(--text-muted);max-width:200px;line-height:1.6">Subscribe to The Nova Brief to get new posts in your inbox.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="blog-cta">
+  <div class="container-sm" style="position:relative">
+    <span class="eyebrow" style="color:rgba(0,139,248,.7);margin-bottom:12px;display:block">From the Practitioner</span>
+    <h2 style="color:#fff;margin-bottom:12px">Reading about execution<br/>isn't the same as doing it.</h2>
+    <p style="color:rgba(255,255,255,.62);font-size:17px;max-width:440px;margin:0 auto 28px">Book a discovery call and get a written GTM readiness assessment for your ISV, on your target clouds.</p>
+    <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03"
+       target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+      Book a 30-Min Discovery Call
+    </a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+function filterPost(btn, cat) {
+  document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.blog-card[data-cat]').forEach(card => {
+    const cats = card.dataset.cat ? card.dataset.cat.split(' ') : [];
+    card.style.display = (cat === 'all' || cats.includes(cat)) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

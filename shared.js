@@ -101,7 +101,7 @@ const NAV_HTML = `
                 <div class="dropdown-item-icon" style="background:transparent;"><img src="images/labra-logo.png" alt="Labra" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Labra
               </a>
               <a href="partner-tackle.html" class="dropdown-item" role="menuitem">
-                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/tackle-logo.png" alt="Tackle.io" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Tackle.io
+                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/tackle.io-logo.png" alt="Tackle.io" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Tackle.io
               </a>
             </div>
           </div>
@@ -197,7 +197,7 @@ const NAV_HTML = `
         <a href="partner-saasify.html" class="mob-nested-link"><img src="images/saasify-logo.png" alt="SaaSify" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> SaaSify</a>
         <a href="partner-workspan.html" class="mob-nested-link"><img src="images/workspan-logo.jpeg" alt="Workspan" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Workspan</a>
         <a href="partner-labra.html" class="mob-nested-link"><img src="images/labra-logo.png" alt="Labra" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Labra</a>
-        <a href="partner-tackle.html" class="mob-nested-link"><img src="images/tackle-logo.png" alt="Tackle.io" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Tackle.io</a>
+        <a href="partner-tackle.html" class="mob-nested-link"><img src="images/tackle.io-logo.png" alt="Tackle.io" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Tackle.io</a>
       </div>
       
       <button class="mob-nested-btn">SI / GSI ${SVG.chevDown}</button>
@@ -248,59 +248,80 @@ const NAV_HTML = `
 
 const FOOTER_HTML = `
 <footer id="footer" role="contentinfo">
-  <div class="container" style="padding-top:52px;padding-bottom:28px">
+  <div class="container" style="padding-top:64px;padding-bottom:32px">
     <div class="footer-grid">
       <div>
-        <div style="margin-bottom:14px">
-          <img src="images/logo-white.png" alt="SaaSNova" style="height:34px;width:auto;object-fit:contain"/>
-        </div>
-        <p class="footer-tagline">The world's first GTM execution engine for SaaS ISVs scaling through AWS, Azure, and GCP Marketplace.</p>
-        <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap">
-          <div style="display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:7px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">
+        <a href="index.html" aria-label="SaaSNova Home" style="display:inline-block;margin-bottom:16px;">
+          <img src="images/logo-white.png" alt="SaaSNova" style="height:36px;width:auto;object-fit:contain"/>
+        </a>
+        <p class="footer-tagline" style="margin-bottom:24px">The world's first GTM execution engine for SaaS ISVs scaling through AWS, Azure, and GCP Marketplace.</p>
+        
+        <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
             <img src="images/aws-logo.png" alt="AWS" style="height:14px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.75"/>
           </div>
-          <div style="display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:7px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">
+          <div style="display:flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
             <img src="images/azure-logo.png" alt="Azure" style="height:14px;width:auto;object-fit:contain;opacity:.8"/>
           </div>
-          <div style="display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:7px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">
+          <div style="display:flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
             <img src="images/gcp-logo.png" alt="GCP" style="height:14px;width:auto;object-fit:contain;opacity:.8"/>
           </div>
         </div>
-        <form name="footer-newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleFooterNewsletter(event)" style="display:flex;gap:8px">
+
+        <form name="footer-newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;gap:8px;margin-bottom:24px;max-width:320px">
           <input type="hidden" name="form-name" value="footer-newsletter"/>
           <input type="text" name="bot-field" style="display:none" aria-hidden="true"/>
-          <input type="email" name="email" placeholder="The Nova Brief" style="flex:1;padding:9px 12px;border:1px solid rgba(255,255,255,.12);border-radius:8px;font-size:13px;font-family:inherit;color:#fff;background:rgba(255,255,255,.06);outline:none;min-width:0"/>
-          <button type="submit" class="btn btn-primary" style="padding:9px 14px;font-size:13px;flex-shrink:0">Join</button>
+          <input type="email" name="email" placeholder="The Nova Brief" required style="flex:1;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(255,255,255,0.05);color:#fff;font-size:14px;outline:none;"/>
+          <button type="submit" class="btn btn-primary" style="padding:10px 18px;font-size:14px;background:var(--pink, #FA0F9C);border:none;border-radius:8px;">Join</button>
         </form>
+
+        <div style="display:flex;gap:16px;align-items:center;">
+          <a href="#" style="color:#0A66C2;" aria-label="LinkedIn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="#" style="color:#FF0000;" aria-label="YouTube">
+            <svg width="26" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.582 6.186c-.23-.86-.908-1.538-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418c-.86.23-1.538.908-1.768 1.768C2 7.746 2 12 2 12s0 4.254.418 5.814c.23.86.908 1.538 1.768 1.768 1.56.418 7.814.418 7.814.418s6.254 0 7.814-.418c.86-.23 1.538-.908 1.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814zM9.996 15.005l.005-6 5.207 3.005-5.212 2.995z"/></svg>
+          </a>
+        </div>
       </div>
+      
       <div>
-        <div class="footer-col-title">Services</div>
+        <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">SERVICES</div>
         <a href="services.html" class="footer-link">All Services</a>
         <a href="ignite.html" class="footer-link">Ignite</a>
         <a href="supernova.html" class="footer-link">SuperNova</a>
         <a href="novax.html" class="footer-link">NovaX</a>
       </div>
+      
       <div>
-        <div class="footer-col-title">Company</div>
+        <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">COMPANY</div>
         <a href="about.html" class="footer-link">About &amp; Team</a>
         <a href="results.html" class="footer-link">Case Studies</a>
         <a href="show.html" class="footer-link">The Jen GTM Show</a>
         <a href="partners.html" class="footer-link">Partners</a>
         <a href="contact.html" class="footer-link">Contact</a>
       </div>
+      
       <div>
-        <div class="footer-col-title">Resources</div>
+        <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">RESOURCES</div>
         <a href="webinars.html" class="footer-link">Webinars</a>
         <a href="blog.html" class="footer-link">Blog</a>
         <a href="newsletter.html" class="footer-link">The Nova Brief</a>
+        
+        <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-top:40px;margin-bottom:20px;">CONTACT</div>
+        <a href="mailto:jen@saasnova.ai" class="footer-link" style="text-transform:none;">jen@saasnova.ai</a>
+        <a href="tel:+12017555369" class="footer-link" style="text-transform:none;">+1 (201) 755-5369</a>
+        <a href="mailto:operations@saasnova.ai" class="footer-link" style="text-transform:none;">operations@saasnova.ai</a>
       </div>
     </div>
-    <hr class="divider-dark" style="margin:44px 0 22px"/>
-    <div class="footer-bottom" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-      <span class="footer-legal" style="font-size:13px; color:rgba(255,255,255,.45);">&copy; 2026 SaaSNova. All rights reserved.</span>
-      <div style="display:flex;gap:20px;flex-wrap:wrap">
-        <a href="privacy.html" class="footer-legal" style="font-size:13px; color:rgba(255,255,255,.45); text-decoration:none;">Privacy Policy</a>
-        <a href="terms.html" class="footer-legal" style="font-size:13px; color:rgba(255,255,255,.45); text-decoration:none;">Terms of Use</a>
+    
+    <hr class="divider-dark" style="margin:48px 0 24px; border:none; height:1px; background:linear-gradient(90deg, #008BF8 0%, #FA0F9C 50%, rgba(255,255,255,0.05) 100%);"/>
+    
+    <div class="footer-bottom" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <span class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);">&copy; 2026 SaaSNova. All rights reserved.</span>
+      <div style="display:flex;gap:24px;flex-wrap:wrap">
+        <a href="privacy.html" class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Privacy Policy</a>
+        <a href="terms.html" class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Terms of Use</a>
       </div>
     </div>
   </div>
@@ -309,15 +330,18 @@ const FOOTER_HTML = `
   <a href="${CALENDLY}" target="_blank" rel="noopener" class="btn btn-primary w-full" style="justify-content:center;display:flex;font-weight:800;background-color:var(--pink);color:#fff;border-radius:12px;border:none;box-shadow: 0 -8px 24px rgba(0, 139, 248, 0.35), 0 -4px 12px rgba(250, 15, 156, 0.2);">Get Started</a>
 </div>`;
 
+// DOM Injections
 const navEl = document.getElementById('nav-placeholder');
 if(navEl) navEl.innerHTML = NAV_HTML;
 const footerEl = document.getElementById('footer-placeholder');
 if(footerEl) footerEl.innerHTML = FOOTER_HTML;
 
+// Navigation Scroll Effect
 window.addEventListener('scroll', () => {
   document.getElementById('nav')?.classList.toggle('scrolled', window.scrollY > 8);
 }, { passive: true });
 
+// Mobile Menu Toggle
 function toggleMob() {
   const menu = document.getElementById('mob-menu');
   const btn = document.getElementById('hamburger');
@@ -327,6 +351,7 @@ function toggleMob() {
   document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
+// Global Click Handlers
 document.addEventListener('click', e => {
   if(e.target.closest('#mob-menu a')) {
     document.getElementById('mob-menu')?.classList.remove('open');
@@ -344,12 +369,14 @@ document.addEventListener('click', e => {
   }
 });
 
+// Active Link Setup
 const page = window.location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav-link').forEach(l => {
   const href = l.getAttribute('href');
   if(href && href === page) l.classList.add('active');
 });
 
+// Intersection Observer for Reveal Animations
 const revObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(e.isIntersecting) {
@@ -359,11 +386,123 @@ const revObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
 
+// Scroll FAB Feature Implementation
+function initScrollFab() {
+  const fabHTML = `
+    <style>
+      .sn-scroll-fab {
+        position: fixed; bottom: 30px; right: 30px; z-index: 99;
+        display: flex; align-items: center; gap: 10px;
+        background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 0, 0, 0.05); padding: 8px 16px 8px 8px; border-radius: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--text-primary); text-decoration: none;
+      }
+      .sn-scroll-fab:hover {
+        transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+        background: rgba(255, 255, 255, 0.95);
+      }
+      .sn-fab-icon {
+        display: flex; align-items: center; justify-content: center;
+        width: 32px; height: 32px; border-radius: 50%;
+        background: linear-gradient(135deg, var(--blue, #008BF8), var(--pink, #FA0F9C));
+        color: white; transition: transform 0.4s ease;
+      }
+      .sn-fab-label { font-size: 14px; font-weight: 600; white-space: nowrap; }
+      .sn-fab-up .sn-fab-icon { transform: rotate(180deg); }
+      @media (max-width: 640px) {
+        .sn-scroll-fab { display: none; } /* Hidden on mobile to prevent overlap with sticky CTA */
+      }
+    </style>
+    <button id="sn-scroll-fab" class="sn-scroll-fab" aria-label="Scroll down">
+      <div class="sn-fab-icon">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="sn-fab-label">Scroll Down</span>
+    </button>
+  `;
+  document.body.insertAdjacentHTML('beforeend', fabHTML);
+
+  const fab = document.getElementById('sn-scroll-fab');
+  const label = fab.querySelector('.sn-fab-label');
+  let isUp = false;
+
+  function getSections() {
+    return Array.from(document.querySelectorAll('section, footer')).filter(s => s.offsetHeight > 100);
+  }
+
+  fab.addEventListener('click', () => {
+    if (isUp) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const sections = getSections();
+      const scrollY = window.scrollY + window.innerHeight * 0.3; 
+      let nextSectionIndex = -1;
+      
+      for (let i = 0; i < sections.length; i++) {
+        if (sections[i].offsetTop > scrollY) {
+          nextSectionIndex = i;
+          break;
+        }
+      }
+
+      if (nextSectionIndex !== -1) {
+        sections[nextSectionIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
+    }
+  });
+
+  function onScroll() {
+    const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 150);
+
+    if (isAtBottom && !isUp) {
+      isUp = true;
+      fab.classList.add('sn-fab-up');
+      fab.setAttribute('aria-label', 'Back to top');
+      label.textContent = 'Back to Top';
+    } else if (!isAtBottom && isUp) {
+      isUp = false;
+      fab.classList.remove('sn-fab-up');
+      fab.setAttribute('aria-label', 'Scroll down');
+      label.textContent = 'Scroll Down';
+    }
+  }
+  
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+
+// Document Ready Initialization
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
   
+  // Mobile Sticky CTA Logic
   if(window.innerWidth <= 640) {
       const stickyCta = document.querySelector('.mobile-sticky-cta');
       if(stickyCta) stickyCta.style.display = 'block';
   }
+
+  // Initialize the Scroll FAB
+  initScrollFab();
 });
+
+/* ── NEWSLETTER INLINE FORM ── */
+function handleNewsletterSubmit(e) {
+  e.preventDefault();
+  var form = e.target;
+  var btn = form.querySelector('[type="submit"]');
+  if (btn) { btn.textContent = 'Subscribing...'; btn.disabled = true; }
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(new FormData(form)).toString()
+  }).then(function(){
+    form.style.display = 'none';
+    var thanks = form.parentNode.querySelector('.newsletter-thanks');
+    if (thanks) thanks.style.display = 'flex';
+  }).catch(function(){
+    if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
+  });
+}

@@ -36,66 +36,64 @@ Founded by Jen Dawson, a 25+ year cloud GTM practitioner behind 100+ ISV activat
       {
         id: 'programs',
         q: 'What services do you offer?',
-        a: `SaaSNova has three services, each customised to your GTM stage. You pick one based on where you are:<br><br>
-<strong>Ignite, 3 Months</strong><br>Cloud GTM activation. For ISVs at any stage, from pre-listing to reactivating a stalled listing.<br><br>
-<strong>SuperNova, 4 Months</strong><br>US Market Entry. Built for global ISVs (APAC, EMEA, EU) entering the US market across hyperscalers.<br><br>
-<strong>NovaX, 6 Months</strong><br>Global embedded execution. Premium programme for scale-stage ISVs with quarterly board reporting.<br><br>
-Every programme is customised to your cloud mix and revenue goals, not a one-size-fits-all approach.`,
+        a: `SaaSNova has three core programs, each tailored to your GTM maturity:<br><br>
+<strong>Ignite (3 Months):</strong><br>Prove your first cloud-attributable revenue.<br><br>
+<strong>SuperNova (4 Months):</strong><br>US market entry and investor-grade GTM proof.<br><br>
+<strong>NovaX (6 Months):</strong><br>Embedded multi-cloud GTM execution and scaling.<br><br>
+Every programme is customised to your cloud mix and revenue goals.`,
         follow: ['ignite','supernova','novax','whichprogram']
       },
       {
         id: 'ignite',
         q: 'Tell me about Ignite',
-        a: `<strong>SaaSNova Ignite, 3 Month Programme</strong><br><br>
-Best for: Any-stage ISVs, starting fresh, reactivating a stalled listing, or generating first attributable cloud revenue within 90 days.<br><br>
-<strong>Customised execution includes:</strong><br>
-• Cloud field relationship activation across your target hyperscalers<br>
-• Co-sell execution and WinWires<br>
-• Revenue attribution framework<br>
+        a: `<strong>SaaSNova Ignite (3 Months)</strong><br><br>
+Best for: Pre-Series A &rarr; Series A ISVs establishing their first cloud-attributable traction.<br><br>
+<strong>Core Outcomes:</strong><br>
+• Your first cloud-attributable signal<br>
+• Validated co-sell pipeline<br>
+• PRM implementation & ACE hygiene<br>
 • Board-ready GTM evidence report<br><br>
-Every engagement is tailored to your cloud mix and GTM starting point. Jen Dawson reviews every engagement personally.`,
+Every engagement is tailored to your cloud mix and GTM starting point.`,
         follow: ['supernova','novax','whichprogram','booking']
       },
       {
         id: 'supernova',
         q: 'Tell me about SuperNova',
-        a: `<strong>SaaSNova SuperNova, 4 Month Programme</strong><br><br>
-Best for: Global ISVs (APAC, EMEA, EU) entering the US market, or ISVs in fundraising who need investor-grade cloud revenue evidence.<br><br>
-<strong>Customised execution includes:</strong><br>
-• US co-sell activation across AWS, Azure, and GCP<br>
-• NAMER GTM activation via channel partners, distributors, and SIs<br>
-• US field team relationship building<br>
-• Investor-ready GTM evidence deck<br>
-• US market revenue attribution framework<br><br>
-SuperNova is designed specifically for US market entry. If you are based outside the US and need to build US cloud revenue, this is the programme.`,
+        a: `<strong>SaaSNova SuperNova (4 Months)</strong><br><br>
+Best for: Global ISVs entering the US market, or Series A &rarr; Series B ISVs needing investor-grade GTM traction.<br><br>
+<strong>Core Outcomes:</strong><br>
+• Operator-led US GTM activation via channel & SIs<br>
+• Verified US co-sell opportunities<br>
+• US partner & Channel map<br>
+• Investor-ready US revenue validation<br><br>
+If you need to build scalable US cloud revenue, this is the programme.`,
         follow: ['ignite','novax','whichprogram','booking']
       },
       {
         id: 'novax',
         q: 'Tell me about NovaX',
-        a: `<strong>SaaSNova NovaX, 6 Month Programme</strong><br><br>
-Best for: Scale-stage ISVs where cloud marketplace is a primary revenue channel, globally, and quarterly board accountability on cloud revenue is required.<br><br>
-<strong>Customised execution includes:</strong><br>
-• Embedded global GTM execution as part of your team<br>
-• Full cloud field relationship management<br>
-• Quarterly board revenue reports ×4<br>
-• Holistic GTM ROI narrative for investors and board<br><br>
-SaaSNova operates as an extension of your team, attending alliance calls and managing field relationships directly.`,
+        a: `<strong>SaaSNova NovaX (6 Months)</strong><br><br>
+Best for: Series A &rarr; Series C ISVs expanding beyond early traction into repeatable, multi-cloud revenue.<br><br>
+<strong>Core Outcomes:</strong><br>
+• Scalable multi-cloud co-sell engine<br>
+• Partner-led pipeline activation (SIs/GSIs)<br>
+• Quarterly board traction evidence<br>
+• Full PRM lifecycle automation<br><br>
+SaaSNova operates as an embedded extension of your team, managing relationships and execution directly.`,
         follow: ['ignite','supernova','whichprogram','booking']
       },
       {
         id: 'whichprogram',
         q: 'Which programme is right for me?',
         a: `<strong>Choose Ignite if:</strong><br>
-You need cloud GTM activation, whether you're pre-listing, newly listed, or have a listing generating no attributable revenue.<br><br>
+You are launching, relaunching, or need to prove your first attributable cloud revenue.<br><br>
 <strong>Choose SuperNova if:</strong><br>
-You are based outside the US (APAC, EMEA, EU) and need to build US co-sell revenue across hyperscalers, or you are in a fundraising process and need investor-grade GTM evidence.<br><br>
+You are an APAC/EMEA ISV entering the US market, or you are fundraising and need investor-grade US traction evidence.<br><br>
 <strong>Choose NovaX if:</strong><br>
-Cloud marketplace is a core global revenue channel and you need embedded execution with quarterly board reporting.<br><br>
+You need to operationalize co-sell across multiple clouds and require a dedicated, embedded execution team.<br><br>
 The fastest way to find the right fit: book a 30-minute discovery call with Jen Dawson.`,
         follow: ['booking','programs']
       },
-,
       {
         id: 'pricing',
         q: 'How does pricing work?',

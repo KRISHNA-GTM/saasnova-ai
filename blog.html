@@ -11,19 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css"/>
 
-<title>Why Your Cloud Marketplace Listing Is Silent And What Fixes It</title>
-<meta name="description" content="Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn 3 execution gaps keeping ISVs silent. SaaSNova deploys the fix in 90 days."/>
-
-<meta property="og:title" content="Why Your Cloud Marketplace Listing Is Silent And What Fixes It" />
-<meta property="og:description" content="Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn 3 execution gaps keeping ISVs silent. SaaSNova deploys the fix in 90 days." />
-<meta property="og:image" content="images/blogs/cloud-marketplace-listing.png" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="blog-cloud-marketplace-listing-silent-fix.html" />
-
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Why Your Cloud Marketplace Listing Is Silent And What Fixes It" />
-<meta name="twitter:description" content="Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn 3 execution gaps keeping ISVs silent. SaaSNova deploys the fix in 90 days." />
-<meta name="twitter:image" content="images/blogs/cloud-marketplace-listing.png" />
+<title>SaaSNova Blog — Cloud Marketplace Insights</title>
+<meta name="description" content="Actionable insights on co-sell execution, marketplace listing, and field team motions across AWS, Azure, and GCP."/>
 
 <style>
 /* ── BLOG HERO, vibrant gradient mesh ── */
@@ -92,6 +81,7 @@
 .blog-feat-visual {
   height:100%;min-height:280px;position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
+  background:#0a1628; /* Added background for letterboxing */
 }
 .blog-feat-content {padding:36px 32px;display:flex;flex-direction:column;justify-content:center;}
 
@@ -109,7 +99,9 @@
 }
 .blog-card:hover {transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,139,248,.1);border-color:rgba(0,139,248,.2);}
 .blog-card-visual {
-  height:160px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  height:180px; /* Slightly taller to accommodate image text */
+  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background: #0A1628; /* Added background for letterboxing */
 }
 .blog-card-body {padding:20px;flex:1;display:flex;flex-direction:column;}
 .blog-card-cat {font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px;}
@@ -128,7 +120,7 @@
 
 @media(max-width:900px){
   .blog-featured-card{grid-template-columns:1fr;}
-  .blog-feat-visual{min-height:200px;}
+  .blog-feat-visual{min-height:240px;}
   .blog-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:600px){.blog-grid{grid-template-columns:1fr;}}
@@ -155,9 +147,7 @@
 <div class="blog-filters">
   <div class="blog-filters-inner">
     <button class="blog-filter-btn active" onclick="filterPost(this,'all')">All Posts</button>
-    <button class="blog-filter-btn" onclick="filterPost(this,'aws')">AWS Co-Sell</button>
-    <button class="blog-filter-btn" onclick="filterPost(this,'multi')">Multi-Cloud</button>
-    <button class="blog-filter-btn" onclick="filterPost(this,'board')">Board Proof</button>
+    <button class="blog-filter-btn" onclick="filterPost(this,'aws')">AWS Strategy</button>
     <button class="blog-filter-btn" onclick="filterPost(this,'isv')">ISV Programs</button>
   </div>
 </div>
@@ -167,20 +157,21 @@
     <div style="margin-bottom:24px">
       <span class="eyebrow" style="color:var(--blue)">Featured Post</span>
     </div>
-    <a href="blog-cloud-marketplace-listing-silent-fix.html" class="blog-featured-card reveal" style="text-decoration:none;color:inherit;display:grid">
-      <div class="blog-feat-visual" style="background:#0a1628">
-        <img src="images/blogs/cloud-marketplace-listing.png" alt="Cloud Marketplace Listing" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.9"/>
+    <a href="blog-aws-prm-deadline.html" class="blog-featured-card reveal" style="text-decoration:none;color:inherit;display:grid">
+      <div class="blog-feat-visual">
+        <!-- Changed to object-fit: contain to ensure full text/image is visible without cropping -->
+        <img src="images/blogs/aws prm blog 2 cover.png" alt="AWS PRM Deadline" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;padding:12px;"/>
       </div>
       <div class="blog-feat-content">
-        <span style="display:inline-block;padding:3px 10px;border-radius:var(--r-full);background:rgba(0,139,248,.1);color:var(--blue);font-size:11px;font-weight:700;margin-bottom:14px">ISV Marketplace Activation</span>
-        <h2 style="font-size:clamp(20px,2.4vw,27px);margin-bottom:12px;line-height:1.3">Why Your Cloud Marketplace Listing Is Silent And What Actually Fixes It</h2>
-        <p style="font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:20px">Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn the 3 execution gaps keeping ISVs silent. SaaSNova deploys the fix in 90 days.</p>
+        <span style="display:inline-block;padding:3px 10px;border-radius:var(--r-full);background:rgba(255,153,0,.1);color:#FF9900;font-size:11px;font-weight:700;margin-bottom:14px">AWS APN Compliance</span>
+        <h2 style="font-size:clamp(20px,2.4vw,27px);margin-bottom:12px;line-height:1.3">The July 31 AWS PRM Deadline: How to Measure Attribution and Keep Funding</h2>
+        <p style="font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:20px">By July 31, 2026, the way AWS "sees" your value changes forever. Learn the execution fixes to maintain co-sell eligibility and avoid compliance drops.</p>
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:8px">
             <img src="images/jen-dp.jpg" alt="Jen Dawson" style="width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:top"/>
             <span style="font-size:13px;font-weight:600;color:var(--text-secondary)">Jen Dawson</span>
           </div>
-          <span style="font-size:12px;color:var(--text-muted)">April 2026 · 8 min read</span>
+          <span style="font-size:12px;color:var(--text-muted)">April 2026 · 5 min read</span>
           <span style="margin-left:auto;font-size:14px;font-weight:600;color:var(--blue)">Read </span>
         </div>
       </div>
@@ -193,102 +184,42 @@
     <h2 style="margin-bottom:var(--sp-4)" class="reveal">All Posts</h2>
     <div class="blog-grid">
 
-      <a href="blog-cloud-marketplace-listing-silent-fix.html" class="blog-card reveal delay-1" data-cat="isv multi">
-        <div class="blog-card-visual" style="background:#0A1628;">
-          <img src="images/blogs/cloud-marketplace-listing.png" alt="Cloud Marketplace Listing" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.85"/>
+      <!-- POST 1: SILENT LISTING -->
+      <a href="blog-cloud-marketplace-listing-silent-fix.html" class="blog-card reveal delay-1" data-cat="aws isv">
+        <div class="blog-card-visual">
+          <!-- Changed to object-fit: contain to ensure full text/image is visible without cropping -->
+          <img src="images/blogs/cloud-marketplace-listing.png" alt="Cloud Marketplace Listing" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;padding:8px;"/>
         </div>
         <div class="blog-card-body">
           <div class="blog-card-cat" style="color:var(--blue)">ISV Marketplace Activation</div>
           <div class="blog-card-h">Why Your Cloud Marketplace Listing Is Silent And What Actually Fixes It</div>
-          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn the 3 execution gaps.</p>
+          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn the 3 execution gaps keeping ISVs silent.</p>
           <div class="blog-card-meta">
-            <span style="font-size:12px;color:var(--text-muted)">April 2026 · 8 min</span>
+            <span style="font-size:12px;color:var(--text-muted)">April 2026 · 6 min</span>
             <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
           </div>
         </div>
       </a>
 
-      <a href="blog-board-proof.html" class="blog-card reveal delay-2" data-cat="board">
-        <div class="blog-card-visual" style="background:linear-gradient(135deg,#1a0a25,#2d0f40,#1a0018)">
-          <svg width="200" height="160" viewBox="0 0 200 160" fill="none" style="position:absolute;inset:0;opacity:.7">
-            <rect x="18" y="125" width="24" height="22" fill="rgba(250,15,156,.15)" rx="3"/>
-            <rect x="54" y="100" width="24" height="47" fill="rgba(250,15,156,.22)" rx="3"/>
-            <rect x="90" y="72" width="24" height="75" fill="rgba(250,15,156,.32)" rx="3"/>
-            <rect x="126" y="44" width="24" height="103" fill="rgba(250,15,156,.44)" rx="3"/>
-            <rect x="162" y="18" width="24" height="129" fill="rgba(250,15,156,.58)" rx="3"/>
-            <path d="M18 125 Q60 95 90 72 Q130 42 174 18" stroke="rgba(250,15,156,.65)" stroke-width="1.5" fill="none"/>
-          </svg>
-          <div style="position:relative;text-align:center">
-            <div style="width:48px;height:48px;border-radius:12px;background:rgba(250,15,156,.18);border:1px solid rgba(250,15,156,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="white" stroke-width="1.4" fill="none"/><path d="M7 16l4-5 4 3 4-7" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase">Board Proof</div>
-          </div>
+      <!-- POST 2: AWS ALIGNMENT -->
+      <a href="blog-aws-alignment.html" class="blog-card reveal delay-2" data-cat="aws isv">
+        <div class="blog-card-visual">
+          <!-- Added public placeholder image from Unsplash. You can swap the URL when your real asset is ready -->
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="AWS Doesn't Reward Progress, It Rewards Alignment" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.85"/>
         </div>
         <div class="blog-card-body">
-          <div class="blog-card-cat" style="color:var(--pink)">Board Proof</div>
-          <div class="blog-card-h">What Board-Ready Cloud GTM Proof Actually Looks Like</div>
-          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">A practical framework for producing investor-grade cloud marketplace evidence boards can present directly.</p>
+          <div class="blog-card-cat" style="color:var(--orange)">AWS Execution Strategy</div>
+          <div class="blog-card-h">AWS Doesn't Reward Progress. It Rewards Alignment.</div>
+          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">Getting listed on AWS was the easy part. Why fragmented execution costs you, and what moves the needle.</p>
           <div class="blog-card-meta">
-            <span style="font-size:12px;color:var(--text-muted)">March 2026 · 10 min</span>
+            <span style="font-size:12px;color:var(--text-muted)">April 2026 · 5 min</span>
             <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
           </div>
         </div>
       </a>
 
-      <a href="blog-isv-accelerate.html" class="blog-card reveal delay-3" data-cat="isv">
-        <div class="blog-card-visual" style="background:linear-gradient(135deg,#1a1000,#2d1e00,#1a1200)">
-          <svg width="200" height="160" viewBox="0 0 200 160" fill="none" style="position:absolute;inset:0;opacity:.7">
-            <circle cx="100" cy="80" r="70" stroke="rgba(255,153,0,.08)" stroke-width="1" fill="none"/>
-            <circle cx="100" cy="80" r="48" stroke="rgba(255,153,0,.12)" stroke-width="1" fill="none"/>
-            <circle cx="100" cy="80" r="26" stroke="rgba(255,153,0,.18)" stroke-width="1" fill="none"/>
-            <path d="M76 120 L100 52 L124 120" stroke="rgba(255,153,0,.4)" stroke-width="1.5" fill="none"/>
-            <path d="M84 104 L116 104" stroke="rgba(255,153,0,.4)" stroke-width="1.5" fill="none"/>
-          </svg>
-          <div style="position:relative;text-align:center">
-            <div style="width:48px;height:48px;border-radius:12px;background:rgba(255,153,0,.18);border:1px solid rgba(255,153,0,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.2 6.5L21 9.3l-5.2 4.7 1.4 6.7L12 17.5l-5.2 3.2 1.4-6.7L3 9.3l6.8-.8z" stroke="#FF9900" stroke-width="1.4" fill="none" stroke-linejoin="round"/></svg>
-            </div>
-            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase">ISV Accelerate</div>
-          </div>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-cat" style="color:var(--aws)">AWS Marketplace</div>
-          <div class="blog-card-h">ISV Accelerate: What It Actually Takes to Qualify, and Why Most ISVs Miss It</div>
-          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">The real qualification criteria, common disqualifiers, and the execution path that gets ISVs accepted and active.</p>
-          <div class="blog-card-meta">
-            <span style="font-size:12px;color:var(--text-muted)">March 2026 · 10 min</span>
-            <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
-          </div>
-        </div>
-      </a>
-
-      <a href="blog-multi-cloud-gtm.html" class="blog-card reveal delay-1" data-cat="multi">
-        <div class="blog-card-visual" style="background:linear-gradient(135deg,#0d1f3c,#12294f,#0d2218)">
-          <svg width="200" height="160" viewBox="0 0 200 160" fill="none" style="position:absolute;inset:0;opacity:.6">
-            <circle cx="100" cy="80" r="65" stroke="rgba(255,153,0,.1)" stroke-width="1.5" fill="none"/>
-            <circle cx="100" cy="80" r="42" stroke="rgba(0,120,212,.1)" stroke-width="1.5" fill="none"/>
-            <circle cx="100" cy="80" r="22" stroke="rgba(52,168,83,.1)" stroke-width="1.5" fill="none"/>
-          </svg>
-          <div style="position:relative;text-align:center">
-            <div style="width:48px;height:48px;border-radius:12px;background:rgba(241,153,83,.18);border:1px solid rgba(241,153,83,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 8px">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.4" fill="none"/><ellipse cx="12" cy="12" rx="4" ry="9" stroke="white" stroke-width="1.4" fill="none"/><path d="M3 12h18" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg>
-            </div>
-            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase">Multi-Cloud</div>
-          </div>
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-cat" style="color:var(--orange)">Multi-Cloud Strategy</div>
-          <div class="blog-card-h">The Multi-Cloud GTM Playbook: AWS, Azure, and GCP in One Coordinated Motion</div>
-          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">A structured framework for ISVs running co-sell across all three clouds without tripling the operational overhead.</p>
-          <div class="blog-card-meta">
-            <span style="font-size:12px;color:var(--text-muted)">March 2026 · 11 min</span>
-            <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
-          </div>
-        </div>
-      </a>
-
-      <div class="blog-card reveal delay-2" style="border:2px dashed var(--border-light);background:linear-gradient(135deg,#F0F7FF,#FFF5FB);cursor:default">
+      <!-- CTA CARD -->
+      <div class="blog-card reveal delay-3" style="border:2px dashed var(--border-light);background:linear-gradient(135deg,#F0F7FF,#FFF5FB);cursor:default">
         <div style="padding:32px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;min-height:300px">
           <div class="icon-wrap icon-orange" style="margin-bottom:16px">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="1.5" y="4" width="17" height="12" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M1.5 7l8.5 5 8.5-5" stroke="currentColor" stroke-width="1.5"/></svg>
@@ -296,16 +227,6 @@
           <h3 style="font-size:18px;margin-bottom:8px">Get the Weekly Brief</h3>
           <p class="text-sm" style="color:var(--text-muted);margin-bottom:18px;max-width:220px;line-height:1.65">Co-sell tactics, marketplace updates, and GTM intelligence, every week from Jen Dawson.</p>
           <a href="newsletter" class="btn btn-primary btn-sm">Subscribe Free </a>
-        </div>
-      </div>
-
-      <div class="blog-card reveal delay-3" style="border:2px dashed var(--border-light);background:#FAFBFF;cursor:default">
-        <div style="padding:32px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;min-height:300px">
-          <div style="width:48px;height:48px;border-radius:50%;background:var(--light-200);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:14px">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 5v8M5 9h8" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <h3 style="font-size:16px;margin-bottom:6px;color:var(--text-muted)">More posts monthly</h3>
-          <p class="text-sm" style="color:var(--text-muted);max-width:200px;line-height:1.6">Subscribe to The Nova Brief to get new posts in your inbox.</p>
         </div>
       </div>
 

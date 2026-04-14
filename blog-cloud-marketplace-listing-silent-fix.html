@@ -148,14 +148,13 @@
   border-radius: var(--r-2xl);
   overflow: hidden;
   margin-bottom: var(--sp-5);
-  aspect-ratio: 1671/940;
   background: var(--light-200);
+  /* Removed strict aspect-ratio to prevent image cropping */
 }
 
 .blog-hero-img img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 
@@ -165,14 +164,13 @@
   border-radius: var(--r-xl);
   overflow: hidden;
   margin: var(--sp-4) 0;
-  aspect-ratio: 1536/1024;
   background: var(--light-200);
+  border: 1px solid var(--border-light);
 }
 
 .blog-inline-img img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 
@@ -319,7 +317,7 @@
 
         <!-- Inline Image — placed immediately after this heading per spec -->
         <div class="blog-inline-img">
-          <img src="images/blogs/blog-1-1.png" alt="Three execution gaps in cloud marketplace GTM, PDM relationship, co-sell submissions, and field enablement driving enterprise introduction, pipeline growth, and faster revenue" width="1536" height="1024" loading="lazy"/>
+          <img src="images/blogs/cloud-marketplace-listing.png" alt="Three execution gaps in cloud marketplace GTM, PDM relationship, co-sell submissions, and field enablement driving enterprise introduction, pipeline growth, and faster revenue" width="1536" height="1024" loading="lazy"/>
         </div>
 
         <p>After working with more than 100+ ISVs across AWS, Azure, and GCP, SaaSNova sees the same three gaps every time.</p>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" type="image/png" sizes="32x32" href="images/logo-favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/logo-favicon-16x16.png">
+<link rel="apple-touch-icon" href="images/logo-favicon-apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<title>The July 31 AWS PRM Deadline — SaaSNova Blog</title>
+<meta name="description" content="By July 31, 2026, the way AWS 'sees' your value changes forever. Learn how to implement PRM, measure attribution, keep funding, and avoid co-sell delays."/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="The July 31 AWS PRM Deadline: How to Measure Attribution, Keep Funding, and Avoid Co-Sell Delays"/>
+<meta property="og:description" content="By July 31, 2026, the way AWS 'sees' your value changes forever. Learn how to implement PRM, measure attribution, keep funding, and avoid co-sell delays."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://saasnova.ai/blog/aws-prm-deadline"/>
+<meta property="og:image" content="https://saasnova.ai/images/blogs/aws-prm-blog-2-cover.png"/>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="The July 31 AWS PRM Deadline: How to Measure Attribution, Keep Funding, and Avoid Co-Sell Delays"/>
+<meta name="twitter:description" content="By July 31, 2026, the way AWS 'sees' your value changes forever. Learn how to implement PRM, measure attribution, keep funding, and avoid co-sell delays."/>
+<meta name="twitter:image" content="https://saasnova.ai/images/blogs/aws-prm-blog-2-cover.png"/>
+
+<style>
+/* ── BLOG POST LAYOUT ── */
+.blog-post-wrap {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--sp-8);
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--sp-3);
+}
+
+/* ── SIDEBAR ── */
+.blog-sidebar {
+  position: sticky;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.sidebar-card {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--r-xl);
+  padding: var(--sp-3);
+}
+
+.toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: var(--sp-2);
+}
+
+.toc-list li a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  display: block;
+  padding: 5px 10px;
+  border-radius: var(--r-md);
+  border-left: 2px solid var(--border-light);
+  transition: all .15s;
+  text-decoration: none;
+}
+
+.toc-list li a:hover {
+  color: var(--blue);
+  border-left-color: var(--blue);
+  background: rgba(0,139,248,.04);
+}
+
+.toc-list li.toc-h3 a {
+  padding-left: 20px;
+  font-size: 12px;
+}
+
+.sidebar-nl {
+  background: linear-gradient(135deg, #0A1628, #0D1F45);
+  border: none;
+  text-align: center;
+}
+
+.sidebar-nl h4 {
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.sidebar-nl p {
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  margin-bottom: var(--sp-2);
+  line-height: 1.6;
+}
+
+.sidebar-nl input[type="email"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--r-md);
+  font-size: 13px;
+  font-family: inherit;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  outline: none;
+  margin-bottom: 8px;
+}
+
+.sidebar-nl input[type="email"]::placeholder {
+  color: rgba(255,255,255,.35);
+}
+
+.sidebar-cta {
+  background: linear-gradient(135deg, #EBF5FF, #FFF5FB);
+  text-align: center;
+}
+
+.sidebar-cta h4 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.sidebar-cta p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-2);
+  line-height: 1.6;
+}
+
+/* ── HERO IMAGE ── */
+.blog-hero-img {
+  width: 100%;
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+  margin-bottom: var(--sp-5);
+  background: var(--light-200);
+}
+
+.blog-hero-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── INLINE IMAGE ── */
+.blog-inline-img {
+  width: 100%;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  margin: var(--sp-4) 0;
+  background: var(--light-200);
+  border: 1px solid var(--border-light);
+}
+
+.blog-inline-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── TAG PILLS ── */
+.blog-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ── LEAD PARAGRAPH ── */
+.blog-body .blog-lead {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: var(--sp-4);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .blog-post-wrap {
+    grid-template-columns: 1fr;
+  }
+  .blog-sidebar {
+    position: static;
+    order: -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2);
+  }
+  .sidebar-card:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .blog-post-wrap {
+    padding: 0 var(--sp-2);
+  }
+  .blog-sidebar {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- BLOG HERO -->
+<section style="margin-top:64px;padding:var(--sp-12) 0;background:linear-gradient(135deg,#0A1628 0%,#0C2245 50%,#0A1628 100%);position:relative;overflow:hidden;color:#fff">
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 65% at 75% 25%,rgba(241,153,83,.18) 0%,transparent 55%),radial-gradient(ellipse 40% 50% at 15% 75%,rgba(0,139,248,.1) 0%,transparent 50%)"></div>
+  <div class="container-sm" style="position:relative;z-index:2">
+    <a href="blog.html" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:var(--sp-4);text-decoration:none">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Back to Blog
+    </a>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:var(--sp-3)">
+      <span class="blog-tag" style="background:rgba(255,153,0,.15);color:rgba(255,185,100,.95)">AWS APN</span>
+      <span class="blog-tag" style="background:rgba(0,139,248,.15);color:rgba(120,200,255,.95)">PRM Implementation</span>
+      <span class="blog-tag" style="background:rgba(250,15,156,.12);color:rgba(255,120,200,.95)">Compliance</span>
+    </div>
+    <h1 style="margin-bottom:var(--sp-3);color:#fff;max-width:860px">The July 31 AWS PRM Deadline: How to Measure Attribution, Keep Funding, and Avoid Co-Sell Delays</h1>
+    <div style="display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px">
+        <img src="images/jen-dp.jpg" alt="Jen Dawson" style="width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid rgba(255,255,255,.2)"/>
+        <span style="font-size:14px;color:rgba(255,255,255,.7);font-weight:600">Jen Dawson</span>
+      </div>
+      <span style="width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.25)"></span>
+      <span style="font-size:14px;color:rgba(255,255,255,.5)">April 2026</span>
+      <span style="width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.25)"></span>
+      <span style="font-size:14px;color:rgba(255,255,255,.5)">5 min read</span>
+    </div>
+  </div>
+</section>
+<div class="wave-d2w"><svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:48px;display:block;width:100%"><path d="M0,0 C360,48 1080,48 1440,0 L1440,48 L0,48 Z" fill="#fff"/></svg></div>
+
+<!-- BLOG BODY + SIDEBAR -->
+<section style="background:linear-gradient(180deg,#FAFBFF 0%,#fff 20%);padding:var(--sp-8) 0 var(--sp-10)">
+  <div class="blog-post-wrap">
+
+    <!-- MAIN CONTENT -->
+    <div>
+
+      <!-- Hero Image -->
+      <div class="blog-hero-img">
+        <img src="images/blogs/aws prm blog 2 cover.png" alt="The July 31 AWS PRM Deadline" loading="eager"/>
+      </div>
+
+      <div class="blog-body">
+
+        <p class="blog-lead">Are you an AWS APN partner? Have you heard of PRM yet? By July 31, 2026, the way AWS "sees" your value changes forever. If you aren't visible in the new Partner Revenue Measurement (PRM) system, your co-sell engine doesn't just slow down — it stops.</p>
+
+        <p>For most APN partners, PRM is the most important deadline you haven't been briefed on yet. AWS has introduced PRM as a mandatory requirement for all partners. They are standardizing how partner-driven consumption is measured across EC2, S3, RDS, ECS, Lambda, and dozens of other core AWS services.</p>
+        
+        <p>PRM is not an option; it is the mechanism of record.</p>
+
+        <p>Miss the deadline and the consequences are immediate:</p>
+        <ul>
+          <li>Loss of AWS Partner Funding Benefits (MDF/SDF)</li>
+          <li>Removal of the "Deployed on AWS" badge</li>
+          <li>Blocked co-sell eligibility with AWS Field teams</li>
+          <li>Freezing of your Marketplace and ACE motions</li>
+        </ul>
+
+        <div class="blog-inline-img">
+          <img src="images/blogs/blog 2 consequences.png" alt="Consequences of missing the AWS PRM deadline" loading="lazy"/>
+        </div>
+
+        <h2 id="what-is-prm">So what actually is PRM?</h2>
+
+        <p>PRM is AWS's way of moving from estimated partner influence to actual service‑level attribution. It creates a transparent, data‑backed value exchange between AWS and partners.</p>
+
+        <p>AWS attributes revenue through three signals:</p>
+        <ul>
+          <li><strong>Zero-touch AWS Marketplace Metering:</strong> Automatic attribution for AMI and ML products</li>
+          <li><strong>Resource Tagging:</strong> Applying the <code>aws-apn-id</code> tag to cost-incurring AWS resources</li>
+          <li><strong>API Call Decoration:</strong> Embedding User Agent strings in your regular AWS API/CLI calls</li>
+        </ul>
+
+        <p>When your product runs on AWS, PRM creates a measurable signal that tells AWS: <em>this partner is driving real consumption</em>. PRM is the signal that determines whether AWS sellers can actually see you inside their co-sell workflow.</p>
+
+        <p>PRM doesn't require Marketplace transactions. Attribution can come from your own AWS accounts, your customers' accounts, or a hybrid of both. The implementation itself typically takes 24-48 hours. AMI, ML, and container workloads must be in customer‑managed accounts. SaaS and Professional Services workloads can be in either partner‑managed or customer‑managed accounts. Success requires the right tagging strategy and environment setup to pass validation.</p>
+
+        <div class="blog-inline-img">
+          <img src="images/blogs/blog 2 unlock.png" alt="Unlocking AWS revenue through PRM tagging and API decoration" loading="lazy"/>
+        </div>
+
+        <h2 id="beyond-compliance">Why it matters beyond compliance</h2>
+
+        <p>Compliance is the floor, not the ceiling.</p>
+
+        <p>Partners with active PRM data show up differently on AWS scorecards. Field teams can see real consumption data tied to your product. That improves co-sell alignment, strengthens your case for partner funding, and gives PDMs the metrics they need to advocate for you internally.</p>
+
+        <p>An ISV without PRM is flying blind inside the AWS ecosystem and increasingly, so is AWS when it comes to seeing your impact.</p>
+
+        <h2 id="best-practices">PRM Implementation Best Practices</h2>
+
+        <p>To ensure you don't leave revenue credit on the table and avoid compliance drops, follow these three rules:</p>
+
+        <h3 id="bp-tag-all">1. Tag all eligible resource types</h3>
+        <p>AWS PRM tracks over 80+ service types, including EC2 instances, S3 buckets, RDS databases, Lambda functions, EBS volumes, snapshots, and ENIs. Tag every eligible cost-incurring resource to maximize your revenue attribution.</p>
+
+        <h3 id="bp-data-delay">2. Expect the 24-48 hours data delay</h3>
+        <p>After applying tags, it takes 24 to 48 hours for the data to appear in AWS Partner Analytics. Do not panic or alter your configuration if you don't see immediate results.</p>
+
+        <h3 id="bp-auto-scans">3. Enable weekly auto-scans</h3>
+        <p>Cloud environments are highly dynamic. Set up automated weekly scans to keep your compliance data up to date. New resources and infrastructure changes can introduce untagged resources at any time, which will silently drain your attribution if left unmonitored.</p>
+
+        <h2 id="diy-trap">The DIY Trap: Why Manual Tagging Breaks Infrastructure</h2>
+
+        <p>Manual PRM execution is an operational minefield. If your engineers handle this themselves, you face three risks:</p>
+        
+        <ul>
+          <li><strong>IaC Drift:</strong> Manually applying the <code>aws-apn-id</code> tag via the console breaks Terraform, CloudFormation, or CDK states, crashing your next deployment.</li>
+          <li><strong>The "One-Time" Illusion:</strong> Cloud environments are dynamic. Without an automated weekly scanning agent, new untagged resources spin up, compliance drops, and revenue attribution leaks.</li>
+          <li><strong>Shadow Resources:</strong> PRM supports 88+ services. If you only tag EC2 and S3, but miss ECS Fargate tasks or EBS snapshots, you leave massive revenue credit unclaimed.</li>
+        </ul>
+
+        <h2 id="act-early">ACT EARLY</h2>
+
+        <p>AWS is rolling this out across all validated ISVs globally. July 31 is closer than it looks, and the partners who move early will have the smoothest path through it. Partners who wait until June are competing for attention alongside everyone else.</p>
+
+        <p>The ask is straightforward: Complete PRM integration before July 31, stay compliant, and let AWS see the consumption your product is already driving.</p>
+
+        <div class="blog-inline-img">
+          <img src="images/blogs/blog 2 prm journey.png" alt="The PRM implementation journey from tagging to verified compliance" loading="lazy"/>
+        </div>
+
+        <h2 id="activation-program">The PRM Activation Program</h2>
+
+        <p>Every AWS environment is unique, which is why we've designed this to be a high-touch, guided process. We're happy to talk through what this looks like for your specific environment and help you navigate the technical nuances.</p>
+
+        <p>You shouldn't have to pull your engineers off your product roadmap to chase AWS tags.</p>
+
+        <p>SaaSNova and Rysun Labs have built a joint PRM Activation Program for ISVs who want to hit the deadline without a snag. We provide a turnkey, 48-hour sprint that handles the strategy, the tagging architecture, and the validation for you — ensuring your infrastructure remains intact while your revenue attribution flows.</p>
+
+        <p>The deadline is July 31. Wait until the June rush, and you risk getting stuck in the compliance validation backlog while competing for limited AWS partner team attention. Secure your AWS funding and stay visible to the field — start your activation today.</p>
+
+        <h2 id="secure-compliance">Secure Your July 31 Compliance Today</h2>
+
+        <p>The investment for the full PRM Activation Program is $7,200 (Flat Fee). This includes the full environment audit, technical implementation, and AWS validation support.</p>
+
+        <div class="callout" style="background:var(--light-100);padding:var(--sp-4);border-radius:var(--r-xl);border-left:4px solid #FF9900;margin-top:var(--sp-4)">
+          <h3 style="margin-bottom:12px;font-size:18px">READY TO DEPLOY?</h3>
+          <p><strong>Step 1: Get Started</strong><br>We process enrollments via our secure portal. You will get payment confirmation and a welcome email to begin the onboarding.</p>
+          <p><strong>Step 2: Book Your Kickoff Call</strong><br>We will walk through your PRM Activation Plan, review your AWS environment, and confirm the resources required for tagging and validation.</p>
+        </div>
+
+        <p style="margin-top:var(--sp-4)">The implementation is fast. The cost of missing it isn't. If you want to avoid the June rush, now's the time to start.</p>
+
+      </div><!-- /.blog-body -->
+
+      <!-- END CTA -->
+      <div style="margin-top:var(--sp-8);padding:var(--sp-5);background:var(--light-100);border-radius:var(--r-2xl);border:1px solid var(--border-light);text-align:center">
+        <h3 style="margin-bottom:var(--sp-2)">Hit the July 31 Deadline Fast.</h3>
+        <p style="margin-bottom:var(--sp-3);max-width:480px;margin-left:auto;margin-right:auto">Ensure your AWS funding, co-sell eligibility, and Marketplace motions aren't frozen. Let SaaSNova and Rysun Labs handle your PRM Implementation in a 48-hour sprint.</p>
+        <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03" target="_blank" rel="noopener" class="btn btn-primary">Book Your Kickoff Call</a>
+      </div>
+
+    </div><!-- /.blog-main -->
+
+    <!-- SIDEBAR -->
+    <aside class="blog-sidebar">
+
+      <!-- Table of Contents -->
+      <div class="sidebar-card">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:var(--sp-1)">In This Article</div>
+        <ul class="toc-list">
+          <li><a href="#what-is-prm">What actually is PRM?</a></li>
+          <li><a href="#beyond-compliance">Beyond Compliance</a></li>
+          <li><a href="#best-practices">PRM Best Practices</a></li>
+          <li><a href="#diy-trap">The DIY Trap</a></li>
+          <li><a href="#act-early">Act Early</a></li>
+          <li><a href="#activation-program">The PRM Activation Program</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="sidebar-card sidebar-nl">
+        <div style="width:36px;height:36px;border-radius:var(--r-md);background:rgba(0,139,248,.2);border:1px solid rgba(0,139,248,.3);display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-2)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="rgba(120,200,255,.9)" stroke-width="1.2" fill="none"/><path d="M1 5.5l7 4 7-4" stroke="rgba(120,200,255,.9)" stroke-width="1.2"/></svg>
+        </div>
+        <h4>The Nova Brief</h4>
+        <p>Co-sell tactics, marketplace updates, and GTM intelligence every week from Jen Dawson.</p>
+        <form name="sidebar-newsletter" method="POST" data-netlify="true" onsubmit="handleSidebarNL(event)">
+          <input type="hidden" name="form-name" value="sidebar-newsletter"/>
+          <input type="email" name="email" placeholder="Your work email" required/>
+          <button type="submit" class="btn btn-primary w-full" style="font-size:13px;padding:10px 16px">Subscribe Free</button>
+        </form>
+        <div id="sidebar-nl-success" style="display:none;font-size:13px;color:rgba(100,220,130,.9);font-weight:600;margin-top:8px;text-align:center">Subscribed. Thank you.</div>
+      </div>
+
+      <!-- CTA Card -->
+      <div class="sidebar-card sidebar-cta">
+        <div style="width:44px;height:44px;border-radius:var(--r-lg);background:linear-gradient(135deg,#FF9900,#FFB033);display:flex;align-items:center;justify-content:center;margin:0 auto var(--sp-2)">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.2 6.5L19 9.3l-5.2 4.7 1.4 6.7L10 17.5l-5.2 3.2 1.4-6.7L3 9.3l6.8-.8z" stroke="white" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Secure Your PRM Status</h4>
+        <p>Avoid IaC drift, missed cost tags, and co-sell suspensions. Implement PRM cleanly in 48 hours.</p>
+        <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03" target="_blank" rel="noopener" class="btn btn-primary w-full" style="font-size:13px;padding:10px 16px;justify-content:center;display:flex">Book a Call</a>
+      </div>
+
+      <!-- Tags -->
+      <div class="sidebar-card">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:var(--sp-2)">Tags</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="padding:4px 10px;border-radius:var(--r-full);background:rgba(255,153,0,.15);color:#CC7A00;font-size:11px;font-weight:700">AWS</span>
+          <span style="padding:4px 10px;border-radius:var(--r-full);background:rgba(0,139,248,.08);color:var(--blue);font-size:11px;font-weight:700">PRM</span>
+          <span style="padding:4px 10px;border-radius:var(--r-full);background:rgba(250,15,156,.08);color:var(--pink);font-size:11px;font-weight:700">Co-Sell</span>
+          <span style="padding:4px 10px;border-radius:var(--r-full);background:rgba(52,168,83,.1);color:#1A6635;font-size:11px;font-weight:700">APN Partner</span>
+        </div>
+      </div>
+
+    </aside>
+
+  </div><!-- /.blog-post-wrap -->
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="shared.js"></script>
+<script>
+function handleSidebarNL(e) {
+  e.preventDefault();
+  const form = e.target;
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(form)).toString()
+  }).catch(() => {});
+  form.style.display = 'none';
+  document.getElementById('sidebar-nl-success').style.display = 'block';
+}
+</script>
+</body>
+</html>

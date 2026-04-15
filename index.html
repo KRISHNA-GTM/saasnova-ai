@@ -251,9 +251,21 @@ h1, h2, h3, h4, h5, h6 {
 .ba-line::after { content: ''; position: absolute; right: -1px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid #008BF8; }
 .ba-logo { height: 28px; width: auto; margin-top: 10px; object-fit: contain; }
 
+/* Responsive Proof Strip */
+.sn-proof-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
 @media (max-width: 992px) {
   .pipeline-grid { grid-template-columns: 1fr; gap: 40px; }
+  .sn-proof-strip { grid-template-columns: repeat(2, 1fr); }
 }
+
 @media (max-width: 640px) {
   .sn-hero-ctas { flex-direction: column; width: 100%; }
   .cta-primary, .cta-secondary { width: 100%; justify-content: center; }
@@ -261,6 +273,11 @@ h1, h2, h3, h4, h5, h6 {
   .sn-ba-arrow { padding: 12px 0; }
   .ba-line { width: 2px; height: 40px; background: linear-gradient(180deg, #E11D48, #008BF8); }
   .ba-line::after { right: auto; bottom: -1px; top: auto; left: 50%; transform: translateX(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid #008BF8; border-bottom: none; }
+  .sn-hero-visual-box { padding: 20px; }
+}
+
+@media (max-width: 480px) {
+  .sn-proof-strip { grid-template-columns: 1fr; }
 }
 
 /* ── COMPARE TABLE ── */
@@ -566,7 +583,8 @@ h1, h2, h3, h4, h5, h6 {
     <div class="reveal delay-1" style="flex: 0.9; display: flex; justify-content: flex-end;">
       <div class="hero-video-wrapper" style="width: 100%; max-width: 540px; position: relative;">
         <div class="hero-video-frame" style="border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); background: #000;">
-          <video src="images/SaaSNova-Jen-why.mp4" controls preload="metadata" poster="images/Jen-videoframe_thumb.png" 
+          <!-- FIX: Added playsinline to guarantee mobile playback -->
+          <video src="images/SaaSNova-Jen-why.mp4" controls playsinline preload="metadata" poster="images/Jen-videoframe_thumb.png" 
                  style="display: block; width: 100%; height: auto;">
           </video>
         </div>
@@ -598,7 +616,7 @@ h1, h2, h3, h4, h5, h6 {
     <div class="marquee-track" style="animation-direction:reverse">
       <span class="marquee-logo-item"><img src="images/newrelic.svg" alt="New Relic"/></span>
       <span class="marquee-logo-item"><img src="images/Druva_Logo_tagline_Color.svg" alt="Druva"/></span>
-      <span class="marquee-logo-item"><img src="images/freshworks-logo-png_seeklogo-360980.png" alt="Freshworks"/></span>
+      <span class="marquee-logo-item"><img src="images/freshworks-logo-png.png" alt="Freshworks"/></span>
       <span class="marquee-logo-item"><img src="images/Postman--Streamline-Svg-Logos.svg" alt="Postman"/></span>
       <span class="marquee-logo-item"><img src="images/hashicorp-ar21.svg" alt="HashiCorp"/></span>
       <span class="marquee-logo-item"><img src="images/arcticwolf.png" alt="Arctic Wolf"/></span>
@@ -614,7 +632,7 @@ h1, h2, h3, h4, h5, h6 {
       <!-- Duplicate items to ensure smooth infinite scroll -->
       <span class="marquee-logo-item"><img src="images/newrelic.svg" alt="New Relic"/></span>
       <span class="marquee-logo-item"><img src="images/Druva_Logo_tagline_Color.svg" alt="Druva"/></span>
-      <span class="marquee-logo-item"><img src="images/freshworks-logo-png_seeklogo-360980.png" alt="Freshworks"/></span>
+      <span class="marquee-logo-item"><img src="images/freshworks-logo-png.png" alt="Freshworks"/></span>
       <span class="marquee-logo-item"><img src="images/Postman--Streamline-Svg-Logos.svg" alt="Postman"/></span>
       <span class="marquee-logo-item"><img src="images/hashicorp-ar21.svg" alt="HashiCorp"/></span>
       <span class="marquee-logo-item"><img src="images/arcticwolf.png" alt="Arctic Wolf"/></span>
@@ -730,8 +748,8 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </div>
 
-        <!-- Proof strip -->
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px;position:relative;z-index:1;">
+        <!-- FIX: Updated to a responsive CSS class (.sn-proof-strip) instead of forced inline styles to prevent cutting on mobile -->
+        <div class="sn-proof-strip">
           <div style="text-align:center;padding:10px 6px;background:#F8FAFC;border-radius:10px;border:1px solid rgba(0,0,0,.05)">
             <div style="font-family:'JetBrains Mono',monospace;font-weight:900;font-size:18px;background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">2K+</div>
             <div style="font-size:10px;font-weight:600;color:#64748B;margin-top:3px">PSQLs · Arctic Wolf</div>
@@ -1341,13 +1359,7 @@ document.addEventListener('DOMContentLoaded', () => {
           { tab: 'Kevin Flitcroft', text: '"Automation is the essential foundation but real acceleration happens when GTM activation aligns an ISV’s story with seller priorities inside AWS, Azure, and Google Cloud."', author: 'Kevin Flitcroft', role: 'Head of Sales' }
         ]
       },
-      {
-        id: 'nexla', logo: 'images/nexla-logo.png', name: 'Nexla',
-        quotes: [
-          { tab: 'Jayashree Rajan', text: '"SaaSNova didn\'t just clarify our AWS GTM motion, they exposed issues we didn\'t even know were blocking us. Their operator-level mastery of Marketplace, ACE, co-sell, and partner programs is unmatched."', author: 'Jayashree Rajan', role: 'CMO' }
-        ]
-      },
-      {
+        {
         id: 'aws', logo: 'images/aws-logo.png', name: 'AWS',
         quotes: [
           { tab: 'Gunjan Ramketa', text: '"Jen’s GTM architecture elevated Dataminr’s entire AWS motion. The structure and discipline she brought created the kind of alignment and seller confidence we rarely see from ISVs."', author: 'Gunjan Ramketa', role: 'Partner Development Manager' },
@@ -1370,6 +1382,12 @@ document.addEventListener('DOMContentLoaded', () => {
         id: 'freshworks', logo: 'images/freshworks-logo-png.png', name: 'Freshworks',
         quotes: [
           { tab: 'Abhishek GP', text: '"Jen is one of the most dynamic and driven leaders I’ve worked with Freshwork. She built the alignment and relationships needed to secure a three‑year strategic collaboration with AWS and set the foundation for a scalable co‑sell motion. She consistently turns challenges into opportunities."', author: 'Abhishek GP', role: 'VP of Growth at Atlan (and former Head of Growth at Freshworks)' }
+        ]
+      },
+          {
+        id: 'nexla', logo: 'images/nexla-logo.png', name: 'Nexla',
+        quotes: [
+          { tab: 'Jayashree Rajan', text: '"SaaSNova didn\'t just clarify our AWS GTM motion, they exposed issues we didn\'t even know were blocking us. Their operator-level mastery of Marketplace, ACE, co-sell, and partner programs is unmatched."', author: 'Jayashree Rajan', role: 'CMO' }
         ]
       }
     ];

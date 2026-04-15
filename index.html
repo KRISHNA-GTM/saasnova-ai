@@ -290,18 +290,45 @@ h1, h2, h3, h4, h5, h6 {
 .sn-compare-row:first-child .saasnova-col{background:rgba(0,139,248,.10)}
 .sn-compare-row:first-child .sn-compare-cell{padding:20px 24px;font-weight:700;color:var(--text-primary)}
 .sn-compare-cell.saasnova-col img{max-width:100%;height:36px;object-fit:contain}
+
+/* Mobile Sticky CTA */
+.mobile-sticky-cta {
+  display: none;
+}
+
 .sn-compare-mobile{display:none}
 
 @media(max-width:768px){
   .sn-compare-table{display:none}
   .sn-compare-mobile{display:flex;flex-direction:column;gap:10px;width: 100%;}
-  .sn-cmp-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 16px}
-  .sn-cmp-capability{font-size:13px;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:10px;line-height:1.4;display:flex;align-items:flex-start;gap:8px}
+  .sn-cmp-card{background:#fff;border:1px solid var(--border-light);border-radius:14px;padding:14px 16px}
+  .sn-cmp-capability{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px;line-height:1.4;display:flex;align-items:flex-start;gap:8px}
   .sn-cmp-capability::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:5px}
   .sn-cmp-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .sn-cmp-col{padding:8px 10px;border-radius:9px;font-size:11px;font-weight:600;line-height:1.4;text-align:center}
-  .sn-cmp-col.sn{background:rgba(0,139,248,.12);border:1px solid rgba(0,139,248,.2);color:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;gap:6px}
-  .sn-cmp-col.other{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.45)}
+  .sn-cmp-col{padding:8px 10px;border-radius:9px;font-size:12px;font-weight:600;line-height:1.4;text-align:center}
+  /* Fix text contrast in mobile compare section */
+  .sn-cmp-col.sn{background:rgba(0,139,248,.1);border:1px solid rgba(0,139,248,.2);color:#0055A0;display:flex;align-items:center;justify-content:center;gap:6px}
+  .sn-cmp-col.other{background:#F8FAFC;border:1px solid var(--border-light);color:var(--text-secondary)}
+
+  /* Mobile Sticky CTA styles */
+  .mobile-sticky-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0; 
+    left: 0; 
+    right: 0;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border-light);
+    z-index: 999;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+    justify-content: center;
+  }
+  body {
+    padding-bottom: 80px; /* Space to prevent footer from being hidden behind sticky CTA */
+  }
 }
 
 /* RESPONSIVE CSS GRIDS FOR ALL SECTIONS */
@@ -540,9 +567,10 @@ h1, h2, h3, h4, h5, h6 {
   
   <div style="position: absolute; top: -150px; left: 50%; transform: translateX(-50%); width: 80vw; height: 400px; background: radial-gradient(ellipse at center, rgba(0, 139, 248, 0.15) 0%, transparent 70%); pointer-events: none; z-index: 0;"></div>
 
-  <div class="sn-hero-inner" style="position: relative; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 60px; padding: 0 24px;">
+  <!-- FIX: Removed inline flex properties that broke the grid on mobile -->
+  <div class="sn-hero-inner" style="position: relative; padding: 0 24px;">
     
-    <div class="sn-hero-text reveal" style="flex: 1.1; max-width: 620px;">
+    <div class="sn-hero-text reveal">
       <div class="sn-hero-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 139, 248, 0.05); color: #008BF8; padding: 6px 14px; border-radius: 100px; font-size: 11px; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 24px; border: 1px solid rgba(0, 139, 248, 0.15);">
         <span style="width: 6px; height: 6px; background: #008BF8; border-radius: 50%;"></span>
         GTM EXECUTION FOR CLOUD MARKETPLACE ISVS
@@ -580,10 +608,10 @@ h1, h2, h3, h4, h5, h6 {
       </div>
     </div>
 
-    <div class="reveal delay-1" style="flex: 0.9; display: flex; justify-content: flex-end;">
+    <!-- FIX: Corrected video width handling for responsive grid -->
+    <div class="reveal delay-1" style="display: flex; justify-content: flex-end; width: 100%;">
       <div class="hero-video-wrapper" style="width: 100%; max-width: 540px; position: relative;">
         <div class="hero-video-frame" style="border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); background: #000;">
-          <!-- FIX: Added playsinline to guarantee mobile playback -->
           <video src="images/SaaSNova-Jen-why.mp4" controls playsinline preload="metadata" poster="images/Jen-videoframe_thumb.png" 
                  style="display: block; width: 100%; height: auto;">
           </video>
@@ -616,7 +644,7 @@ h1, h2, h3, h4, h5, h6 {
     <div class="marquee-track" style="animation-direction:reverse">
       <span class="marquee-logo-item"><img src="images/newrelic.svg" alt="New Relic"/></span>
       <span class="marquee-logo-item"><img src="images/Druva_Logo_tagline_Color.svg" alt="Druva"/></span>
-      <span class="marquee-logo-item"><img src="images/freshworks-logo-png.png" alt="Freshworks"/></span>
+      <span class="marquee-logo-item"><img src="images/freshworks-logo-png_seeklogo-360980.png" alt="Freshworks"/></span>
       <span class="marquee-logo-item"><img src="images/Postman--Streamline-Svg-Logos.svg" alt="Postman"/></span>
       <span class="marquee-logo-item"><img src="images/hashicorp-ar21.svg" alt="HashiCorp"/></span>
       <span class="marquee-logo-item"><img src="images/arcticwolf.png" alt="Arctic Wolf"/></span>
@@ -632,7 +660,7 @@ h1, h2, h3, h4, h5, h6 {
       <!-- Duplicate items to ensure smooth infinite scroll -->
       <span class="marquee-logo-item"><img src="images/newrelic.svg" alt="New Relic"/></span>
       <span class="marquee-logo-item"><img src="images/Druva_Logo_tagline_Color.svg" alt="Druva"/></span>
-      <span class="marquee-logo-item"><img src="images/freshworks-logo-png.png" alt="Freshworks"/></span>
+      <span class="marquee-logo-item"><img src="images/freshworks-logo-png_seeklogo-360980.png" alt="Freshworks"/></span>
       <span class="marquee-logo-item"><img src="images/Postman--Streamline-Svg-Logos.svg" alt="Postman"/></span>
       <span class="marquee-logo-item"><img src="images/hashicorp-ar21.svg" alt="HashiCorp"/></span>
       <span class="marquee-logo-item"><img src="images/arcticwolf.png" alt="Arctic Wolf"/></span>
@@ -748,7 +776,6 @@ h1, h2, h3, h4, h5, h6 {
           </div>
         </div>
 
-        <!-- FIX: Updated to a responsive CSS class (.sn-proof-strip) instead of forced inline styles to prevent cutting on mobile -->
         <div class="sn-proof-strip">
           <div style="text-align:center;padding:10px 6px;background:#F8FAFC;border-radius:10px;border:1px solid rgba(0,0,0,.05)">
             <div style="font-family:'JetBrains Mono',monospace;font-weight:900;font-size:18px;background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">2K+</div>
@@ -1310,6 +1337,13 @@ h1, h2, h3, h4, h5, h6 {
   </div>
 </section>
 
+<!-- Mobile Sticky CTA -->
+<div class="mobile-sticky-cta">
+  <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws" class="cta-primary" style="width: 100%; padding: 14px 24px; margin: 0;">
+    Get Started
+  </a>
+</div>
+
 </main>
 <div id="footer-placeholder"></div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -1359,7 +1393,13 @@ document.addEventListener('DOMContentLoaded', () => {
           { tab: 'Kevin Flitcroft', text: '"Automation is the essential foundation but real acceleration happens when GTM activation aligns an ISV’s story with seller priorities inside AWS, Azure, and Google Cloud."', author: 'Kevin Flitcroft', role: 'Head of Sales' }
         ]
       },
-        {
+      {
+        id: 'nexla', logo: 'images/nexla-logo.png', name: 'Nexla',
+        quotes: [
+          { tab: 'Jayashree Rajan', text: '"SaaSNova didn\'t just clarify our AWS GTM motion, they exposed issues we didn\'t even know were blocking us. Their operator-level mastery of Marketplace, ACE, co-sell, and partner programs is unmatched."', author: 'Jayashree Rajan', role: 'CMO' }
+        ]
+      },
+      {
         id: 'aws', logo: 'images/aws-logo.png', name: 'AWS',
         quotes: [
           { tab: 'Gunjan Ramketa', text: '"Jen’s GTM architecture elevated Dataminr’s entire AWS motion. The structure and discipline she brought created the kind of alignment and seller confidence we rarely see from ISVs."', author: 'Gunjan Ramketa', role: 'Partner Development Manager' },
@@ -1379,15 +1419,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
       },
       {
-        id: 'freshworks', logo: 'images/freshworks-logo-png.png', name: 'Freshworks',
+        id: 'freshworks', logo: 'images/freshworks-logo-png', name: 'Freshworks',
         quotes: [
           { tab: 'Abhishek GP', text: '"Jen is one of the most dynamic and driven leaders I’ve worked with Freshwork. She built the alignment and relationships needed to secure a three‑year strategic collaboration with AWS and set the foundation for a scalable co‑sell motion. She consistently turns challenges into opportunities."', author: 'Abhishek GP', role: 'VP of Growth at Atlan (and former Head of Growth at Freshworks)' }
-        ]
-      },
-          {
-        id: 'nexla', logo: 'images/nexla-logo.png', name: 'Nexla',
-        quotes: [
-          { tab: 'Jayashree Rajan', text: '"SaaSNova didn\'t just clarify our AWS GTM motion, they exposed issues we didn\'t even know were blocking us. Their operator-level mastery of Marketplace, ACE, co-sell, and partner programs is unmatched."', author: 'Jayashree Rajan', role: 'CMO' }
         ]
       }
     ];

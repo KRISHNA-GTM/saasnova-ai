@@ -11,11 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css"/>
 
-<title>SaaSNova Blog — Cloud Marketplace Insights</title>
+<title>SaaSNova Blog - Cloud Marketplace Insights</title>
 <meta name="description" content="Actionable insights on co-sell execution, marketplace listing, and field team motions across AWS, Azure, and GCP."/>
 
 <style>
-/* ── BLOG HERO, vibrant gradient mesh ── */
+/* BLOG HERO */
 .blog-hero {
   margin-top:64px;
   position:relative;overflow:hidden;
@@ -48,7 +48,7 @@
   font-size:17px;color:rgba(255,255,255,.62);line-height:1.8;max-width:540px;
 }
 
-/* ── CATEGORY FILTER ── */
+/* CATEGORY FILTER */
 .blog-filters {
   background:#fff;border-bottom:1px solid var(--border-light);
   padding:16px 0;position:sticky;top:64px;z-index:50;
@@ -67,25 +67,36 @@
 }
 .blog-filter-btn.active { background:var(--blue);color:#fff;border-color:var(--blue); }
 
-/* ── FEATURED POST ── */
+/* FEATURED POST */
 .blog-featured {
   background:linear-gradient(135deg,#EBF5FF 0%,#F5EEFF 100%);
   padding:56px 0;
 }
 .blog-featured-card {
   max-width:900px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  display:flex; flex-direction: row; gap:0;
   background:#fff;border:1px solid var(--border-light);border-radius:var(--r-2xl);
   overflow:hidden;box-shadow:0 8px 40px rgba(0,139,248,.1);
 }
-.blog-feat-visual {
-  height:100%;min-height:280px;position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-  background:#0a1628; /* Added background for letterboxing */
-}
-.blog-feat-content {padding:36px 32px;display:flex;flex-direction:column;justify-content:center;}
 
-/* ── POST GRID ── */
+/* Flawless 1671x940 Scaling with Contain */
+.blog-feat-visual {
+  width: 50%;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  background:#0a1628; 
+}
+.blog-feat-visual img {
+  width: 100%; height: 100%;
+  object-fit: contain; /* Changed from cover to contain to prevent cutting */
+  display: block;
+}
+.blog-feat-content {
+  width: 50%;
+  padding:36px 32px;display:flex;flex-direction:column;justify-content:center;
+}
+
+/* POST GRID */
 .blog-grid-section {
   background:#FAFBFF;padding:56px 0;
 }
@@ -98,17 +109,25 @@
   text-decoration:none;color:inherit;
 }
 .blog-card:hover {transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,139,248,.1);border-color:rgba(0,139,248,.2);}
+
+/* Flawless 1671x940 Scaling for Grid */
 .blog-card-visual {
-  height:180px; /* Slightly taller to accommodate image text */
-  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
-  background: #0A1628; /* Added background for letterboxing */
+  width:100%; height: auto;
+  aspect-ratio: 1671 / 940;
+  position:relative;overflow:hidden;
+  background: #0A1628; display: block;
+}
+.blog-card-visual img {
+  width: 100%; height: 100%;
+  object-fit: contain; /* Guaranteed to show entire image */
+  display: block;
 }
 .blog-card-body {padding:20px;flex:1;display:flex;flex-direction:column;}
 .blog-card-cat {font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px;}
 .blog-card-h {font-size:15px;font-weight:700;line-height:1.45;margin-bottom:8px;flex:1;}
 .blog-card-meta {display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--border-light);}
 
-/* ── CTA STRIP ── */
+/* CTA STRIP */
 .blog-cta {
   background:linear-gradient(135deg,#0A1628,#1A0A2E);
   padding:56px 0;text-align:center;position:relative;overflow:hidden;
@@ -119,8 +138,9 @@
 }
 
 @media(max-width:900px){
-  .blog-featured-card{grid-template-columns:1fr;}
-  .blog-feat-visual{min-height:240px;}
+  .blog-featured-card{flex-direction: column;}
+  .blog-feat-visual { width: 100%; aspect-ratio: 1671 / 940; }
+  .blog-feat-content { width: 100%; }
   .blog-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:600px){.blog-grid{grid-template-columns:1fr;}}
@@ -157,10 +177,9 @@
     <div style="margin-bottom:24px">
       <span class="eyebrow" style="color:var(--blue)">Featured Post</span>
     </div>
-    <a href="blog-aws-prm-deadline.html" class="blog-featured-card reveal" style="text-decoration:none;color:inherit;display:grid">
+    <a href="blog-aws-prm-deadline.html" class="blog-featured-card reveal" style="text-decoration:none;color:inherit;">
       <div class="blog-feat-visual">
-        <!-- Changed to object-fit: contain to ensure full text/image is visible without cropping -->
-        <img src="images/blogs/aws prm blog 2 cover.png" alt="AWS PRM Deadline" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;padding:12px;"/>
+        <img src="images/blogs/aws prm blog 2 cover.png" alt="AWS PRM Deadline" />
       </div>
       <div class="blog-feat-content">
         <span style="display:inline-block;padding:3px 10px;border-radius:var(--r-full);background:rgba(255,153,0,.1);color:#FF9900;font-size:11px;font-weight:700;margin-bottom:14px">AWS APN Compliance</span>
@@ -171,7 +190,7 @@
             <img src="images/jen-dp.jpg" alt="Jen Dawson" style="width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:top"/>
             <span style="font-size:13px;font-weight:600;color:var(--text-secondary)">Jen Dawson</span>
           </div>
-          <span style="font-size:12px;color:var(--text-muted)">April 2026 · 5 min read</span>
+          <span style="font-size:12px;color:var(--text-muted)">April 2026 &middot; 5 min read</span>
           <span style="margin-left:auto;font-size:14px;font-weight:600;color:var(--blue)">Read </span>
         </div>
       </div>
@@ -187,15 +206,14 @@
       <!-- POST 1: SILENT LISTING -->
       <a href="blog-cloud-marketplace-listing-silent-fix.html" class="blog-card reveal delay-1" data-cat="aws isv">
         <div class="blog-card-visual">
-          <!-- Changed to object-fit: contain to ensure full text/image is visible without cropping -->
-          <img src="images/blogs/cloud-marketplace-listing.png" alt="Cloud Marketplace Listing" style="width:100%;height:100%;object-fit:contain;position:absolute;inset:0;padding:8px;"/>
+          <img src="images/blogs/cloud-marketplace-listing.png" alt="Cloud Marketplace Listing" />
         </div>
         <div class="blog-card-body">
           <div class="blog-card-cat" style="color:var(--blue)">ISV Marketplace Activation</div>
           <div class="blog-card-h">Why Your Cloud Marketplace Listing Is Silent And What Actually Fixes It</div>
           <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn the 3 execution gaps keeping ISVs silent.</p>
           <div class="blog-card-meta">
-            <span style="font-size:12px;color:var(--text-muted)">April 2026 · 6 min</span>
+            <span style="font-size:12px;color:var(--text-muted)">April 2026 &middot; 6 min</span>
             <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
           </div>
         </div>
@@ -204,15 +222,15 @@
       <!-- POST 2: AWS ALIGNMENT -->
       <a href="blog-aws-alignment.html" class="blog-card reveal delay-2" data-cat="aws isv">
         <div class="blog-card-visual">
-          <!-- Added public placeholder image from Unsplash. You can swap the URL when your real asset is ready -->
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="AWS Doesn't Reward Progress, It Rewards Alignment" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.85"/>
+          <!-- Placeholder AWS Alignment image perfectly scaling to 1671x940 -->
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1671&h=940&q=80" alt="AWS Doesn't Reward Progress, It Rewards Alignment" />
         </div>
         <div class="blog-card-body">
           <div class="blog-card-cat" style="color:var(--orange)">AWS Execution Strategy</div>
           <div class="blog-card-h">AWS Doesn't Reward Progress. It Rewards Alignment.</div>
           <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">Getting listed on AWS was the easy part. Why fragmented execution costs you, and what moves the needle.</p>
           <div class="blog-card-meta">
-            <span style="font-size:12px;color:var(--text-muted)">April 2026 · 5 min</span>
+            <span style="font-size:12px;color:var(--text-muted)">April 2026 &middot; 5 min</span>
             <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
           </div>
         </div>
@@ -237,7 +255,7 @@
 <section class="blog-cta">
   <div class="container-sm" style="position:relative">
     <span class="eyebrow" style="color:rgba(0,139,248,.7);margin-bottom:12px;display:block">From the Practitioner</span>
-    <h2 style="color:#fff;margin-bottom:12px">Reading about execution<br/>isn't the same as doing it.</h2>
+    <h2 style="color:#fff;margin-bottom:12px; font-size: clamp(28px, 4vw, 40px);">Reading about execution<br/>isn't the same as doing it.</h2>
     <p style="color:rgba(255,255,255,.62);font-size:17px;max-width:440px;margin:0 auto 28px">Book a discovery call and get a written GTM readiness assessment for your ISV, on your target clouds.</p>
     <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03"
        target="_blank" rel="noopener" class="btn btn-primary btn-lg">

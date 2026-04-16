@@ -1,12 +1,10 @@
 /* ═══════════════════════════════════════════════════
-   SaaSNova Chatbot, OFFLINE / NO-API VERSION v2.0
-   chatbot.js
-
+   SaaSNova Chatbot, OFFLINE / NO-API VERSION v2.1
+   
    Works 100% on Netlify free. No API key. No server.
    Users tap preset question chips → instant answers.
 
-   TO EDIT CONTENT: find the KB object below and
-   update the 'a' (answer) fields. HTML is supported.
+   *NEW*: Auto-injects its HTML container.
    ═══════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -21,87 +19,87 @@
      isBooking = true opens Calendly link
   ───────────────────────────────────────────────── */
   const KB = {
-    welcome: "Hi! I'm the SaaSNova assistant. Ask me about our services, pricing, or how to get started.",
+    welcome: "Hi! I'm the SaaSNova assistant. Ask me about our execution programs, pricing, or how to get started.",
 
     topics: [
       {
         id: 'whois',
         q: 'What is SaaSNova?',
-        a: `<strong>SaaSNova</strong> is a cloud marketplace GTM execution engine for SaaS ISVs scaling through AWS, Azure, and GCP, AWS is our flagship hyperscaler.<br><br>
-Founded by Jen Dawson, a 25+ year cloud GTM practitioner behind 100+ ISV activations including New Relic, Druva, Freshworks, Arctic Wolf, and Dataminr.<br><br>
-<strong>The problem we solve:</strong> ISVs don't fail at listing. They fail at execution. You're listed. You're active. But there's no predictable, attributable revenue coming from the hyperscaler ecosystem. Cloud field teams don't respond. MDF is fragmented. The board sees nothing they can present to investors.<br><br>
-<strong>What SaaSNova does:</strong> We activate cloud field relationships, drive co-sell conversations to actual deals, and deliver the verified revenue evidence your board needs, customised to your ISV's GTM stage and cloud mix.`,
+        a: `<strong>SaaSNova</strong> is the world's first operator-led cloud marketplace GTM execution engine for SaaS ISVs scaling across AWS, Azure, and GCP.<br><br>
+Founded by Jen Dawson, a 25+ year cloud GTM practitioner behind 100+ ISV activations including New Relic, Freshworks, Arctic Wolf, and Dataminr.<br><br>
+<strong>The problem we solve:</strong> ISVs don't fail at listing. They fail at execution. You're listed, but cloud field teams don't respond, and the board sees no attributable pipeline.<br><br>
+<strong>What SaaSNova does:</strong> We act as an extension of your team to activate field relationships, drive co-sell to closed-won, and deliver verified revenue evidence. Not advice. Execution.`,
         follow: ['programs','jen','clouds','booking']
       },
       {
         id: 'programs',
         q: 'What services do you offer?',
-        a: `SaaSNova has three core programs, each tailored to your GTM maturity:<br><br>
-<strong>Ignite (3 Months):</strong><br>Prove your first cloud-attributable revenue.<br><br>
-<strong>SuperNova (4 Months):</strong><br>US market entry and investor-grade GTM proof.<br><br>
-<strong>NovaX (6 Months):</strong><br>Embedded multi-cloud GTM execution and scaling.<br><br>
-Every programme is customised to your cloud mix and revenue goals.`,
+        a: `SaaSNova runs three core execution programs, tailored to your GTM maturity and cloud mix:<br><br>
+<strong>Ignite (3 Months):</strong><br>For ISVs establishing their first cloud-attributable traction.<br><br>
+<strong>SuperNova (4 Months):</strong><br>For global ISVs targeting US market entry and US-based co-sell revenue.<br><br>
+<strong>NovaX (6 Months):</strong><br>For ISVs operationalizing and scaling multi-cloud co-sell (AWS, Azure, GCP).<br><br>
+Every program is customized to your starting point and delivers board-ready GTM pipeline evidence.`,
         follow: ['ignite','supernova','novax','whichprogram']
       },
       {
         id: 'ignite',
         q: 'Tell me about Ignite',
         a: `<strong>SaaSNova Ignite (3 Months)</strong><br><br>
-Best for: Pre-Series A &rarr; Series A ISVs establishing their first cloud-attributable traction.<br><br>
+<strong>Ideal Stage:</strong> Pre-Series A &rarr; Series A. For ISVs launching, relaunching, or proving first attributable revenue.<br><br>
 <strong>Core Outcomes:</strong><br>
 • Your first cloud-attributable signal<br>
-• Validated co-sell pipeline<br>
+• Validated co-sell opportunities<br>
 • PRM implementation & ACE hygiene<br>
-• Board-ready GTM evidence report<br><br>
-Every engagement is tailored to your cloud mix and GTM starting point.`,
+• Board-ready GTM evidence report<br>
+• Early proof points for ISV Accelerate readiness`,
         follow: ['supernova','novax','whichprogram','booking']
       },
       {
         id: 'supernova',
         q: 'Tell me about SuperNova',
         a: `<strong>SaaSNova SuperNova (4 Months)</strong><br><br>
-Best for: Global ISVs entering the US market, or Series A &rarr; Series B ISVs needing investor-grade GTM traction.<br><br>
+<strong>Ideal Stage:</strong> Series A &rarr; Series B. For global APAC/EMEA ISVs entering the US market with cloud-attributed revenue goals.<br><br>
 <strong>Core Outcomes:</strong><br>
-• Operator-led US GTM activation via channel & SIs<br>
 • Verified US co-sell opportunities<br>
-• US partner & Channel map<br>
-• Investor-ready US revenue validation<br><br>
-If you need to build scalable US cloud revenue, this is the programme.`,
+• US partner & Channel map (CPPO)<br>
+• Executive-ready US GTM evidence package<br>
+• 2-4X stronger US field engagement<br>
+• 40-60% fewer US co-sell rejections`,
         follow: ['ignite','novax','whichprogram','booking']
       },
       {
         id: 'novax',
         q: 'Tell me about NovaX',
         a: `<strong>SaaSNova NovaX (6 Months)</strong><br><br>
-Best for: Series A &rarr; Series C ISVs expanding beyond early traction into repeatable, multi-cloud revenue.<br><br>
+<strong>Ideal Stage:</strong> Series B &rarr; Series C. For ISVs expanding beyond early traction into repeatable, multi-cloud revenue.<br><br>
 <strong>Core Outcomes:</strong><br>
-• Scalable multi-cloud co-sell engine<br>
+• Multi-cloud co-sell orchestration (AWS, Azure, GCP)<br>
 • Partner-led pipeline activation (SIs/GSIs)<br>
-• Quarterly board traction evidence<br>
-• Full PRM lifecycle automation<br><br>
-SaaSNova operates as an embedded extension of your team, managing relationships and execution directly.`,
+• Scalable tagging and attribution model<br>
+• PRM-powered partner lifecycle automation<br>
+• Quarterly board performance reporting`,
         follow: ['ignite','supernova','whichprogram','booking']
       },
       {
         id: 'whichprogram',
-        q: 'Which programme is right for me?',
+        q: 'Which program is right for me?',
         a: `<strong>Choose Ignite if:</strong><br>
-You are launching, relaunching, or need to prove your first attributable cloud revenue.<br><br>
+You are launching or need to establish your first cloud-attributable pipeline.<br><br>
 <strong>Choose SuperNova if:</strong><br>
-You are an APAC/EMEA ISV entering the US market, or you are fundraising and need investor-grade US traction evidence.<br><br>
+You are an international ISV penetrating the US market and need investor-grade US traction evidence.<br><br>
 <strong>Choose NovaX if:</strong><br>
-You need to operationalize co-sell across multiple clouds and require a dedicated, embedded execution team.<br><br>
-The fastest way to find the right fit: book a 30-minute discovery call with Jen Dawson.`,
+You are ready to operationalize co-sell across multiple clouds and require a dedicated, embedded execution team.<br><br>
+The fastest way to confirm the right fit is to book a 30-minute discovery call with Jen Dawson.`,
         follow: ['booking','programs']
       },
       {
         id: 'pricing',
         q: 'How does pricing work?',
-        a: `Pricing is based on your specific requirements and eligibility. There is no fixed rate card.<br><br>
-Every engagement is scoped to your cloud mix, listing status, and GTM stage. To get a custom quote, book a discovery call with Jen Dawson or request a private offer via AWS Marketplace.<br><br>
+        a: `Pricing is based on your specific requirements, internal readiness, and eligibility. There is no standard rate card.<br><br>
+Every engagement is scoped directly to your cloud mix and GTM stage.<br><br>
 <strong>Two ways to proceed:</strong><br>
-• Book a 30-min discovery call with Jen<br>
-• Request a private offer via AWS Marketplace`,
+• Book a 30-min discovery call with Jen Dawson for a custom quote.<br>
+• Request a private offer directly via AWS Marketplace (SaaSNova services can be procured via AWS).`,
         isBooking: true,
         follow: ['ignite','supernova','novax']
       },
@@ -109,78 +107,76 @@ Every engagement is scoped to your cloud mix, listing status, and GTM stage. To 
         id: 'cosell',
         q: 'What is co-sell?',
         a: `Co-sell is a joint sales motion where your ISV and a cloud provider's field team pursue a deal together.<br><br>
-On <strong>AWS</strong> this runs through ACE (Partner Opportunity Management).<br>
-On <strong>Azure</strong> through the co-sell portal in Partner Center.<br>
+On <strong>AWS</strong> this runs through ACE.<br>
+On <strong>Azure</strong> through the Partner Center co-sell portal.<br>
 On <strong>GCP</strong> through Partner Advantage.<br><br>
-SaaSNova writes and submits co-sell opportunities on your behalf, with the customer context, cloud consumption angle, and specific ask that cloud field teams actually respond to.<br><br>
-Most ISVs file submissions that get ignored. We structure them so they do not.`,
+Most ISVs file submissions that get ignored. SaaSNova structures submissions with the exact customer context, cloud consumption angle, and field messaging that makes hyperscaler AEs actually engage.`,
         follow: ['isvacc','programs','booking']
       },
       {
         id: 'isvacc',
         q: 'What is ISV Accelerate?',
-        a: `ISV Accelerate is AWS's co-sell program for qualified ISV partners. Accepted ISVs get direct support from AWS Partner Development Representatives (PDRs) and access to the ACE co-sell program.<br><br>
+        a: `ISV Accelerate is AWS's premium co-sell program. Accepted ISVs get direct support from AWS Partner Development Representatives (PDRs) and enhanced ACE visibility.<br><br>
 <strong>To qualify you need:</strong><br>
-• A software product listing on AWS Marketplace (not a services listing)<br>
+• A software product listing on AWS Marketplace<br>
 • AWS Select Partner Network tier or above<br>
 • Active ACE co-sell submission history<br>
-• AWS-native or AWS-integrated product architecture<br><br>
-Most ISVs miss the program because they apply before establishing an ACE history. SaaSNova handles ISV Accelerate activation as part of every program.`,
+• AWS-integrated product architecture<br><br>
+Most ISVs fail because they apply before establishing an ACE history. We generate the proof points required for ISV Accelerate progression.`,
         follow: ['cosell','programs','booking']
       },
       {
         id: 'boardreport',
-        q: 'What is a board-ready pipeline report?',
-        a: `Every SaaSNova program ends with a board pipeline report your leadership team can present directly. It contains:<br><br>
-• <strong>Co-sell opportunity log</strong>, named submissions per cloud, stage, value, assigned field partner<br>
-• <strong>WinWire record</strong>, submitted wins with cloud involvement documented<br>
-• <strong>Field enablement log</strong>, sessions run, date, attendance, cloud<br>
-• <strong>Field relationship map</strong>, named cloud contacts and last touchpoint<br>
-• <strong>Revenue attribution summary</strong>, deals where cloud co-sell influenced outcome<br><br>
-NovaX delivers this report every quarter throughout the 6-month engagement.`,
+        q: 'What is a board pipeline report?',
+        a: `Every SaaSNova program delivers a board-ready pipeline report your leadership can present directly to investors. It includes:<br><br>
+• <strong>Co-sell opportunity log:</strong> Submissions, stages, values, and assigned cloud reps.<br>
+• <strong>WinWire record:</strong> Submitted wins documenting cloud involvement.<br>
+• <strong>Field enablement log:</strong> Sessions run with cloud teams.<br>
+• <strong>Revenue attribution summary:</strong> Hard data on cloud-influenced and partner-sourced deals.<br><br>
+NovaX delivers this continually on a quarterly cadence.`,
         follow: ['programs','booking']
       },
       {
         id: 'jen',
         q: 'Who is Jen Dawson?',
         a: `Jen Dawson is the Founder and CEO of SaaSNova.<br><br>
-25+ years of cloud GTM experience across AWS, Azure, and GCP, having built co-sell programs at scale and managed ISV Accelerate motions directly.<br><br>
-She has activated 100+ ISVs including New Relic, Druva, Freshworks, Postman, HashiCorp, Arctic Wolf, and Dataminr.<br><br>
-Jen personally reviews every co-sell submission, leads field enablement sessions, and signs off on every board pipeline report across all SaaSNova programs.`,
+She brings 25+ years of cloud GTM experience across AWS, Azure, and GCP, having built scalable co-sell programs and managed ISV Accelerate motions directly.<br><br>
+She has personally activated over 100 ISVs including Arctic Wolf, Dataminr, Safe Security, and Freshworks.<br><br>
+Unlike advisory firms, Jen and her team operate as embedded GTM executors alongside your own organization.`,
         follow: ['programs','booking']
       },
       {
         id: 'clouds',
         q: 'Which clouds do you cover?',
-        a: `All three, AWS, Azure, and GCP, with equal execution depth.<br><br>
-<strong>AWS:</strong> ACE co-sell submissions, ISV Accelerate activation, WinWires, PDM trust-building.<br><br>
-<strong>Azure:</strong> Co-sell ready activation, IP co-sell and deal registration, Microsoft field engagement.<br><br>
-<strong>GCP:</strong> Partner Advantage activation, Google Cloud field enablement, pipeline attribution.<br><br>
-Every program is scoped to your target cloud mix, one cloud, two, or all three.`,
+        a: `SaaSNova executes across all three major hyperscalers:<br><br>
+• <strong>AWS:</strong> ACE optimization, ISV Accelerate, WinWires, PDM alignment.<br>
+• <strong>Azure:</strong> IP co-sell, deal registration, Microsoft field enablement.<br>
+• <strong>GCP:</strong> Partner Advantage activation, field engagement, pipeline attribution.<br><br>
+NovaX handles multi-cloud orchestration across all three simultaneously.`,
         follow: ['cosell','programs','booking']
       },
       {
         id: 'proof',
         q: 'Do you have client results?',
-        a: `Yes, real, named results from real clients.<br><br>
-<em>"Jen's GTM architecture fundamentally changed how Arctic Wolf engaged with AWS. The structure, clarity, and discipline she brought created a level of alignment we rarely see with security partners."</em><br>
-, John McElhone, Partner Development Manager, AWS<br><br>
+        a: `Yes, we generate verifiable pipeline and alignment.<br><br>
+<em>"Jen's GTM architecture fundamentally changed how Arctic Wolf engaged with AWS. The clarity and discipline she brought created alignment we rarely see."</em><br>
+— John McElhone, Partner Development Manager, AWS<br><br>
 <em>"The architecture gave Dataminr the credibility sellers and AWS senior leaders needed to lean in."</em><br>
-, Fraser Charles, Senior Director Partner Ecosystems, Dataminr<br><br>
-<em>"The co-sell scoring discussion was eye-opening to us."</em><br>
-, Odin Olson, VP Partnerships &amp; Alliances, Arctic Wolf Networks`,
+— Fraser Charles, Senior Director Partner Ecosystems, Dataminr<br><br>
+<em>"SaaSNova isn't a platform, they're the operator behind our AWS Marketplace success. They bring the GTM clarity no tool can provide."</em><br>
+— Gary Cronk, Director Strategic Partners, Safe Security`,
         follow: ['programs','booking']
       },
       {
         id: 'booking',
-        q: 'How do I book a discovery call?',
-        a: `Book a 30-minute discovery call with Jen Dawson directly.<br><br>
+        q: 'How do I book a call?',
+        a: `You can book a 30-minute discovery call directly with Jen Dawson.<br><br>
 On the call, Jen will:<br>
-• Score your cloud GTM readiness across 8 dimensions<br>
+• Review your cloud mix and listing status<br>
 • Identify exactly where your co-sell motion is stalling<br>
-• Recommend the right program for your ISV<br>
-• Outline clear next steps, no pressure<br><br>
-Jen reviews every submission personally and responds within 24 hours.`,
+• Recommend the right program (Ignite, SuperNova, or NovaX)<br>
+• Outline clear next steps for execution<br><br>
+Jen reviews every submission personally.`,
         isBooking: true,
         follow: ['programs','jen']
       }
@@ -197,8 +193,13 @@ Jen reviews every submission personally and responds within 24 hours.`,
 
   /* ── BUILD DOM ──────────────────────────────────── */
   function buildChatbot() {
-    const root = document.getElementById('sn-chatbot-root');
-    if (!root) return;
+    // Automatically inject HTML root if it doesn't exist
+    let root = document.getElementById('sn-chatbot-root');
+    if (!root) {
+      root = document.createElement('div');
+      root.id = 'sn-chatbot-root';
+      document.body.appendChild(root);
+    }
 
     root.innerHTML = `
       <div id="sn-cb-launcher" role="button" tabindex="0" aria-label="Open chat">
@@ -218,7 +219,7 @@ Jen reviews every submission personally and responds within 24 hours.`,
       <div id="sn-cb-window" aria-hidden="true" role="dialog" aria-label="SaaSNova assistant">
         <div id="sn-cb-header">
           <div id="sn-cb-header-left">
-            <img src="/images/jen-dp.jpg" alt="SaaSNova" id="sn-cb-avatar"
+            <img src="images/jen-dp.jpg" alt="SaaSNova" id="sn-cb-avatar"
                  onerror="this.style.display='none'"/>
             <div>
               <div id="sn-cb-name">SaaSNova Assistant</div>

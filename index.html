@@ -70,6 +70,23 @@ h1, h2, h3, h4, h5, h6 {
   border-radius:6px;
   background:rgba(0,0,0,0.03);
 }
+
+/* Failsafe for injected nav bars - specifically targeting stray floating buttons on tablet */
+#nav-placeholder {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+@media (max-width: 1024px) {
+  #nav-placeholder [class*="btn"], 
+  #nav-placeholder [class*="cta"], 
+  #nav-placeholder [class*="button"],
+  #nav-placeholder a[href*="contact"],
+  #nav-placeholder button:not(.menu-toggle) {
+    display: none !important;
+  }
+}
+
 /* ══════════════════════════════════════════
    HERO SECTION
 ══════════════════════════════════════════ */
@@ -82,7 +99,7 @@ h1, h2, h3, h4, h5, h6 {
     linear-gradient(90deg, rgba(0,0,0,.025) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
   background-position: 0 0, 0 0, -1px -1px, -1px -1px;
-  padding: 120px 24px 80px;
+  padding: 100px 24px 60px; 
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid rgba(0,0,0,.04);
@@ -116,6 +133,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 24px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  white-space: normal; /* Fixed Galaxy Fold Overflow Bug */
+  text-align: center;
 }
 .sn-eyebrow-dot {
   width: 6px;
@@ -126,15 +145,12 @@ h1, h2, h3, h4, h5, h6 {
   flex-shrink: 0;
 }
 .sn-hero-text h1 {
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(32px, 4.5vw, 56px);
   font-weight: 800;
   line-height: 1.06;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.035em;
   color: #0F1923;
   margin-bottom: 20px;
-}
-.sn-hl {
-  color: #008BF8;
 }
 .sn-hl-grad {
   background: linear-gradient(90deg, #008BF8, #FA0F9C);
@@ -185,6 +201,11 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(0,139,248,.12); border-color: rgba(0,139,248,.5); transform: translateY(-2px); color:#008BF8;
 }
 
+.video-col-wrap {
+  display: flex; 
+  justify-content: flex-end; 
+  width: 100%;
+}
 .hero-video-frame {
   position: relative;
   width: 100%;
@@ -192,7 +213,9 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 16px;
   overflow: hidden;
   background: #111;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+  box-shadow: 0 30px 60px -12px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,139,248,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  z-index: 1;
 }
 .hero-video-frame video {
   width: 100%;
@@ -201,17 +224,21 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
-@media (max-width: 992px) {
-  .sn-hero-inner { grid-template-columns: 1fr; gap: 48px; }
-  .sn-hero-static { padding: 100px 20px 60px; }
-  .sn-hero-text { align-items: flex-start; text-align: left; }
+/* Tablet & Mobile Alignment Fixes */
+@media (max-width: 1024px) {
+  .sn-hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+  .sn-hero-text { align-items: center; text-align: center; margin: 0 auto; }
+  .sn-cloud-pills { justify-content: center; }
+  .sn-hero-ctas { justify-content: center; }
+  .video-col-wrap { justify-content: center; margin-top: 10px; }
+  .sn-hero-static { padding: 80px 20px 48px; }
 }
 
 /* ══════════════════════════════════════════
    PIPELINE SECTION & BEFORE/AFTER CARDS
 ══════════════════════════════════════════ */
 .pipeline-section {
-  padding: 80px 0;
+  padding: 56px 0;
   background: #ffffff;
 }
 .pipeline-grid {
@@ -220,6 +247,11 @@ h1, h2, h3, h4, h5, h6 {
   gap: 64px;
   align-items: center;
 }
+
+@media (max-width: 1024px) {
+  .pipeline-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
 .sn-hero-visual-box {
   background: #ffffff;
   border-radius: 24px;
@@ -242,46 +274,117 @@ h1, h2, h3, h4, h5, h6 {
 }
 .sn-hero-visual-box > * { position: relative; z-index: 1; }
 
-.sn-before-after { display: flex; align-items: stretch; gap: 0; position: relative; z-index: 1; }
-.sn-ba-card { flex: 1; background: #fff; border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; justify-content: space-between; }
-.sn-ba-card.before { border: 1px solid rgba(225,29,72,.2); box-shadow: 0 4px 16px rgba(225,29,72,.06); }
-.sn-ba-card.after { border: 1px solid rgba(16,185,129,.2); box-shadow: 0 4px 16px rgba(16,185,129,.08); }
-.sn-ba-arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 12px; flex-shrink: 0; }
-.ba-line { position: relative; width: 40px; height: 2px; background: linear-gradient(90deg, #E11D48, #008BF8); border-radius: 2px; }
-.ba-line::after { content: ''; position: absolute; right: -1px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid #008BF8; }
-.ba-logo { height: 28px; width: auto; margin-top: 10px; object-fit: contain; }
+/* ── BULLETPROOF GRID LAYOUT FOR CONNECTOR (2-LINE COMPACT DESIGN) ── */
+.sn-before-after { 
+  display: grid; 
+  grid-template-columns: 1fr auto 1fr; 
+  align-items: stretch; 
+  gap: 0; 
+  position: relative; 
+  z-index: 1; 
+}
+.sn-ba-card { 
+  background: #fff; 
+  border-radius: 14px; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  position: relative; 
+  z-index: 1; 
+}
+.sn-ba-card.before { 
+  border: 1px solid rgba(225,29,72,.2); 
+  box-shadow: 0 4px 16px rgba(225,29,72,.06); 
+  padding: 24px 44px 24px 20px; 
+}
+.sn-ba-card.after { 
+  border: 1px solid rgba(16,185,129,.2); 
+  box-shadow: 0 4px 16px rgba(16,185,129,.08); 
+  padding: 24px 20px 24px 44px; 
+}
+
+.sn-ba-connector {
+  width: max-content; 
+  height: auto; 
+  padding: 12px 18px; 
+  border-radius: 16px; 
+  background: #fff; 
+  box-shadow: 0 6px 20px rgba(0, 139, 248, 0.15); 
+  border: 1px solid rgba(0, 139, 248, 0.2); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 12px; 
+  z-index: 2; 
+  position: relative; 
+  align-self: center; 
+  margin: 0 -36px; /* High negative margin merges cards elegantly behind the pill */
+  font-size: 11px; 
+  font-weight: 800; 
+}
+.sn-ba-connector-txt {
+  background: linear-gradient(90deg, var(--blue), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.sn-ba-connector svg.sn-ba-arrow { stroke: var(--pink); transition: transform 0.3s; width: 16px; height: 16px; }
 
 /* Responsive Proof Strip */
 .sn-proof-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 24px;
   position: relative;
   z-index: 1;
 }
 
 @media (max-width: 992px) {
-  .pipeline-grid { grid-template-columns: 1fr; gap: 40px; }
+  /* Stack Before/After vertically on all Tablets and Mobile */
+  .sn-before-after { 
+    grid-template-columns: 1fr; 
+    grid-template-rows: auto auto auto; 
+  }
+  .sn-ba-card.before { padding: 24px 20px 48px 20px; }
+  .sn-ba-card.after { padding: 48px 20px 24px 20px; }
+  .sn-ba-connector { 
+    margin: -28px auto; 
+    z-index: 3; 
+    flex-direction: column; /* Stack vertically for mobile */
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 16px;
+  }
+  .sn-ba-connector .sn-ba-connector-txt { text-align: center !important; line-height: 1.4 !important; }
+  .sn-ba-connector svg.sn-ba-arrow { transform: rotate(90deg); margin: 0 auto; }
   .sn-proof-strip { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
+  .sn-hero-static { padding: 80px 16px 40px; }
+  .sn-hero-eyebrow { font-size: 10px; padding: 6px 12px; }
   .sn-hero-ctas { flex-direction: column; width: 100%; }
   .cta-primary, .cta-secondary { width: 100%; justify-content: center; }
-  .sn-before-after { flex-direction: column; gap: 16px; }
-  .sn-ba-arrow { padding: 12px 0; }
-  .ba-line { width: 2px; height: 40px; background: linear-gradient(180deg, #E11D48, #008BF8); }
-  .ba-line::after { right: auto; bottom: -1px; top: auto; left: 50%; transform: translateX(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid #008BF8; border-bottom: none; }
   .sn-hero-visual-box { padding: 20px; }
 }
 
 @media (max-width: 480px) {
   .sn-proof-strip { grid-template-columns: 1fr; }
+  .sn-trust-divider { display: none; }
 }
 
 /* ── COMPARE TABLE ── */
-.sn-compare-table{background:#fff;border:1px solid var(--border-light);border-radius:var(--r-xl);overflow:hidden;width:100%;box-shadow:0 4px 24px rgba(0,0,0,.04);}
+.compare-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--r-xl);
+}
+.sn-compare-table{background:#fff;border:1px solid var(--border-light);border-radius:var(--r-xl);overflow:hidden;width:100%; min-width: 760px; box-shadow:0 4px 24px rgba(0,0,0,.04);}
 .sn-compare-row{display:grid;grid-template-columns:2.5fr 1fr 1.2fr;border-bottom:1px solid var(--border-light)}
 .sn-compare-row:last-child{border-bottom:none}
 .sn-compare-cell{padding:16px 24px;display:flex;align-items:center;justify-content:flex-start;font-size:14px;color:var(--text-secondary);text-align:left;gap:10px}
@@ -291,7 +394,7 @@ h1, h2, h3, h4, h5, h6 {
 .sn-compare-row:first-child .sn-compare-cell{padding:20px 24px;font-weight:700;color:var(--text-primary)}
 .sn-compare-cell.saasnova-col img{max-width:100%;height:36px;object-fit:contain}
 
-/* Mobile Sticky CTA */
+/* Mobile Sticky CTA - Disabled entirely per user request */
 .mobile-sticky-cta {
   display: none;
 }
@@ -301,46 +404,25 @@ h1, h2, h3, h4, h5, h6 {
 @media(max-width:768px){
   .sn-compare-table{display:none}
   .sn-compare-mobile{display:flex;flex-direction:column;gap:10px;width: 100%;}
-  .sn-cmp-card{background:#fff;border:1px solid var(--border-light);border-radius:14px;padding:14px 16px}
-  .sn-cmp-capability{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px;line-height:1.4;display:flex;align-items:flex-start;gap:8px}
+  .sn-cmp-card{background:#fff;border:1px solid var(--border-light);border-radius:14px;padding:18px 20px;}
+  .sn-cmp-capability{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:12px;line-height:1.4;display:flex;align-items:flex-start;gap:8px}
   .sn-cmp-capability::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:5px}
   .sn-cmp-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .sn-cmp-col{padding:8px 10px;border-radius:9px;font-size:12px;font-weight:600;line-height:1.4;text-align:center}
-  /* Fix text contrast in mobile compare section */
   .sn-cmp-col.sn{background:rgba(0,139,248,.1);border:1px solid rgba(0,139,248,.2);color:#0055A0;display:flex;align-items:center;justify-content:center;gap:6px}
   .sn-cmp-col.other{background:#F8FAFC;border:1px solid var(--border-light);color:var(--text-secondary)}
-
-  /* Mobile Sticky CTA styles */
-  .mobile-sticky-cta {
-    display: flex;
-    position: fixed;
-    bottom: 0; 
-    left: 0; 
-    right: 0;
-    padding: 16px 24px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid var(--border-light);
-    z-index: 999;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
-    justify-content: center;
-  }
-  body {
-    padding-bottom: 80px; /* Space to prevent footer from being hidden behind sticky CTA */
-  }
 }
 
 /* RESPONSIVE CSS GRIDS FOR ALL SECTIONS */
 .sn-exec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; width: 100%; }
-.sn-prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; }
+.sn-prog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; align-items: stretch; }
 .sn-proof-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; width: 100%; }
 .sn-show-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px; align-items: center; width: 100%; }
 .sn-blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; }
 .sn-event-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; width: 100%; }
 .sn-price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 560px; margin: 0 auto 48px; width: 100%; }
 
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .sn-exec-grid { grid-template-columns: repeat(2, 1fr); }
   .sn-prog-grid { grid-template-columns: repeat(2, 1fr); }
   .sn-show-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -382,20 +464,17 @@ h1, h2, h3, h4, h5, h6 {
 .prog-section { margin-bottom: 20px; }
 .prog-section h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
 .prog-section ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.prog-section li { font-size: 13px; color: var(--text-secondary); line-height: 1.4; display: flex; align-items: flex-start; gap: 8px; }
+.prog-section li { font-size: 13.5px; color: #1E293B; font-weight: 500; line-height: 1.5; display: flex; align-items: flex-start; gap: 8px; }
 .prog-section li::before { font-weight: 800; font-size: 12px; margin-top: 1px; flex-shrink: 0; }
 
 .card-ignite .prog-section h4 { color: var(--blue); }
 .card-ignite .prog-section li::before { content: '✓'; color: var(--blue); }
-.card-ignite .prog-highlight { background: rgba(0,139,248,0.04); border: 1px solid rgba(0,139,248,0.1); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
 
 .card-supernova .prog-section h4 { color: var(--orange); }
 .card-supernova .prog-section li::before { content: '✓'; color: var(--orange); }
-.card-supernova .prog-highlight { background: rgba(241,153,83,0.05); border: 1px solid rgba(241,153,83,0.15); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
 
 .card-novax .prog-section h4 { color: var(--pink); }
 .card-novax .prog-section li::before { content: '✓'; color: var(--pink); }
-.card-novax .prog-highlight { background: rgba(250,15,156,0.04); border: 1px solid rgba(250,15,156,0.12); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
 
 .section-tag { padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; display: inline-block; text-transform: uppercase; letter-spacing: 0.05em; }
 .st-blue { background: rgba(0,139,248,0.1); color: var(--blue); }
@@ -563,29 +642,28 @@ h1, h2, h3, h4, h5, h6 {
 <main>
 
 <!-- 1. HERO SECTION (2-Column Aligned) -->
-<section class="sn-hero-static" id="sn-hero" style="padding: 100px 0; background-color: #FAFAFC; background-image: linear-gradient(rgba(0, 139, 248, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 139, 248, 0.05) 1px, transparent 1px); background-size: 40px 40px; position: relative; overflow: hidden;">
+<section class="sn-hero-static" id="sn-hero">
   
   <div style="position: absolute; top: -150px; left: 50%; transform: translateX(-50%); width: 80vw; height: 400px; background: radial-gradient(ellipse at center, rgba(0, 139, 248, 0.15) 0%, transparent 70%); pointer-events: none; z-index: 0;"></div>
 
-  <!-- FIX: Removed inline flex properties that broke the grid on mobile -->
-  <div class="sn-hero-inner" style="position: relative; padding: 0 24px;">
+  <div class="sn-hero-inner" style="position: relative;">
     
     <div class="sn-hero-text reveal">
-      <div class="sn-hero-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 139, 248, 0.05); color: #008BF8; padding: 6px 14px; border-radius: 100px; font-size: 11px; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 24px; border: 1px solid rgba(0, 139, 248, 0.15);">
-        <span style="width: 6px; height: 6px; background: #008BF8; border-radius: 50%;"></span>
+      <div class="sn-hero-eyebrow">
+        <span class="sn-eyebrow-dot"></span>
         GTM EXECUTION FOR CLOUD MARKETPLACE ISVS
       </div>
 
-      <h1 style="font-size: 64px; line-height: 1.05; margin: 0 0 24px; color: #0f172a; font-weight: 800; letter-spacing: -0.03em;">
+      <h1>
         The world’s first <br/>
-        <span style="background: linear-gradient(90deg, #008BF8 0%, #a855f7 50%, #FA0F9C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">operator-led GTM <br/>execution engine.</span>
+        <span class="sn-hl-grad">operator-led GTM <br/>execution engine.</span>
       </h1>
 
-      <p style="font-size: 20px; line-height: 1.6; color: #475569; margin-bottom: 32px; max-width: 520px; font-weight: 450;">
+      <p class="sn-hero-sub">
         We operate the co-sell and marketplace motions that generate pipeline and revenue across cloud ecosystems.
       </p>
 
-      <div class="sn-cloud-pills" style="display: flex; gap: 12px; margin-bottom: 40px;">
+      <div class="sn-cloud-pills">
         <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:10px;background:#FFF;border:1px solid #F19953;font-size:12px;font-weight:800;color:#7A4A00">
           <img src="images/aws-logo.png" alt="AWS" style="height:14px;width:auto"/><span>AWS</span>
         </div>
@@ -597,26 +675,30 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </div>
 
-      <div class="sn-hero-ctas" style="display: flex; gap: 16px;">
-        <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws" target="_blank" class="cta-primary" style="background: #FA0F9C; color: #FFFFFF; padding: 16px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 20px rgba(250, 15, 156, 0.2); transition: transform 0.2s ease;">
+      <div class="sn-hero-ctas">
+        <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws" target="_blank" class="cta-primary">
           <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="white" stroke-width="1.8"/><path d="M5 2v2M11 2v2M2 7h12" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
           Book a Call
         </a>
-        <a href="services.html" class="cta-secondary" style="background: #FFFFFF; color: #008BF8; padding: 16px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; border: 2px solid #008BF8;">
+        <a href="services.html" class="cta-secondary">
           Explore Services <svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
         </a>
       </div>
     </div>
 
-    <!-- FIX: Corrected video width handling for responsive grid -->
-    <div class="reveal delay-1" style="display: flex; justify-content: flex-end; width: 100%;">
+    <!-- Centered video wrapping structure for Tablet/Mobile -->
+    <div class="reveal delay-1 video-col-wrap">
       <div class="hero-video-wrapper" style="width: 100%; max-width: 540px; position: relative;">
-        <div class="hero-video-frame" style="border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); background: #000;">
-          <video src="images/SaaSNova-Jen-why.mp4" controls playsinline preload="metadata" poster="images/Jen-videoframe_thumb.png" 
-                 style="display: block; width: 100%; height: auto;">
+        <!-- Premium Video Glow Background -->
+        <div style="position: absolute; inset: -20px; background: linear-gradient(135deg, rgba(0,139,248,0.5) 0%, rgba(250,15,156,0.3) 50%, rgba(241,153,83,0.4) 100%); filter: blur(50px); z-index: 0; border-radius: 30px; opacity: 0.85;"></div>
+        
+        <!-- Premium Grid Dots overlay for depth -->
+        <div style="position: absolute; inset: -30px; background-image: radial-gradient(rgba(255,255,255,0.4) 2px, transparent 2px); background-size: 16px 16px; z-index: 0; opacity: 0.5; border-radius: 40px; pointer-events: none;"></div>
+
+        <div class="hero-video-frame">
+          <video src="images/SaaSNova-Jen-why.mp4" controls playsinline preload="metadata" poster="images/Jen-videoframe_thumb.png">
           </video>
         </div>
-        <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(250, 15, 156, 0.1) 0%, transparent 70%); z-index: -1;"></div>
       </div>
     </div>
 
@@ -632,7 +714,7 @@ h1, h2, h3, h4, h5, h6 {
         <span class="sn-trust-num">100+</span> <span>ISVs Activated</span>
       </div>
       
-      <div style="width:1px;height:16px;background:rgba(255,255,255,.12)"></div>
+      <div style="width:1px;height:16px;background:rgba(255,255,255,.12)" class="sn-trust-divider"></div>
       <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:rgba(255,255,255,.55)">
         <span class="sn-trust-num">25+</span> <span>Years Cloud GTM</span>
       </div>
@@ -675,7 +757,7 @@ h1, h2, h3, h4, h5, h6 {
 </div>
 
 <!-- 3. INTERACTIVE TESTIMONIALS SECTION -->
-<section style="background: #fff; padding:80px 0; border-bottom:1px solid var(--border-light);">
+<section style="background: #fff; padding:56px 0; border-bottom:1px solid var(--border-light);">
   <div class="container">
     <div style="font-size:11px;font-weight:800;text-align:center;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:32px">What ISV Leaders and Field Teams Say</div>
 
@@ -709,7 +791,7 @@ h1, h2, h3, h4, h5, h6 {
         THE EXECUTION GAP
       </div>
       <h2 style="font-size:clamp(32px, 4vw, 44px); font-weight:800; line-height:1.15; color:var(--text-primary); margin-bottom:16px; letter-spacing:-0.02em;">
-        So, your marketplace listing is live.<br/><span class="sn-hl">But, no pipeline means no revenue.</span>
+        So, your marketplace listing is live.<br/><span class="sn-hl-grad">But, no pipeline means no revenue.</span>
       </h2>
       <p style="font-size:18px; color:var(--text-secondary); line-height:1.6; max-width:480px; margin-bottom:32px;">
         We step in as your dedicated cloud GTM operators, activating field relationships, unblocking co-sell motions, and converting your listing into measurable revenue.
@@ -743,7 +825,7 @@ h1, h2, h3, h4, h5, h6 {
       <div class="sn-hero-visual-box">
         <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94A3B8;margin-bottom:20px;text-align:center;position:relative;z-index:1;">Pipeline Transformation</div>
         
-        <!-- Before / After -->
+        <!-- NATIVE GRID CONNECTOR: Fixes Tablet/Laptop overlap -->
         <div class="sn-before-after">
           <!-- Before -->
           <div class="sn-ba-card before">
@@ -757,10 +839,10 @@ h1, h2, h3, h4, h5, h6 {
             </div>
             <div style="margin-top:16px;padding:8px 12px;background:#FFF1F2;border-radius:8px;border:1px solid rgba(225,29,72,.15);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;color:#E11D48;">Status: Dormant</div>
           </div>
-          <!-- Arrow -->
-          <div class="sn-ba-arrow">
-            <div class="ba-line"></div>
-            <img src="images/logo-color.png" alt="SaaSNova" class="ba-logo"/>
+          <!-- Grid Connector Element (2-Line Design) -->
+          <div class="sn-ba-connector">
+            <div class="sn-ba-connector-txt" style="text-align: right; line-height: 1.3;">SaaSNova<br/>Execution</div>
+            <svg class="sn-ba-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
           <!-- After -->
           <div class="sn-ba-card after">
@@ -863,7 +945,7 @@ h1, h2, h3, h4, h5, h6 {
 <div class="wave-d2w"><svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:48px;display:block;width:100%;background:#0A1628"><path d="M0,0 C360,48 1080,48 1440,0 L1440,48 L0,48 Z" fill="#ffffff"/></svg></div>
 
 <!-- 6. SERVICES -->
-<section class="sn-programs" style="background:#ffffff; padding: 80px 0;">
+<section class="sn-programs" style="background:#ffffff; padding: 64px 0;">
   <div class="container">
     <div style="text-align:center;margin-bottom:60px">
       <div class="section-tag st-blue" style="margin-bottom:12px">Services</div>
@@ -871,22 +953,16 @@ h1, h2, h3, h4, h5, h6 {
       <p class="reveal" style="max-width:580px;margin:0 auto;font-size:17px;color:var(--text-secondary)">Start at the stage that matches your GTM maturity. Execution is customize to your cloud mix and revenue targets.</p>
     </div>
 
-    <div class="reveal sn-prog-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch;">
+    <div class="reveal sn-prog-grid">
 
-      <div class="sn-prog-card card-ignite" style="background:linear-gradient(180deg,#F0F7FF 0%,#fff 100%); position:relative; display:flex; flex-direction:column; padding: 40px 24px 32px; border-radius: 16px; border: 1px solid var(--border-light); transition: transform 0.3s ease;">
-        <div class="sn-prog-topbar" style="position:absolute; top:0; left:0; right:0; height:6px; background:var(--blue); border-radius: 16px 16px 0 0;"></div>
-        
-        <div style="position:absolute; top:24px; right:16px; background:#004a99; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap; box-shadow: 0 4px 12px rgba(0,74,153,0.2);">
-          Cloud GTM Activation
-        </div>
-
-        <div style="margin-bottom:12px;">
-          <span class="section-tag st-blue" style="font-size:10px; font-weight:800;">3 MONTHS</span>
-        </div>
-
+      <!-- Ignite Card -->
+      <div class="sn-prog-card card-ignite" style="background:linear-gradient(180deg,#F0F7FF 0%,#fff 100%);">
+        <div class="sn-prog-topbar" style="background:var(--blue);"></div>
+        <div style="position:absolute; top:24px; right:16px; background:#004a99; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap; box-shadow: 0 4px 12px rgba(0,74,153,0.2);">Cloud GTM Activation</div>
+        <div style="margin-bottom:12px;"><span class="section-tag st-blue" style="font-size:10px; font-weight:800;">3 MONTHS</span></div>
         <h3 style="font-size:28px; margin:0 0 24px; color:var(--text-primary)">Ignite</h3>
         
-        <div style="flex-grow:1;">
+        <div style="flex-grow:1; display:flex; flex-direction:column;">
           <div class="prog-section" style="margin-bottom:24px">
             <h4 style="font-size:14px; color:var(--text-primary); margin-bottom:12px; font-weight:700;">What You Get</h4>
             <ul style="font-size:13px; color:var(--text-secondary); line-height:1.6; padding-left:18px; margin:0;">
@@ -902,19 +978,20 @@ h1, h2, h3, h4, h5, h6 {
           <div class="prog-section" style="margin-bottom:24px">
             <h4 style="font-size:14px; color:var(--text-primary); margin-bottom:12px; font-weight:700;">Impact</h4>
             <ul style="font-size:13px; color:var(--text-secondary); line-height:1.6; padding-left:18px; margin:0;">
-              <li>2–3X lift in Field AM engagement</li>
-              <li>40–60% fewer co‑sell rejections</li>
+              <li>Stronger cloud‑readiness foundation</li>
+              <li>Hygiene established for ACE/PRM/tagging and PCM</li>
               <li>Early pipeline visibility</li>
               <li>Stronger investor confidence</li>
             </ul>
           </div>
-        </div>
 
-        <div style="margin-top:20px; padding-top:20px; border-top: 1px solid var(--border-light); margin-bottom:24px;">
-          <span style="display:block; font-size:10px; font-weight:800; color:#004a99; text-transform:uppercase; margin-bottom:4px;">Ideal Stage</span>
-          <p style="font-size:13px; font-weight:500; color:var(--text-primary); margin:0; line-height:1.4;">
-            <strong>Pre‑Series A &rarr; Series A.</strong> For ISVs launching or proving first attributable revenue.
-          </p>
+          <!-- margin-top: auto guarantees identical bottom alignment -->
+          <div style="margin-top:auto; padding-top:20px; border-top: 1px solid var(--border-light); margin-bottom:24px;">
+            <span style="display:block; font-size:10px; font-weight:800; color:#004a99; text-transform:uppercase; margin-bottom:4px;">Ideal Stage</span>
+            <p style="font-size:13px; font-weight:500; color:var(--text-primary); margin:0; line-height:1.4;">
+              <strong>Pre‑Series A &rarr; Series A.</strong> For ISVs launching or proving first attributable revenue.
+            </p>
+          </div>
         </div>
 
         <div style="display:flex;gap:12px;">
@@ -923,20 +1000,14 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </div>
 
-      <div class="sn-prog-card card-supernova" style="background:linear-gradient(180deg,#fff 0%,#FFFBF5 100%); position:relative; display:flex; flex-direction:column; padding: 40px 24px 32px; border-radius: 16px; border: 1px solid var(--border-light); box-shadow:0 12px 48px rgba(241,153,83,.08);">
-        <div class="sn-prog-topbar" style="position:absolute; top:0; left:0; right:0; height:6px; background:var(--orange); border-radius: 16px 16px 0 0;"></div>
-        
-        <div style="position:absolute; top:24px; right:16px; background:#994d00; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap; box-shadow: 0 4px 12px rgba(153,77,0,0.2);">
-          US Market Entry
-        </div>
-
-        <div style="margin-bottom:12px;">
-          <span class="section-tag st-orange" style="font-size:10px; font-weight:800;">4 MONTHS</span>
-        </div>
-
+      <!-- SuperNova Card -->
+      <div class="sn-prog-card card-supernova" style="background:linear-gradient(180deg,#fff 0%,#FFFBF5 100%); box-shadow:0 12px 48px rgba(241,153,83,.08);">
+        <div class="sn-prog-topbar" style="background:var(--orange);"></div>
+        <div style="position:absolute; top:24px; right:16px; background:#994d00; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap; box-shadow: 0 4px 12px rgba(153,77,0,0.2);">US Market Entry</div>
+        <div style="margin-bottom:12px;"><span class="section-tag st-orange" style="font-size:10px; font-weight:800;">4 MONTHS</span></div>
         <h3 style="font-size:28px; margin:0 0 24px; color:var(--text-primary)">SuperNova</h3>
         
-        <div style="flex-grow:1;">
+        <div style="flex-grow:1; display:flex; flex-direction:column;">
           <div class="prog-section" style="margin-bottom:24px">
             <h4 style="font-size:14px; color:var(--text-primary); margin-bottom:12px; font-weight:700;">What You Get</h4>
             <ul style="font-size:13px; color:var(--text-secondary); line-height:1.6; padding-left:18px; margin:0;">
@@ -958,13 +1029,14 @@ h1, h2, h3, h4, h5, h6 {
               <li>Validated US GTM traction</li>
             </ul>
           </div>
-        </div>
 
-        <div style="margin-top:20px; padding-top:20px; border-top: 1px solid var(--border-light); margin-bottom:24px;">
-          <span style="display:block; font-size:10px; font-weight:800; color:#994d00; text-transform:uppercase; margin-bottom:4px;">Ideal Stage</span>
-          <p style="font-size:13px; font-weight:500; color:var(--text-primary); margin:0; line-height:1.4;">
-            <strong>Series A &rarr; Series B.</strong> Global ISVs expanding in the US with cloud traction.
-          </p>
+          <!-- margin-top: auto guarantees identical bottom alignment -->
+          <div style="margin-top:auto; padding-top:20px; border-top: 1px solid var(--border-light); margin-bottom:24px;">
+            <span style="display:block; font-size:10px; font-weight:800; color:#994d00; text-transform:uppercase; margin-bottom:4px;">Ideal Stage</span>
+            <p style="font-size:13px; font-weight:500; color:var(--text-primary); margin:0; line-height:1.4;">
+              <strong>Series A &rarr; Series B.</strong> Global ISVs expanding in the US with cloud traction.
+            </p>
+          </div>
         </div>
 
         <div style="display:flex;gap:12px;">
@@ -973,20 +1045,14 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </div>
 
-      <div class="sn-prog-card card-novax" style="background:linear-gradient(180deg,#FFF5FB 0%,#fff 100%); position:relative; display:flex; flex-direction:column; padding: 40px 24px 32px; border-radius: 16px; border: 1px solid var(--border-light);">
-        <div class="sn-prog-topbar" style="position:absolute; top:0; left:0; right:0; height:6px; background:var(--pink); border-radius: 16px 16px 0 0;"></div>
-        
-        <div style="position:absolute; top:24px; right:16px; background:#b0126a; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap; box-shadow: 0 4px 12px rgba(176,18,106,0.2);">
-          Global Multi-Cloud Scale
-        </div>
-
-        <div style="margin-bottom:12px;">
-          <span class="section-tag st-pink" style="font-size:10px; font-weight:800;">6 MONTHS</span>
-        </div>
-
+      <!-- NovaX Card -->
+      <div class="sn-prog-card card-novax" style="background:linear-gradient(180deg,#FFF5FB 0%,#fff 100%);">
+        <div class="sn-prog-topbar" style="background:var(--pink);"></div>
+        <div style="position:absolute; top:24px; right:16px; background:#b0126a; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:10px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap; box-shadow: 0 4px 12px rgba(176,18,106,0.2);">Global Multi-Cloud Scale</div>
+        <div style="margin-bottom:12px;"><span class="section-tag st-pink" style="font-size:10px; font-weight:800;">6 MONTHS</span></div>
         <h3 style="font-size:28px; margin:0 0 24px; color:var(--text-primary)">NovaX</h3>
         
-        <div style="flex-grow:1;">
+        <div style="flex-grow:1; display:flex; flex-direction:column;">
           <div class="prog-section" style="margin-bottom:24px">
             <h4 style="font-size:14px; color:var(--text-primary); margin-bottom:12px; font-weight:700;">What You Get</h4>
             <ul style="font-size:13px; color:var(--text-secondary); line-height:1.6; padding-left:18px; margin:0;">
@@ -1009,13 +1075,14 @@ h1, h2, h3, h4, h5, h6 {
               <li>Series B &rarr; C scale engine</li>
             </ul>
           </div>
-        </div>
 
-        <div style="margin-top:20px; padding-top:20px; border-top: 1px solid var(--border-light); margin-bottom:24px;">
-          <span style="display:block; font-size:10px; font-weight:800; color:#b0126a; text-transform:uppercase; margin-bottom:4px;">Ideal Stage</span>
-          <p style="font-size:13px; font-weight:500; color:var(--text-primary); margin:0; line-height:1.4;">
-            <strong>Series A &rarr; Series C.</strong> Multi-cloud ISVs expanding into repeatable global revenue.
-          </p>
+          <!-- margin-top: auto guarantees identical bottom alignment -->
+          <div style="margin-top:auto; padding-top:20px; border-top: 1px solid var(--border-light); margin-bottom:24px;">
+            <span style="display:block; font-size:10px; font-weight:800; color:#b0126a; text-transform:uppercase; margin-bottom:4px;">Ideal Stage</span>
+            <p style="font-size:13px; font-weight:500; color:var(--text-primary); margin:0; line-height:1.4;">
+              <strong>Series A &rarr; Series C.</strong> Multi-cloud ISVs expanding into repeatable global revenue.
+            </p>
+          </div>
         </div>
 
         <div style="display:flex;gap:12px;">
@@ -1029,133 +1096,123 @@ h1, h2, h3, h4, h5, h6 {
 </section>
 
 <!-- 7. WHY SAASNOVA (Unified light section) -->
-<section style="background:linear-gradient(160deg,#F8F9FF 0%,#EFF4FF 100%); padding:80px 0; border-top:1px solid var(--border-light); border-bottom:1px solid var(--border-light);">
+<section style="background:linear-gradient(160deg,#F8F9FF 0%,#EFF4FF 100%); padding:64px 0; border-top:1px solid var(--border-light); border-bottom:1px solid var(--border-light);">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px">
       <div class="section-tag st-blue" style="margin-bottom:12px">Why SaaSNova</div>
       <h2 style="color:var(--text-primary);margin-bottom:10px; font-size:clamp(32px, 4vw, 48px); font-weight:800; letter-spacing:-0.02em;">Not Advice. Not Theory. Execution.</h2>
       <p style="color:var(--text-secondary);max-width:520px;margin:0 auto;font-size:17px;text-align:center">Other vendors give you frameworks and dashboards. We embed as your cloud GTM operator and go execute.</p>
     </div>
-    <div class="sn-compare-table reveal">
-      
-      <div class="sn-compare-row" style="border-bottom:1px solid var(--border-light);background:var(--light-100);">
-        <div class="sn-compare-cell" style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em">Capability</div>
-        <div class="sn-compare-cell center saasnova-col">
-        <div class="sn-compare-cell" style="font-size:20px;font-weight:800;color:var(--text-secondary);text-align:left">SaaSNova</div>
-        </div>
-        <div class="sn-compare-cell" style="font-size:15px;font-weight:800;color:var(--text-secondary);text-align:left">Advisory / Platform</div>
-      </div>
-
-      <div class="sn-compare-row">
-        <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>
-          Executes GTM alongside your team
-        </div>
-        <div class="sn-compare-cell center saasnova-col">
-          <div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center">
-            <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    
+    <!-- Compare Table (Scrollable Native Table wrapper protects all viewports) -->
+    <div class="compare-table-wrapper">
+      <div class="sn-compare-table">
+        <div class="sn-compare-row" style="border-bottom:1px solid var(--border-light);background:var(--light-100);">
+          <div class="sn-compare-cell" style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em">Capability</div>
+          <!-- Centered SaaSNova Logo Cell -->
+          <div class="sn-compare-cell center saasnova-col" style="padding: 16px 0;">
+            <img src="images/logo-color.png" alt="SaaSNova Logo" style="height:40px; width:auto; object-fit:contain;"/>
           </div>
+          <div class="sn-compare-cell" style="font-size:15px;font-weight:800;color:var(--text-secondary);text-align:left">Advisory / Platform</div>
         </div>
-        <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Tooling or guidance only</span></div>
-      </div>
-
-      <div class="sn-compare-row">
-        <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>
-          Activates hyperscaler field relationships
+        
+        <div class="sn-compare-row">
+          <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Executes GTM alongside your team</div>
+          <div class="sn-compare-cell center saasnova-col"><div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg></div></div>
+          <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Tooling or guidance only</span></div>
         </div>
-        <div class="sn-compare-cell center saasnova-col">
-          <div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center">
-            <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
+        
+        <div class="sn-compare-row">
+          <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Activates hyperscaler field relationships</div>
+          <div class="sn-compare-cell center saasnova-col"><div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg></div></div>
+          <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Limited to portal workflows</span></div>
         </div>
-        <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Limited to portal workflows</span></div>
-      </div>
-
-      <div class="sn-compare-row">
-        <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>
-          Identifies and advances real co-sell opportunities
+        
+        <div class="sn-compare-row">
+          <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Identifies and advances real co-sell opportunities</div>
+          <div class="sn-compare-cell center saasnova-col"><div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg></div></div>
+          <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Requires your team to drive motion</span></div>
         </div>
-        <div class="sn-compare-cell center saasnova-col">
-          <div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center">
-            <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
+        
+        <div class="sn-compare-row">
+          <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Produces field-validated deal evidence</div>
+          <div class="sn-compare-cell center saasnova-col"><div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg></div></div>
+          <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Relies on your team for proof</span></div>
         </div>
-        <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Requires your team to drive motion</span></div>
-      </div>
-
-      <div class="sn-compare-row">
-        <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>
-          Produces field-validated deal evidence
+        
+        <div class="sn-compare-row">
+          <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Delivers field enablement sessions with cloud teams</div>
+          <div class="sn-compare-cell center saasnova-col"><div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg></div></div>
+          <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Provides decks, not delivery</span></div>
         </div>
-        <div class="sn-compare-cell center saasnova-col">
-          <div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center">
-            <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
+        
+        <div class="sn-compare-row">
+          <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Provides a board-ready, attributable pipeline report</div>
+          <div class="sn-compare-cell center saasnova-col"><div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg></div></div>
+          <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Dashboards only, no verification</span></div>
         </div>
-        <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Relies on your team for proof</span></div>
-      </div>
-
-      <div class="sn-compare-row">
-        <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>
-          Delivers field enablement sessions with cloud teams
+        
+        <div class="sn-compare-row" style="border-bottom:none">
+          <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>Aligns MDF, co-marketing, and cloud GTM into measurable ROI</div>
+          <div class="sn-compare-cell center saasnova-col"><div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg></div></div>
+          <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Recommendations only, no execution</span></div>
         </div>
-        <div class="sn-compare-cell center saasnova-col">
-          <div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center">
-            <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-        <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Provides decks, not delivery</span></div>
-      </div>
-
-      <div class="sn-compare-row">
-        <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>
-          Provides a board-ready, attributable pipeline report
-        </div>
-        <div class="sn-compare-cell center saasnova-col">
-          <div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center">
-            <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-        <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Dashboards only, no verification</span></div>
-      </div>
-
-      <div class="sn-compare-row" style="border-bottom:none">
-        <div class="sn-compare-cell" style="color:var(--text-primary);gap:10px;font-weight:500">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0"></span>
-          Aligns MDF, co-marketing, and cloud GTM into measurable ROI
-        </div>
-        <div class="sn-compare-cell center saasnova-col">
-          <div style="width:26px;height:26px;border-radius:50%;background:rgba(52,168,83,.12);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center">
-            <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-        <div class="sn-compare-cell"><span style="font-size:13px;font-weight:500;color:var(--text-muted)">Recommendations only, no execution</span></div>
       </div>
     </div>
 
-    <!-- Mobile alternative: stacked capability cards (shown only on <768px via CSS) -->
-    <div class="sn-compare-mobile reveal">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;padding:10px 14px;background:rgba(0,0,0,.05);border-radius:12px;">
-        <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;text-align:center;">Capability</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-          <div style="text-align:center;font-size:10px;font-weight:800;color:var(--blue);">SaaSNova</div>
-          <div style="text-align:center;font-size:10px;font-weight:700;color:var(--text-muted);">Advisory</div>
+    <div class="sn-compare-mobile">
+      <div class="sn-cmp-card">
+        <div class="sn-cmp-capability">Executes GTM alongside your team</div>
+        <div class="sn-cmp-cols">
+          <div class="sn-cmp-col sn"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SaaSNova</div>
+          <div class="sn-cmp-col other">Tooling / guidance only</div>
         </div>
       </div>
-      <div class="sn-cmp-card" style="background:#fff;border:1px solid var(--border-light);"><div class="sn-cmp-capability" style="color:var(--text-primary);">Executes GTM alongside your team</div><div class="sn-cmp-cols"><div class="sn-cmp-col sn"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3L9 1" stroke="#10B981" stroke-width="1.6" stroke-linecap="round"/></svg>Yes</div><div class="sn-cmp-col other">Tooling only</div></div></div>
-      <div class="sn-cmp-card" style="background:#fff;border:1px solid var(--border-light);"><div class="sn-cmp-capability" style="color:var(--text-primary);">Activates hyperscaler field relationships</div><div class="sn-cmp-cols"><div class="sn-cmp-col sn"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3L9 1" stroke="#10B981" stroke-width="1.6" stroke-linecap="round"/></svg>Yes</div><div class="sn-cmp-col other">Portal only</div></div></div>
-      <div class="sn-cmp-card" style="background:#fff;border:1px solid var(--border-light);"><div class="sn-cmp-capability" style="color:var(--text-primary);">Identifies and advances real co-sell deals</div><div class="sn-cmp-cols"><div class="sn-cmp-col sn"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3L9 1" stroke="#10B981" stroke-width="1.6" stroke-linecap="round"/></svg>Yes</div><div class="sn-cmp-col other">Needs your team</div></div></div>
-      <div class="sn-cmp-card" style="background:#fff;border:1px solid var(--border-light);"><div class="sn-cmp-capability" style="color:var(--text-primary);">Delivers board-ready attributable pipeline report</div><div class="sn-cmp-cols"><div class="sn-cmp-col sn"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3L9 1" stroke="#10B981" stroke-width="1.6" stroke-linecap="round"/></svg>Yes</div><div class="sn-cmp-col other">Dashboards only</div></div></div>
-      <div class="sn-cmp-card" style="background:#fff;border:1px solid var(--border-light);"><div class="sn-cmp-capability" style="color:var(--text-primary);">Field enablement sessions with cloud teams</div><div class="sn-cmp-cols"><div class="sn-cmp-col sn"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3L9 1" stroke="#10B981" stroke-width="1.6" stroke-linecap="round"/></svg>Yes</div><div class="sn-cmp-col other">Decks only</div></div></div>
-      <div class="sn-cmp-card" style="background:#fff;border:1px solid var(--border-light);"><div class="sn-cmp-capability" style="color:var(--text-primary);">Aligns MDF, co-marketing into measurable ROI</div><div class="sn-cmp-cols"><div class="sn-cmp-col sn"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3L9 1" stroke="#10B981" stroke-width="1.6" stroke-linecap="round"/></svg>Yes</div><div class="sn-cmp-col other">Recommendations</div></div></div>
+      <div class="sn-cmp-card">
+        <div class="sn-cmp-capability">Activates hyperscaler field relationships</div>
+        <div class="sn-cmp-cols">
+          <div class="sn-cmp-col sn"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SaaSNova</div>
+          <div class="sn-cmp-col other">Portal workflows only</div>
+        </div>
+      </div>
+      <div class="sn-cmp-card">
+        <div class="sn-cmp-capability">Identifies and advances real co-sell opportunities</div>
+        <div class="sn-cmp-cols">
+          <div class="sn-cmp-col sn"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SaaSNova</div>
+          <div class="sn-cmp-col other">Your team drives</div>
+        </div>
+      </div>
+      <div class="sn-cmp-card">
+        <div class="sn-cmp-capability">Produces field-validated deal evidence</div>
+        <div class="sn-cmp-cols">
+          <div class="sn-cmp-col sn"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SaaSNova</div>
+          <div class="sn-cmp-col other">Relies on your proof</div>
+        </div>
+      </div>
+      <div class="sn-cmp-card">
+        <div class="sn-cmp-capability">Delivers field enablement sessions</div>
+        <div class="sn-cmp-cols">
+          <div class="sn-cmp-col sn"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SaaSNova</div>
+          <div class="sn-cmp-col other">Provides decks only</div>
+        </div>
+      </div>
+      <div class="sn-cmp-card">
+        <div class="sn-cmp-capability">Provides board-ready, attributable pipeline report</div>
+        <div class="sn-cmp-cols">
+          <div class="sn-cmp-col sn"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SaaSNova</div>
+          <div class="sn-cmp-col other">Dashboards only</div>
+        </div>
+      </div>
+      <div class="sn-cmp-card">
+        <div class="sn-cmp-capability">Aligns MDF, co-marketing, and cloud GTM</div>
+        <div class="sn-cmp-cols">
+          <div class="sn-cmp-col sn"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SaaSNova</div>
+          <div class="sn-cmp-col other">Recommendations only</div>
+        </div>
+      </div>
     </div>
 
-    <p class="reveal" style="text-align:center;font-size:13px;color:var(--text-muted);margin-top:18px">
+    <p style="text-align:center;font-size:13px;color:var(--text-muted);margin-top:18px">
       Every SaaSNova program includes listing setup, co-sell execution, and a board-ready pipeline report. <a href="services.html" style="color:var(--blue);font-weight:600">See how it works &rarr;</a>
     </p>
   </div>
@@ -1203,17 +1260,17 @@ h1, h2, h3, h4, h5, h6 {
       <a href="blog.html" class="btn btn-secondary">View All Posts</a>
     </div>
     
-    <!-- UPDATED: 3 SPECIFIC BLOG CARDS -->
     <div class="sn-blog-grid">
       
       <!-- Card 1: PRM Deadline -->
       <a href="blog-aws-prm-deadline.html" class="sn-blog-card reveal delay-1">
-        <div class="sn-blog-card-img" style="background:#0A1628;">
-          <img src="images/blogs/aws prm blog 2 cover.png" alt="AWS PRM Deadline" style="object-fit:contain; padding:12px;" onerror="this.src='https://placehold.co/600x400/F1F5F9/94A3B8?text=Blog+Cover'"/>
+        <!-- Ensured identical class formatting without inline overrides to maintain exact 1671/940 ratio -->
+        <div class="sn-blog-card-img">
+          <img src="images/blogs/aws prm blog 2 cover.png" alt="AWS PRM Deadline" onerror="this.src='https://placehold.co/1671x940/F1F5F9/94A3B8?text=Blog+Cover'"/>
         </div>
         <div class="sn-blog-card-content">
           <div><span class="sn-blog-card-tag" style="background:rgba(255,153,0,.1); color:#FF9900;">AWS APN Compliance</span></div>
-          <h4 class="sn-blog-card-title">The July 31 AWS PRM Deadline: How to Measure Attribution</h4>
+          <h4 class="sn-blog-card-title">The July 31 AWS Deadline for PRM: How to Measure Attribution</h4>
           <p class="sn-blog-card-desc">By July 31, 2026, the way AWS "sees" your value changes forever. Learn the execution fixes.</p>
           <div class="sn-blog-card-cta">Read More <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
@@ -1221,8 +1278,8 @@ h1, h2, h3, h4, h5, h6 {
 
       <!-- Card 2: Silent Listing -->
       <a href="blog-cloud-marketplace-listing-silent-fix.html" class="sn-blog-card reveal delay-2">
-        <div class="sn-blog-card-img" style="background:#0A1628;">
-          <img src="images/blogs/cloud-marketplace-listing.png" alt="Why Your Cloud Marketplace Listing Is Silent" style="object-fit:contain; padding:8px;" onerror="this.src='https://placehold.co/600x400/F1F5F9/94A3B8?text=Blog+Cover'"/>
+        <div class="sn-blog-card-img">
+          <img src="images/blogs/cloud-marketplace-listing.png" alt="Why Your Cloud Marketplace Listing Is Silent" onerror="this.src='https://placehold.co/1671x940/F1F5F9/94A3B8?text=Blog+Cover'"/>
         </div>
         <div class="sn-blog-card-content">
           <div><span class="sn-blog-card-tag" style="background:rgba(0,139,248,.1); color:var(--blue);">Marketplace Activation</span></div>
@@ -1234,8 +1291,8 @@ h1, h2, h3, h4, h5, h6 {
 
       <!-- Card 3: AWS Alignment -->
       <a href="blog-aws-alignment.html" class="sn-blog-card reveal delay-3">
-        <div class="sn-blog-card-img" style="background:#0A1628;">
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="AWS Doesn't Reward Progress, It Rewards Alignment" style="object-fit:cover; opacity:.85;"/>
+        <div class="sn-blog-card-img">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1671&q=80" alt="AWS Doesn't Reward Progress, It Rewards Alignment"/>
         </div>
         <div class="sn-blog-card-content">
           <div><span class="sn-blog-card-tag" style="background:rgba(241,153,83,.1); color:var(--orange);">AWS Execution Strategy</span></div>
@@ -1336,13 +1393,6 @@ h1, h2, h3, h4, h5, h6 {
     <p class="reveal" style="font-size:13px;color:rgba(255,255,255,.4);margin-top:16px">jen@saasnova.ai &middot; +1 (201) 755-5369</p>
   </div>
 </section>
-
-<!-- Mobile Sticky CTA -->
-<div class="mobile-sticky-cta">
-  <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws" class="cta-primary" style="width: 100%; padding: 14px 24px; margin: 0;">
-    Get Started
-  </a>
-</div>
 
 </main>
 <div id="footer-placeholder"></div>

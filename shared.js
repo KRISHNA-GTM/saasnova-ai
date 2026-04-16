@@ -100,10 +100,7 @@ const NAV_HTML = `
               <a href="partner-labra.html" class="dropdown-item" role="menuitem">
                 <div class="dropdown-item-icon" style="background:transparent;"><img src="images/labra-logo.png" alt="Labra" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Labra
               </a>
-              <a href="partner-tackle.html" class="dropdown-item" role="menuitem">
-                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/tackle.io-logo.png" alt="Tackle.io" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Tackle.io
-              </a>
-            </div>
+               </div>
           </div>
 
           <div class="nested-dropdown">
@@ -197,7 +194,6 @@ const NAV_HTML = `
         <a href="partner-saasify.html" class="mob-nested-link"><img src="images/saasify-logo.png" alt="SaaSify" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> SaaSify</a>
         <a href="partner-workspan.html" class="mob-nested-link"><img src="images/workspan-logo.jpeg" alt="Workspan" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Workspan</a>
         <a href="partner-labra.html" class="mob-nested-link"><img src="images/labra-logo.png" alt="Labra" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Labra</a>
-        <a href="partner-tackle.html" class="mob-nested-link"><img src="images/tackle.io-logo.png" alt="Tackle.io" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Tackle.io</a>
       </div>
       
       <button class="mob-nested-btn">SI / GSI ${SVG.chevDown}</button>
@@ -326,9 +322,7 @@ const FOOTER_HTML = `
     </div>
   </div>
 </footer>
-<div class="mobile-sticky-cta" style="position:fixed; bottom:0; left:0; right:0; padding:16px; background:#fff; box-shadow:0 -4px 20px rgba(0,0,0,0.1); z-index:100; display:none;">
-  <a href="${CALENDLY}" target="_blank" rel="noopener" class="btn btn-primary w-full" style="justify-content:center;display:flex;font-weight:800;background-color:var(--pink);color:#fff;border-radius:12px;border:none;box-shadow: 0 -8px 24px rgba(0, 139, 248, 0.35), 0 -4px 12px rgba(250, 15, 156, 0.2);">Get Started</a>
-</div>`;
+`;
 
 // DOM Injections
 const navEl = document.getElementById('nav-placeholder');
@@ -411,8 +405,10 @@ function initScrollFab() {
       }
       .sn-fab-label { font-size: 14px; font-weight: 600; white-space: nowrap; }
       .sn-fab-up .sn-fab-icon { transform: rotate(180deg); }
+      
+      /* Adjusted spacing for mobile screens so it sits properly at the bottom right */
       @media (max-width: 640px) {
-        .sn-scroll-fab { display: none; } /* Hidden on mobile to prevent overlap with sticky CTA */
+        .sn-scroll-fab { bottom: 20px; right: 20px; }
       }
     </style>
     <button id="sn-scroll-fab" class="sn-scroll-fab" aria-label="Scroll down">
@@ -478,12 +474,6 @@ function initScrollFab() {
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
   
-  // Mobile Sticky CTA Logic
-  if(window.innerWidth <= 640) {
-      const stickyCta = document.querySelector('.mobile-sticky-cta');
-      if(stickyCta) stickyCta.style.display = 'block';
-  }
-
   // Initialize the Scroll FAB
   initScrollFab();
 });

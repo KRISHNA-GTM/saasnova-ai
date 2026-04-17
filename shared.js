@@ -16,7 +16,8 @@ const SVG = {
   bars: `<svg width="22" height="16" viewBox="0 0 22 16" fill="none"><rect width="22" height="2" rx="1" fill="#0F1923"/><rect y="7" width="16" height="2" rx="1" fill="#0F1923"/><rect y="14" width="22" height="2" rx="1" fill="#0F1923"/></svg>`,
 };
 
-const NAV_HTML = `
+// ── DESKTOP NAV & GLOBAL STYLES ──
+const NAV_STYLE_AND_DESKTOP = `
 <style>
   /* Layout Fallbacks & Mobile Nav Fixes */
   .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
@@ -46,8 +47,6 @@ const NAV_HTML = `
   .nested-dropdown:hover .nested-menu { opacity: 1; visibility: visible; transform: translateX(4px); }
 
   /* ── NUCLEAR CACHE BUSTER FOR MOBILE MENU ── */
-  /* This guarantees the menu items display correctly, ignoring any ghost CSS in index.html */
-  
   #sn-mob-menu {
     display: none !important;
     position: fixed !important;
@@ -199,7 +198,10 @@ const NAV_HTML = `
     <button id="hamburger" onclick="toggleMob()" aria-label="Open menu">${SVG.bars}</button>
   </div>
 </nav>
+`;
 
+// ── MOBILE MENU (Injected separately to bypass HTML DOM issues) ──
+const NAV_MOBILE = `
 <div id="sn-mob-menu" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
   <a href="index.html" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:1px solid rgba(0,0,0,0.04) !important; display:block !important;">Home</a>
   
@@ -281,7 +283,8 @@ const NAV_HTML = `
       Get Started
     </a>
   </div>
-</div>`;
+</div>
+`;
 
 const FOOTER_HTML = `
 <footer id="footer" role="contentinfo">
@@ -367,7 +370,14 @@ const FOOTER_HTML = `
 
 // DOM Injections
 const navEl = document.getElementById('nav-placeholder');
-if(navEl) navEl.innerHTML = NAV_HTML;
+if(navEl) navEl.innerHTML = NAV_STYLE_AND_DESKTOP;
+
+// CRITICAL FIX: Append the mobile menu directly to the BODY tag to completely bypass 
+// any malformed or unclosed HTML tags (like <a> or <p>) located in index.html that were deleting <div> elements.
+if (!document.getElementById('sn-mob-menu')) {
+  document.body.insertAdjacentHTML('beforeend', NAV_MOBILE);
+}
+
 const footerEl = document.getElementById('footer-placeholder');
 if(footerEl) footerEl.innerHTML = FOOTER_HTML;
 

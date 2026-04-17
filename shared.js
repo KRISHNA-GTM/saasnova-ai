@@ -43,6 +43,51 @@ const NAV_HTML = `
   .mob-nested-content.open { max-height: 600px; }
   .mob-nested-link { display: flex; align-items: center; padding: 12px 20px 12px 64px; color: var(--text-secondary); font-size: 15px; font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.03); }
   .mob-nested-link:last-child { border-bottom: none; }
+
+  /* --- Mobile Menu Container Styles --- */
+  #mob-menu {
+    position: fixed;
+    top: 70px; /* Adjust this to match the exact height of your navbar */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: #ffffff;
+    z-index: 999;
+    overflow-y: auto;
+    
+    /* Hide off-screen to the right by default */
+    transform: translateX(100%); 
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s;
+  }
+
+  /* When JS adds the .open class */
+  #mob-menu.open {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* --- Responsive Visibility --- */
+  #hamburger {
+    display: none; /* Hidden on desktop */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px; /* Touch target size */
+  }
+
+  @media (max-width: 992px) {
+    /* Hide desktop nav elements on mobile */
+    .nav-links, .nav-cta {
+      display: none !important; 
+    }
+    /* Show the hamburger icon on mobile */
+    #hamburger {
+      display: block; 
+    }
+  }
 </style>
 
 <nav id="nav">

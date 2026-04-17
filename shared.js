@@ -605,10 +605,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ══════════════════════════════════════════════════════
+   HUBSPOT NEWSLETTER FORM INTEGRATION
+   Initializes HubSpot form embed on pages with form containers
+   ══════════════════════════════════════════════════════ */
+function initHubSpotForm() {
+  // Check if HubSpot form container exists on page
+  const hsFormContainer = document.querySelector('[data-form-id="80375307-028c-4c4f-819c-96dc9e0f6727"]');
+  
+  if (hsFormContainer && window.hbspt) {
+    // HubSpot script already loaded, forms will auto-render
+    window.hbspt.forms.create({
+      region: 'na2',
+      portalId: '245317385',
+      formId: '80375307-028c-4c4f-819c-96dc9e0f6727'
+    });
+  }
+}
+
+// Load HubSpot form script
+function loadHubSpotScript() {
+  if (!window.hbspt) {
+    const hsScript = document.createElement('script');
+    hsScript.src = 'https://js-na2.hsforms.net/forms/embed/245317385.js';
+    hsScript.defer = true;
+    hsScript.onload = () => {
+      initHubSpotForm();
+    };
+    document.head.appendChild(hsScript);
+  } else {
+    initHubSpotForm();
+  }
+}
+
+/* ══════════════════════════════════════════════════════
    GLOBAL INJECTOR FOR POPUP
    This runs automatically on every single page!
    ══════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize HubSpot form if container exists
+  loadHubSpotScript();
+  
   const popupScript = document.createElement('script');
   popupScript.src = 'popup.js';
   popupScript.defer = true;

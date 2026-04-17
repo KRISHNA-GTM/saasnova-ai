@@ -359,37 +359,12 @@ const FOOTER_HTML = `
           </div>
         </div>
 
-       // ... existing code ...
-        <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap">
-          <div style="display:flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
-            <img src="images/aws-logo.png" alt="AWS" style="height:14px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.75"/>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
-            <img src="images/azure-logo.png" alt="Azure" style="height:14px;width:auto;object-fit:contain;opacity:.8"/>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
-            <img src="images/gcp-logo.png" alt="GCP" style="height:14px;width:auto;object-fit:contain;opacity:.8"/>
-          </div>
-        </div>
-
-        <!-- HubSpot Form Integration (Footer) -->
-        <div style="margin-bottom: 24px; max-width: 320px;">
-          <script src="https://js-na2.hsforms.net/forms/embed/245317385.js" defer></script>
-          <div class="hs-form-frame" data-region="na2" data-form-id="80375307-028c-4c4f-819c-96dc9e0f6727" data-portal-id="245317385"></div>
-        </div>
-
-        <div style="display:flex;gap:16px;align-items:center;">
-          <a href="#" style="color:#0A66C2;" aria-label="LinkedIn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          </a>
-          <a href="#" style="color:#FF0000;" aria-label="YouTube">
-            <svg width="26" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.582 6.186c-.23-.86-.908-1.538-1.768-1.768C18.254 4 12 4 12 4s-6.254 0-7.814.418c-.86.23-1.538.908-1.768 1.768C2 7.746 2 12 2 12s0 4.254.418 5.814c.23.86.908 1.538 1.768 1.768 1.56.418 7.814.418 7.814.418s6.254 0 7.814-.418c.86-.23 1.538-.908 1.768-1.768C22 16.254 22 12 22 12s0-4.254-.418-5.814zM9.996 15.005l.005-6 5.207 3.005-5.212 2.995z"/></svg>
-          </a>
-        </div>
-      </div>
-      
-      <div>
-        <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">SERVICES</div>
+        <form name="footer-newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;gap:8px;margin-bottom:24px;max-width:320px">
+          <input type="hidden" name="form-name" value="footer-newsletter"/>
+          <input type="text" name="bot-field" style="display:none" aria-hidden="true"/>
+          <input type="email" name="email" placeholder="The Nova Brief" required style="flex:1;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(255,255,255,0.05);color:#fff;font-size:14px;outline:none;"/>
+          <button type="submit" class="btn btn-primary" style="padding:10px 18px;font-size:14px;background:var(--pink, #FA0F9C);border:none;border-radius:8px;">Join</button>
+        </form>
 
         <div style="display:flex;gap:16px;align-items:center;">
           <a href="#" style="color:#0A66C2;" aria-label="LinkedIn">

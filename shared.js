@@ -355,7 +355,7 @@ const FOOTER_HTML = `
           </div>
         </div>
 
-        <!-- HubSpot Form Integration (Footer) -->
+  <!-- HubSpot Form Integration (Footer) -->
         <div style="margin-bottom: 24px; max-width: 320px;">
           <script src="https://js-na2.hsforms.net/forms/embed/245317385.js" defer></script>
           <div class="hs-form-frame" data-region="na2" data-form-id="80375307-028c-4c4f-819c-96dc9e0f6727" data-portal-id="245317385"></div>

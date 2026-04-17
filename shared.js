@@ -355,14 +355,7 @@ const FOOTER_HTML = `
           </div>
         </div>
 
-        <form name="footer-newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;gap:8px;margin-bottom:24px;max-width:320px">
-          <input type="hidden" name="form-name" value="footer-newsletter"/>
-          <input type="text" name="bot-field" style="display:none" aria-hidden="true"/>
-          <input type="email" name="email" placeholder="The Nova Brief" required style="flex:1;padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(255,255,255,0.05);color:#fff;font-size:14px;outline:none;"/>
-          <button type="submit" class="btn btn-primary" style="padding:10px 18px;font-size:14px;background:var(--pink, #FA0F9C);border:none;border-radius:8px;">Join</button>
-        </form>
-
-        <div style="display:flex;gap:16px;align-items:center;">
+         <div style="display:flex;gap:16px;align-items:center;">
           <a href="#" style="color:#0A66C2;" aria-label="LinkedIn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </a>
@@ -598,24 +591,85 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollFab();
 });
 
-/* ── NEWSLETTER INLINE FORM ── */
-function handleNewsletterSubmit(e) {
-  e.preventDefault();
-  var form = e.target;
-  var btn = form.querySelector('[type="submit"]');
-  if (btn) { btn.textContent = 'Subscribing...'; btn.disabled = true; }
-  fetch('/', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams(new FormData(form)).toString()
-  }).then(function(){
-    form.style.display = 'none';
-    var thanks = form.parentNode.querySelector('.newsletter-thanks');
-    if (thanks) thanks.style.display = 'flex';
-  }).catch(function(){
-    if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
+/* SaaSNova V5, shared.js — HubSpot Integrated */
+
+const CALENDLY = "https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03";
+
+// ==========================
+// HUBSPOT CONFIG (ADD YOUR IDS)
+// ==========================
+const HUBSPOT_PORTAL_ID = "245317385";
+const HUBSPOT_NEWSLETTER_FORM_ID = "REPLACE_WITH_NEWSLETTER_FORM_ID";
+const HUBSPOT_CONTACT_FORM_ID = "80375307-028c-4c4f-819c-96dc9e0f6727";
+
+// ==========================
+// HUBSPOT SUBMIT FUNCTION
+// ==========================
+function submitToHubSpot(formId, fields) {
+  return fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      fields: fields,
+      context: {
+        pageUri: window.location.href,
+        pageName: document.title
+      }
+    })
   });
 }
+
+// ==========================
+// AUTO-BIND NEWSLETTER FORMS
+// ==========================
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('form[name="newsletter"], form[name="footer-newsletter"]').forEach(form => {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = form.querySelector('[name="email"]').value;
+
+      submitToHubSpot(HUBSPOT_NEWSLETTER_FORM_ID, [
+        { name: "email", value: email }
+      ])
+      .then(() => {
+        form.innerHTML = "Subscribed";
+      })
+      .catch(() => {
+        alert("Error. Try again.");
+      });
+    });
+  });
+});
+
+// ==========================
+// AUTO-BIND CONTACT FORM
+// ==========================
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('form[name="contact"]').forEach(form => {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      submitToHubSpot(HUBSPOT_CONTACT_FORM_ID, [
+        { name: "firstname", value: form.first_name.value },
+        { name: "lastname", value: form.last_name.value },
+        { name: "email", value: form.email.value },
+        { name: "company", value: form.company.value },
+        { name: "inquiry_type", value: form.inquiry_type.value },
+        { name: "target_cloud", value: form.target_cloud.value },
+        { name: "marketplace_status", value: form.marketplace_status.value },
+        { name: "message", value: form.message.value }
+      ])
+      .then(() => {
+        form.innerHTML = "Message sent";
+      })
+      .catch(() => {
+        alert("Error. Try again.");
+      });
+    });
+  });
+});
+
 
 /* ══════════════════════════════════════════════════════
    GLOBAL INJECTOR FOR POPUP

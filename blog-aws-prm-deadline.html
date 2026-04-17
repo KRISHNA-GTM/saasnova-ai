@@ -26,7 +26,13 @@
 
 <style>
 /* ── MOBILE OVERFLOW & RESPONSIVE FIXES ── */
+html {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip; /* Stops the document from expanding past viewport horizontally */
+}
 body {
+  width: 100%;
   max-width: 100%;
   overflow-x: clip; /* clip preserves position: sticky while preventing horizontal scroll */
   margin: 0;
@@ -45,6 +51,35 @@ img {
 }
 .blog-main, .blog-sidebar {
   min-width: 0; /* Extremely important to prevent flex container stretching */
+}
+
+/* Ensure containers have padding to prevent text from touching screen edges */
+.container-sm, .container {
+  width: 100%;
+  max-width: 1100px; /* Base max-width */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  box-sizing: border-box;
+}
+
+section {
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+.wave-d2w {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-d2w svg {
+  width: 100%;
+  display: block;
 }
 
 /* ── RESPONSIVE GRID FOR RELATED READING ── */
@@ -68,7 +103,7 @@ img {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 var(--sp-3);
+  padding: 0 var(--sp-4, 24px); /* Fallback added */
 }
 
 /* ── SIDEBAR ── */
@@ -268,7 +303,7 @@ img {
 
 @media (max-width: 640px) {
   .blog-post-wrap {
-    padding: 0 16px; /* Ensuring fallback padding */
+    padding: 0 16px !important; /* Force fallback padding */
   }
 }
 </style>
@@ -390,8 +425,8 @@ img {
               <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">Scan the QR code or enter your email below to join the waitlist. We will mail you as soon as registration is officially open.</p>
               
               <form onsubmit="event.preventDefault(); document.getElementById('waitlist-success').style.display='block'; this.style.display='none';" style="display:flex;gap:8px;width:100%;max-width:350px;flex-wrap:wrap">
-                <input type="email" placeholder="Your work email" required style="flex:1;min-width:150px;padding:10px 14px;border:1px solid var(--border-light);border-radius:var(--r-md);font-family:inherit;font-size:14px;outline:none"/>
-                <button type="submit" class="btn btn-primary btn-sm" style="white-space:nowrap">Get Notified</button>
+                <input type="email" placeholder="Your work email" required style="flex:1 1 120px;min-width:0;padding:10px 14px;border:1px solid var(--border-light);border-radius:var(--r-md);font-family:inherit;font-size:14px;outline:none"/>
+                <button type="submit" class="btn btn-primary btn-sm" style="flex: 0 0 auto; white-space:nowrap">Get Notified</button>
               </form>
               <div id="waitlist-success" style="display:none;color:rgba(52,168,83,1);font-weight:600;font-size:14px;padding:10px 0;">
                 Thanks! We've added you to the waitlist and will notify you soon.

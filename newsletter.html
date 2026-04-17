@@ -29,11 +29,12 @@
     <p class="reveal delay-2 mt-3" style="font-size:18px;max-width:520px;margin:var(--sp-2) auto var(--sp-6)">The weekly signal for ISV leaders and cloud alliances teams. Co-sell strategy, field motion intelligence, and marketplace execution across AWS, Azure, and GCP, from Jen Dawson.</p>
     <div class="reveal delay-3" style="background:#fff;border-radius:var(--r-2xl);padding:var(--sp-5);border:1px solid var(--border-light);box-shadow:var(--shadow-lg);max-width:440px;margin:0 auto var(--sp-6)">
       <h3 style="margin-bottom:var(--sp-3)">Subscribe, Free</h3>
-      
-      <!-- HubSpot Form Integration -->
-      <script src="https://js-na2.hsforms.net/forms/embed/245317385.js" defer></script>
-      <div class="hs-form-frame" data-region="na2" data-form-id="80375307-028c-4c4f-819c-96dc9e0f6727" data-portal-id="245317385"></div>
-      
+      <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleNewsletterPageSubmit(event)" style="display:flex;flex-direction:column;gap:var(--sp-2)">
+        <input type="hidden" name="form-name" value="newsletter"/>
+        <input type="text" name="bot-field" style="display:none" aria-hidden="true" tabindex="-1"/>
+        <input type="email" name="email" required placeholder="Enter your work email" class="form-input" style="font-size:16px;padding:14px 18px"/>
+        <button type="submit" class="btn btn-primary w-full" style="justify-content:center">Subscribe to The Nova Brief</button>
+      </form>
       <p style="font-size:12px;color:var(--text-muted);margin-top:10px;text-align:center">No spam. Unsubscribe any time.</p>
     </div>
     <div class="reveal delay-4" style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2);text-align:left;max-width:680px;margin:0 auto">
@@ -56,6 +57,25 @@
   </div>
 </section>
 <div id="footer-placeholder"></div>
+<script>
+function handleNewsletterPageSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('[type="submit"]');
+  btn.textContent = 'Subscribing…';
+  btn.disabled = true;
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(form)).toString()
+  }).then(() => {
+    form.innerHTML = '<div style="padding:var(--sp-4);text-align:center"><div style="font-weight:700;font-size:18px;color:var(--text-primary);margin-bottom:6px">You are subscribed.</div><p style="color:var(--text-muted)">First issue coming soon. No spam, unsubscribe any time.</p></div>';
+  }).catch(() => {
+    btn.textContent = 'Subscribe to The Nova Brief';
+    btn.disabled = false;
+  });
+}
+</script>
 <script src="shared.js"></script>
 </body>
 </html>

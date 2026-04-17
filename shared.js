@@ -22,7 +22,6 @@ const NAV_HTML = `
   .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
   #hamburger { display: none; background: transparent; border: none; cursor: pointer; padding: 8px; }
   
-  /* Bulletproof Mobile Override for Nav */
   @media (max-width: 1024px) {
     #nav .nav-links, #nav .nav-cta { display: none !important; }
     #nav #hamburger { 
@@ -31,7 +30,7 @@ const NAV_HTML = `
       justify-content: center !important; 
       width: 44px !important; 
       height: 44px !important; 
-      background: #EEF2F8 !important; /* Light gray box so it's obvious */
+      background: #EEF2F8 !important; 
       border-radius: 8px !important;
       border: 1px solid #D0DAE6 !important;
       margin-left: auto !important;
@@ -46,23 +45,45 @@ const NAV_HTML = `
   .nested-menu { position: absolute; left: 100%; top: -6px; min-width: 220px; background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 6px; opacity: 0; visibility: hidden; transform: translateX(-8px); transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; z-index: 100; }
   .nested-dropdown:hover .nested-menu { opacity: 1; visibility: visible; transform: translateX(4px); }
 
-  .mob-accordion { border-bottom: 1px solid rgba(0,0,0,0.04); }
-  .mob-accordion-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 18px 20px; font-size: 18px; font-weight: 600; color: var(--text-primary); background: none; border: none; cursor: pointer; text-align: left; }
-  .mob-accordion-btn svg { transition: transform 0.3s ease; color: var(--text-muted); }
-  .mob-accordion-btn.open svg { transform: rotate(180deg); color: var(--blue); }
-  .mob-accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; background: #F8FAFC; }
-  .mob-accordion-content.open { max-height: 1200px; }
-  .mob-icon-wrap { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 8px; margin-right: 12px; flex-shrink: 0; }
-  .mob-sub-link { display: flex; align-items: center; padding: 14px 20px 14px 24px; color: var(--text-secondary); font-size: 16px; font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.03); }
-  .mob-sub-link:last-child { border-bottom: none; }
+  /* ── NUCLEAR CACHE BUSTER FOR MOBILE MENU ── */
+  /* This guarantees the menu items display correctly, ignoring any ghost CSS in index.html */
+  
+  #sn-mob-menu {
+    display: none !important;
+    position: fixed !important;
+    top: 64px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: #ffffff !important;
+    z-index: 9999 !important;
+    padding: 24px !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    overflow-y: auto !important;
+    border-top: 1px solid #E8EEF4 !important;
+  }
+  #sn-mob-menu.open {
+    display: flex !important;
+  }
 
-  .mob-nested-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 14px 20px 14px 30px; font-size: 16px; font-weight: 600; color: var(--text-primary); background: none; border: none; border-bottom: 1px solid rgba(0,0,0,0.03); cursor: pointer; text-align: left; }
-  .mob-nested-btn svg { transition: transform 0.3s ease; color: var(--text-muted); width: 14px; height: 14px;}
-  .mob-nested-btn.open svg { transform: rotate(180deg); color: var(--blue); }
-  .mob-nested-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; background: #F1F5F9; }
-  .mob-nested-content.open { max-height: 600px; }
-  .mob-nested-link { display: flex; align-items: center; padding: 12px 20px 12px 64px; color: var(--text-secondary); font-size: 15px; font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.03); }
-  .mob-nested-link:last-child { border-bottom: none; }
+  .mob-accordion { border-bottom: 1px solid rgba(0,0,0,0.04) !important; display: block !important; visibility: visible !important; }
+  .mob-accordion-btn { display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; padding: 18px 20px !important; font-size: 18px !important; font-weight: 600 !important; color: #0F1923 !important; background: none !important; border: none !important; cursor: pointer !important; text-align: left !important; visibility: visible !important; font-family: inherit !important;}
+  .mob-accordion-btn svg { transition: transform 0.3s ease !important; color: #6B7E8F !important; }
+  .mob-accordion-btn.open svg { transform: rotate(180deg) !important; color: #008BF8 !important; }
+  .mob-accordion-content { max-height: 0 !important; overflow: hidden !important; transition: max-height 0.4s ease-in-out !important; background: #F8FAFC !important; display: block !important; }
+  .mob-accordion-content.open { max-height: 1200px !important; }
+  .mob-icon-wrap { display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 26px !important; height: 26px !important; border-radius: 8px !important; margin-right: 12px !important; flex-shrink: 0 !important; }
+  .mob-sub-link { display: flex !important; align-items: center !important; padding: 14px 20px 14px 24px !important; color: #3D4E5C !important; font-size: 16px !important; font-weight: 500 !important; text-decoration: none !important; border-bottom: 1px solid rgba(0,0,0,0.03) !important; }
+  .mob-sub-link:last-child { border-bottom: none !important; }
+
+  .mob-nested-btn { display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; padding: 14px 20px 14px 30px !important; font-size: 16px !important; font-weight: 600 !important; color: #0F1923 !important; background: none !important; border: none !important; border-bottom: 1px solid rgba(0,0,0,0.03) !important; cursor: pointer !important; text-align: left !important; font-family: inherit !important; }
+  .mob-nested-btn svg { transition: transform 0.3s ease !important; color: #6B7E8F !important; width: 14px !important; height: 14px !important;}
+  .mob-nested-btn.open svg { transform: rotate(180deg) !important; color: #008BF8 !important; }
+  .mob-nested-content { max-height: 0 !important; overflow: hidden !important; transition: max-height 0.4s ease-in-out !important; background: #F1F5F9 !important; display: block !important; }
+  .mob-nested-content.open { max-height: 600px !important; }
+  .mob-nested-link { display: flex !important; align-items: center !important; padding: 12px 20px 12px 64px !important; color: #3D4E5C !important; font-size: 15px !important; font-weight: 500 !important; text-decoration: none !important; border-bottom: 1px solid rgba(0,0,0,0.03) !important; }
+  .mob-nested-link:last-child { border-bottom: none !important; }
 </style>
 
 <nav id="nav">
@@ -179,34 +200,34 @@ const NAV_HTML = `
   </div>
 </nav>
 
-<div id="mob-menu" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
-  <a href="index.html" class="mob-link" style="padding:18px 20px; font-weight:600; text-decoration:none; color:var(--text-primary); border-bottom:1px solid rgba(0,0,0,0.04); display:block;">Home</a>
+<div id="sn-mob-menu" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
+  <a href="index.html" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:1px solid rgba(0,0,0,0.04) !important; display:block !important;">Home</a>
   
   <div class="mob-accordion">
     <button class="mob-accordion-btn">Services ${SVG.chevDown}</button>
     <div class="mob-accordion-content">
-      <a href="services.html" class="mob-sub-link" style="color:var(--blue);font-weight:700">
-        <div class="mob-icon-wrap" style="background:#EBF5FF">${SVG.services}</div> All Services
+      <a href="services.html" class="mob-sub-link" style="color:#008BF8 !important; font-weight:700 !important;">
+        <div class="mob-icon-wrap" style="background:#EBF5FF !important;">${SVG.services}</div> All Services
       </a>
       <a href="ignite.html" class="mob-sub-link">
-        <div class="mob-icon-wrap" style="background:#EBF5FF">${SVG.ignite}</div> Ignite
+        <div class="mob-icon-wrap" style="background:#EBF5FF !important;">${SVG.ignite}</div> Ignite
       </a>
       <a href="supernova.html" class="mob-sub-link">
-        <div class="mob-icon-wrap" style="background:#FEF3E8">${SVG.supernova}</div> SuperNova
+        <div class="mob-icon-wrap" style="background:#FEF3E8 !important;">${SVG.supernova}</div> SuperNova
       </a>
       <a href="novax.html" class="mob-sub-link">
-        <div class="mob-icon-wrap" style="background:#FEE6F5">${SVG.novax}</div> NovaX
+        <div class="mob-icon-wrap" style="background:#FEE6F5 !important;">${SVG.novax}</div> NovaX
       </a>
     </div>
   </div>
   
-  <a href="about.html" class="mob-link" style="padding:18px 20px; font-weight:600; text-decoration:none; color:var(--text-primary); border-bottom:1px solid rgba(0,0,0,0.04); display:block;">About</a>
+  <a href="about.html" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:1px solid rgba(0,0,0,0.04) !important; display:block !important;">About</a>
   
   <div class="mob-accordion">
     <button class="mob-accordion-btn">Partners ${SVG.chevDown}</button>
     <div class="mob-accordion-content">
-      <a href="partners.html" class="mob-sub-link" style="color:var(--blue);font-weight:700">
-        <div class="mob-icon-wrap" style="background:transparent;"><img src="images/partner-icon.png" alt="All Partners" style="width:20px;height:20px;object-fit:contain;"/></div> All Partners
+      <a href="partners.html" class="mob-sub-link" style="color:#008BF8 !important; font-weight:700 !important;">
+        <div class="mob-icon-wrap" style="background:transparent !important;"><img src="images/partner-icon.png" alt="All Partners" style="width:20px;height:20px;object-fit:contain;"/></div> All Partners
       </a>
       
       <button class="mob-nested-btn">3PI ${SVG.chevDown}</button>
@@ -234,29 +255,29 @@ const NAV_HTML = `
     <button class="mob-accordion-btn">Resources ${SVG.chevDown}</button>
     <div class="mob-accordion-content">
       <a href="results.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#F0F4F8">${SVG.casestudy}</div> Case Studies
+         <div class="mob-icon-wrap" style="background:#F0F4F8 !important;">${SVG.casestudy}</div> Case Studies
       </a>
       <a href="show.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#EBF5FF">${SVG.play}</div> The Jen GTM Show
+         <div class="mob-icon-wrap" style="background:#EBF5FF !important;">${SVG.play}</div> The Jen GTM Show
       </a>
       <a href="webinars.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#F0F4F8">${SVG.webinar}</div> Webinars
+         <div class="mob-icon-wrap" style="background:#F0F4F8 !important;">${SVG.webinar}</div> Webinars
       </a>
       <a href="blog.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#F0F4F8">${SVG.blog}</div> Blog
+         <div class="mob-icon-wrap" style="background:#F0F4F8 !important;">${SVG.blog}</div> Blog
       </a>
       <a href="newsletter.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#FEF3E8">${SVG.mail}</div> The Nova Brief
+         <div class="mob-icon-wrap" style="background:#FEF3E8 !important;">${SVG.mail}</div> The Nova Brief
       </a>
     </div>
   </div>
   
-  <a href="contact.html" class="mob-link" style="padding:18px 20px; font-weight:600; text-decoration:none; color:var(--text-primary); border-bottom:none; display:block;">Contact</a>
+  <a href="contact.html" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:none !important; display:block !important;">Contact</a>
   
-  <div style="padding:24px 20px 80px">
+  <div style="padding:24px 20px 80px !important; display:block !important;">
     <a href="${CALENDLY}" target="_blank" rel="noopener"
        class="btn btn-primary w-full"
-       style="justify-content:center;display:flex;font-weight:800;padding:14px;background-color:var(--pink);color:#fff;border-radius:12px;border:none;box-shadow: 0 8px 24px rgba(0, 139, 248, 0.4), 0 4px 12px rgba(250, 15, 156, 0.3);">
+       style="justify-content:center;display:flex;font-weight:800;padding:14px;background-color:#FA0F9C;color:#fff;border-radius:12px;border:none;box-shadow: 0 8px 24px rgba(0, 139, 248, 0.4), 0 4px 12px rgba(250, 15, 156, 0.3);">
       Get Started
     </a>
   </div>
@@ -357,18 +378,19 @@ window.addEventListener('scroll', () => {
 
 // Mobile Menu Toggle
 function toggleMob() {
-  const menu = document.getElementById('mob-menu');
+  const menu = document.getElementById('sn-mob-menu');
   const btn = document.getElementById('hamburger');
+  if(!menu) return;
   const isOpen = menu.classList.toggle('open');
   menu.setAttribute('aria-hidden', !isOpen);
-  btn.setAttribute('aria-expanded', isOpen);
+  if(btn) btn.setAttribute('aria-expanded', isOpen);
   document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
 // Global Click Handlers
 document.addEventListener('click', e => {
-  if(e.target.closest('#mob-menu a')) {
-    document.getElementById('mob-menu')?.classList.remove('open');
+  if(e.target.closest('#sn-mob-menu a')) {
+    document.getElementById('sn-mob-menu')?.classList.remove('open');
     document.body.style.overflow = '';
   }
   const mobBtn = e.target.closest('.mob-accordion-btn');

@@ -65,6 +65,27 @@ p{color:var(--text-secondary);line-height:1.75}
 .mono{font-family:'JetBrains Mono',monospace;font-weight:700}
 .grad-text{background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
+/* ── AI TYPING CURSOR (Premium Detail) ── */
+/* Add class="ai-cursor" to any text element for this effect */
+.ai-cursor {
+  position: relative;
+  display: inline-block;
+  cursor: text;
+}
+.ai-cursor:hover::after {
+  content: '|';
+  position: absolute;
+  margin-left: 2px;
+  color: var(--pink); /* Color of the blinking cursor */
+  animation: ai-blink 1s step-end infinite;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+}
+@keyframes ai-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 /* ── LAYOUT ── */
 .container{width:100%;max-width:1200px;margin:0 auto;padding:0 var(--sp-3)}
 .container-sm{width:100%;max-width:800px;margin:0 auto;padding:0 var(--sp-3)}
@@ -168,17 +189,7 @@ section{padding:var(--section-y) 0}
 .dropdown-trigger:hover{color:var(--blue);background:rgba(0,139,248,.06)}
 .dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--border-light);border-radius:var(--r-xl);padding:8px;box-shadow:var(--shadow-xl);min-width:220px;opacity:0;pointer-events:none;transform:translateY(-6px);transition:all .18s;z-index:100}
 .dropdown:hover .dropdown-menu{opacity:1;pointer-events:all;transform:translateY(0)}
-.dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:14px;font-weight:500;color:var(--text-secondary);border-radius:var(--r-md);transition:all .12s;cursor:pointer;background:none;border:none;width:100%;text-align:left;font-family:inherit}
-.dropdown-item:hover{background:var(--light-100);color:var(--blue)}
-.dropdown-item-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--light-100)}
-.nav-cta{flex-shrink:0}
-#hamburger{display:none;background:none;border:none;padding:8px;border-radius:var(--r-md)}
-#mob-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:#fff;z-index:199;padding:var(--sp-3);flex-direction:column;gap:2px;overflow-y:auto;border-top:1px solid var(--border-light)}
-#mob-menu.open{display:flex}
-.mob-link{display:block;padding:14px var(--sp-2);font-size:16px;font-weight:500;color:var(--text-secondary);border-radius:var(--r-md);transition:all .12s}
-.mob-link:hover{background:var(--light-100);color:var(--blue)}
-.mob-sub{padding-left:var(--sp-4);font-size:14px;color:var(--text-muted)}
-.mob-divider{height:1px;background:var(--border-light);margin:8px 0}
+.dropdown-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary);border-radius:var(--r-md);cursor:pointer;background:none;border:none;width:100%;text-align:left;font-family:inherit}
 
 /* Bridge the 'Death Zone' Gap */
 .dropdown-menu::before {
@@ -526,3 +537,4 @@ section[style*="background:linear-gradient(160deg,#F"] h3,
 section[style*="background:linear-gradient(160deg,#E"] h1,
 section[style*="background:linear-gradient(160deg,#E"] h2,
 section[style*="background:linear-gradient(160deg,#E"] h3 { color: var(--text-primary); }
+}

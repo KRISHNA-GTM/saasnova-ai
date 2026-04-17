@@ -2,17 +2,9 @@
 
 const CALENDLY = "https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03";
 
+// Stripped out all generic SVGs for a premium, typography-first AI feel
 const SVG = {
-  chevDown: `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 4l3 3 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
-  services: `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="1.5" width="11" height="11" rx="2" stroke="var(--blue)" stroke-width="1.2"/><path d="M4.5 7h5M7 4.5v5" stroke="var(--blue)" stroke-width="1.2" stroke-linecap="round"/></svg>`,
-  ignite: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="var(--blue)" stroke-width="1.2"/><path d="M6 3.5v2.5l1.5 1.5" stroke="var(--blue)" stroke-width="1.2" stroke-linecap="round"/></svg>`,
-  supernova: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l1 2.8 3 .3-2.1 2 .6 3L6 8 3.5 9.1l.6-3L2.1 4.1l3-.3z" stroke="var(--orange)" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
-  novax: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="var(--pink)" stroke-width="1.2"/><path d="M4 6h4M6 4v4" stroke="var(--pink)" stroke-width="1.2" stroke-linecap="round"/></svg>`,
-  play: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="1.5" width="10" height="7.5" rx="1.5" stroke="var(--blue)" stroke-width="1.1"/><path d="M4.5 4.5l3 1.5-3 1.5v-3z" fill="var(--blue)"/></svg>`,
-  mail: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="2.5" width="10" height="7" rx="1.5" stroke="var(--orange)" stroke-width="1.1"/><path d="M1 4.5l5 3 5-3" stroke="var(--orange)" stroke-width="1.1"/></svg>`,
-  blog: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 3h8M2 5.5h6M2 8h4" stroke="var(--blue)" stroke-width="1.3" stroke-linecap="round"/></svg>`,
-  casestudy: `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1.5 12.5h11M2.5 9.5l3-3 2 2 4-5M9 3.5h2.5v2.5" stroke="var(--blue)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  webinar: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="7" rx="1.5" stroke="var(--blue)" stroke-width="1.1"/><path d="M1 4l5 3 5-3" stroke="var(--blue)" stroke-width="1.1"/></svg>`,
+  chevDown: `<svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2.5 4l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
   bars: `<svg width="22" height="16" viewBox="0 0 22 16" fill="none"><rect width="22" height="2" rx="1" fill="#0F1923"/><rect y="7" width="16" height="2" rx="1" fill="#0F1923"/><rect y="14" width="22" height="2" rx="1" fill="#0F1923"/></svg>`,
 };
 
@@ -40,11 +32,45 @@ const NAV_STYLE_AND_DESKTOP = `
 
   /* Alignment Fix: Pushes links to the right */
   .nav-links { margin-left: auto; margin-right: 32px; }
-  
-  .nested-dropdown { position: relative; }
-  .nested-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: default; font-weight: 600; }
-  .nested-menu { position: absolute; left: 100%; top: -6px; min-width: 220px; background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 6px; opacity: 0; visibility: hidden; transform: translateX(-8px); transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; z-index: 100; }
-  .nested-dropdown:hover .nested-menu { opacity: 1; visibility: visible; transform: translateX(4px); }
+
+  /* Premium Typographic Dropdown Updates */
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .dropdown-item:hover {
+    padding-left: 20px; /* Slight typographic indent on hover for premium feel */
+    background: #F8FAFC;
+    color: var(--blue);
+  }
+
+  /* Nested Dropdown styles for the 3PI Flyout menu */
+  .dropdown-submenu { position: relative; }
+  .dropdown-submenu::after {
+    content: ''; position: absolute; top: 0; right: -10px; bottom: 0; width: 10px;
+  }
+  .submenu-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px; font-size: 14px; font-weight: 600; color: #3D4E5C;
+    border-radius: 8px; cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
+  }
+  .submenu-item:hover { background: #F8FAFC; color: #0F1923; }
+  .dropdown-menu-sub {
+    position: absolute; top: -6px; left: 100%; margin-left: 2px;
+    background: #fff; border: 1px solid #E8EEF4; border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(15,25,35,.12); padding: 6px; min-width: 180px;
+    opacity: 0; visibility: hidden; transform: translateX(-8px);
+    transition: all 0.2s ease; z-index: 10;
+  }
+  .dropdown-submenu:hover .dropdown-menu-sub {
+    opacity: 1; visibility: visible; transform: translateX(0);
+  }
 
   /* ── NUCLEAR CACHE BUSTER FOR MOBILE MENU ── */
   #sn-mob-menu {
@@ -72,119 +98,78 @@ const NAV_STYLE_AND_DESKTOP = `
   .mob-accordion-btn.open svg { transform: rotate(180deg) !important; color: #008BF8 !important; }
   .mob-accordion-content { max-height: 0 !important; overflow: hidden !important; transition: max-height 0.4s ease-in-out !important; background: #F8FAFC !important; display: block !important; }
   .mob-accordion-content.open { max-height: 1200px !important; }
-  .mob-icon-wrap { display: inline-flex !important; align-items: center !important; justify-content: center !important; width: 26px !important; height: 26px !important; border-radius: 8px !important; margin-right: 12px !important; flex-shrink: 0 !important; }
   .mob-sub-link { display: flex !important; align-items: center !important; padding: 14px 20px 14px 24px !important; color: #3D4E5C !important; font-size: 16px !important; font-weight: 500 !important; text-decoration: none !important; border-bottom: 1px solid rgba(0,0,0,0.03) !important; }
   .mob-sub-link:last-child { border-bottom: none !important; }
-
-  .mob-nested-btn { display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; padding: 14px 20px 14px 30px !important; font-size: 16px !important; font-weight: 600 !important; color: #0F1923 !important; background: none !important; border: none !important; border-bottom: 1px solid rgba(0,0,0,0.03) !important; cursor: pointer !important; text-align: left !important; font-family: inherit !important; }
-  .mob-nested-btn svg { transition: transform 0.3s ease !important; color: #6B7E8F !important; width: 14px !important; height: 14px !important;}
-  .mob-nested-btn.open svg { transform: rotate(180deg) !important; color: #008BF8 !important; }
-  .mob-nested-content { max-height: 0 !important; overflow: hidden !important; transition: max-height 0.4s ease-in-out !important; background: #F1F5F9 !important; display: block !important; }
-  .mob-nested-content.open { max-height: 600px !important; }
-  .mob-nested-link { display: flex !important; align-items: center !important; padding: 12px 20px 12px 64px !important; color: #3D4E5C !important; font-size: 15px !important; font-weight: 500 !important; text-decoration: none !important; border-bottom: 1px solid rgba(0,0,0,0.03) !important; }
-  .mob-nested-link:last-child { border-bottom: none !important; }
 </style>
 
 <nav id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo" aria-label="SaaSNova Home">
+    <a href="/" class="nav-logo" aria-label="SaaSNova Home">
       <img src="images/logo-color.png" alt="SaaSNova" style="height:48px;width:auto;object-fit:contain"/>
     </a>
     <nav class="nav-links" aria-label="Main">
-      <a href="index.html" class="nav-link">Home</a>
+      <a href="/" class="nav-link">Home</a>
       
       <div class="dropdown">
         <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
           Services ${SVG.chevDown}
         </button>
         <div class="dropdown-menu" role="menu">
-          <a href="services.html" class="dropdown-item" role="menuitem">
-            <div class="dropdown-item-icon">${SVG.services}</div> All Services
+          <a href="/services" class="dropdown-item" role="menuitem" style="color:var(--blue);">All Services</a>
+          <hr style="border:none;border-top:1px solid var(--border-light);margin:4px 0"/>
+          <a href="/ignite" class="dropdown-item" role="menuitem">
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--blue); margin-right:10px; box-shadow: 0 0 8px rgba(0,139,248,0.4);"></span> Ignite
           </a>
-          <a href="ignite.html" class="dropdown-item" role="menuitem">
-            <div class="dropdown-item-icon" style="background:#EBF5FF">${SVG.ignite}</div> <span>Ignite</span>
+          <a href="/supernova" class="dropdown-item" role="menuitem">
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--orange); margin-right:10px; box-shadow: 0 0 8px rgba(241,153,83,0.4);"></span> SuperNova
           </a>
-          <a href="supernova.html" class="dropdown-item" role="menuitem">
-            <div class="dropdown-item-icon" style="background:#FEF3E8">${SVG.supernova}</div> <span>SuperNova</span>
-          </a>
-          <a href="novax.html" class="dropdown-item" role="menuitem">
-            <div class="dropdown-item-icon" style="background:#FEE6F5">${SVG.novax}</div> <span>NovaX</span>
+          <a href="/novax" class="dropdown-item" role="menuitem">
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--pink); margin-right:10px; box-shadow: 0 0 8px rgba(250,15,156,0.4);"></span> NovaX
           </a>
         </div>
       </div>
       
-      <a href="about.html" class="nav-link">About</a>
+      <a href="/about" class="nav-link">About</a>
       
       <div class="dropdown">
-        <a href="partners.html" class="dropdown-trigger" style="text-decoration:none;">
+        <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
           Partners ${SVG.chevDown}
-        </a>
+        </button>
         <div class="dropdown-menu" role="menu" style="min-width:200px; padding: 6px;">
-          
-          <a href="partners.html" class="dropdown-item" style="font-weight:700; color:var(--blue);">
-            <div class="dropdown-item-icon" style="background:transparent;"><img src="images/partner-icon.png" alt="All Partners" style="width:18px;height:18px;object-fit:contain;"/></div> All Partners
-          </a>
+          <a href="/partners" class="dropdown-item" style="color:var(--blue);">All Partners</a>
           <hr style="border:none;border-top:1px solid var(--border-light);margin:4px 0"/>
           
-          <div class="nested-dropdown">
-            <div class="dropdown-item nested-trigger">
-              3PI <svg width="10" height="10" viewBox="0 0 11 11" fill="none" style="transform: rotate(-90deg); color: var(--text-muted, #888);"><path d="M2.5 4l3 3 3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <div class="dropdown-submenu">
+            <div class="submenu-item">
+              <span style="display:flex;align-items:center;">
+                3PI Programs
+              </span>
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="color:var(--text-muted)"><path d="M3 1.5L7 5L3 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="nested-menu">
-              <a href="partner-saasify.html" class="dropdown-item" role="menuitem">
-                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/saasify-logo.png" alt="SaaSify" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> SaaSify
+            <div class="dropdown-menu-sub">
+              <a href="/partner-saasify" class="dropdown-item" role="menuitem">
+                <img src="images/saasify-logo.png" alt="SaaSify" style="width:16px;height:16px;object-fit:contain;border-radius:3px; margin-right:8px; display:inline-block; vertical-align:middle;"/> SaaSify
               </a>
-              <a href="partner-workspan.html" class="dropdown-item" role="menuitem">
-                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/workspan-logo.jpeg" alt="Workspan" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Workspan
-              </a>
-              <a href="partner-labra.html" class="dropdown-item" role="menuitem">
-                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/labra-logo.png" alt="Labra" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Labra
-              </a>
-               </div>
-          </div>
-
-          <div class="nested-dropdown">
-            <div class="dropdown-item nested-trigger">
-              SI / GSI <svg width="10" height="10" viewBox="0 0 11 11" fill="none" style="transform: rotate(-90deg); color: var(--text-muted, #888);"><path d="M2.5 4l3 3 3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-            <div class="nested-menu">
-              <a href="partner-rysun.html" class="dropdown-item" role="menuitem">
-                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/Rysun_High_Res_Logo.png" alt="Rysun" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Rysun
-              </a>
-              <a href="partner-pronix.html" class="dropdown-item" role="menuitem">
-                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/pronix_inc_logo.jpeg" alt="Pronix" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Pronix
+              <a href="/partner-workspan" class="dropdown-item" role="menuitem">
+                <img src="images/workspan-logo.jpeg" alt="Workspan" style="width:16px;height:16px;object-fit:contain;border-radius:3px; margin-right:8px; display:inline-block; vertical-align:middle;"/> Workspan
               </a>
             </div>
           </div>
-
-          <div class="nested-dropdown">
-            <div class="dropdown-item nested-trigger">
-              Distributors <svg width="10" height="10" viewBox="0 0 11 11" fill="none" style="transform: rotate(-90deg); color: var(--text-muted, #888);"><path d="M2.5 4l3 3 3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-            <div class="nested-menu">
-              <a href="partner-redington.html" class="dropdown-item" role="menuitem">
-                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/redington-logo.png" alt="Redington" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Redington
-              </a>
-              <a href="partner-ingram-micro.html" class="dropdown-item" role="menuitem">
-                <div class="dropdown-item-icon" style="background:transparent;"><img src="images/Ingram_Micro_logo.jpg" alt="Ingram Micro" style="width:18px;height:18px;object-fit:contain;border-radius:3px;"/></div> Ingram Micro
-              </a>
-            </div>
-          </div>
-
         </div>
       </div>
 
       <div class="dropdown">
         <button class="dropdown-trigger">Resources ${SVG.chevDown}</button>
         <div class="dropdown-menu" role="menu">
-          <a href="blog.html" class="dropdown-item"><div class="dropdown-item-icon">${SVG.blog}</div>Blog</a>
-          <a href="results.html" class="dropdown-item"><div class="dropdown-item-icon">${SVG.casestudy}</div>Case Studies</a>
-          <a href="show.html" class="dropdown-item"><div class="dropdown-item-icon" style="background:#EBF5FF">${SVG.play}</div>The Jen GTM Show</a>
-          <a href="webinars.html" class="dropdown-item"><div class="dropdown-item-icon">${SVG.webinar}</div>Webinars</a>
-          <a href="newsletter.html" class="dropdown-item"><div class="dropdown-item-icon" style="background:#FEF3E8">${SVG.mail}</div>The Nova Brief</a>
+          <a href="/blog" class="dropdown-item">Blog</a>
+          <a href="/results" class="dropdown-item">Case Studies</a>
+          <a href="/show" class="dropdown-item">The Jen GTM Show</a>
+          <a href="/webinars" class="dropdown-item">Webinars</a>
+          <hr style="border:none;border-top:1px solid var(--border-light);margin:4px 0"/>
+          <a href="/newsletter" class="dropdown-item" style="color:var(--pink);">The Nova Brief</a>
         </div>
       </div>
-      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="/contact" class="nav-link">Contact</a>
     </nav>
   
     <div class="nav-cta">
@@ -200,81 +185,51 @@ const NAV_STYLE_AND_DESKTOP = `
 </nav>
 `;
 
-// ── MOBILE MENU (Injected separately to bypass HTML DOM issues) ──
+// ── MOBILE MENU (Stripped of heavy icons) ──
 const NAV_MOBILE = `
 <div id="sn-mob-menu" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
-  <a href="index.html" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:1px solid rgba(0,0,0,0.04) !important; display:block !important;">Home</a>
+  <a href="/" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:1px solid rgba(0,0,0,0.04) !important; display:block !important;">Home</a>
   
   <div class="mob-accordion">
     <button class="mob-accordion-btn">Services ${SVG.chevDown}</button>
     <div class="mob-accordion-content">
-      <a href="services.html" class="mob-sub-link" style="color:#008BF8 !important; font-weight:700 !important;">
-        <div class="mob-icon-wrap" style="background:#EBF5FF !important;">${SVG.services}</div> All Services
+      <a href="/services" class="mob-sub-link" style="color:#008BF8 !important; font-weight:700 !important;">All Services</a>
+      <a href="/ignite" class="mob-sub-link">
+        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#008BF8; margin-right:12px; box-shadow: 0 0 8px rgba(0,139,248,0.4);"></span> Ignite
       </a>
-      <a href="ignite.html" class="mob-sub-link">
-        <div class="mob-icon-wrap" style="background:#EBF5FF !important;">${SVG.ignite}</div> Ignite
+      <a href="/supernova" class="mob-sub-link">
+        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#F19953; margin-right:12px; box-shadow: 0 0 8px rgba(241,153,83,0.4);"></span> SuperNova
       </a>
-      <a href="supernova.html" class="mob-sub-link">
-        <div class="mob-icon-wrap" style="background:#FEF3E8 !important;">${SVG.supernova}</div> SuperNova
-      </a>
-      <a href="novax.html" class="mob-sub-link">
-        <div class="mob-icon-wrap" style="background:#FEE6F5 !important;">${SVG.novax}</div> NovaX
+      <a href="/novax" class="mob-sub-link">
+        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#FA0F9C; margin-right:12px; box-shadow: 0 0 8px rgba(250,15,156,0.4);"></span> NovaX
       </a>
     </div>
   </div>
   
-  <a href="about.html" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:1px solid rgba(0,0,0,0.04) !important; display:block !important;">About</a>
+  <a href="/about" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:1px solid rgba(0,0,0,0.04) !important; display:block !important;">About</a>
   
   <div class="mob-accordion">
     <button class="mob-accordion-btn">Partners ${SVG.chevDown}</button>
     <div class="mob-accordion-content">
-      <a href="partners.html" class="mob-sub-link" style="color:#008BF8 !important; font-weight:700 !important;">
-        <div class="mob-icon-wrap" style="background:transparent !important;"><img src="images/partner-icon.png" alt="All Partners" style="width:20px;height:20px;object-fit:contain;"/></div> All Partners
-      </a>
-      
-      <button class="mob-nested-btn">3PI ${SVG.chevDown}</button>
-      <div class="mob-nested-content">
-        <a href="partner-saasify.html" class="mob-nested-link"><img src="images/saasify-logo.png" alt="SaaSify" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> SaaSify</a>
-        <a href="partner-workspan.html" class="mob-nested-link"><img src="images/workspan-logo.jpeg" alt="Workspan" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Workspan</a>
-        <a href="partner-labra.html" class="mob-nested-link"><img src="images/labra-logo.png" alt="Labra" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Labra</a>
-      </div>
-      
-      <button class="mob-nested-btn">SI / GSI ${SVG.chevDown}</button>
-      <div class="mob-nested-content">
-        <a href="partner-rysun.html" class="mob-nested-link"><img src="images/Rysun_High_Res_Logo.png" alt="Rysun" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Rysun</a>
-        <a href="partner-pronix.html" class="mob-nested-link"><img src="images/pronix_inc_logo.jpeg" alt="Pronix" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Pronix</a>
-      </div>
-      
-      <button class="mob-nested-btn">Distributors ${SVG.chevDown}</button>
-      <div class="mob-nested-content">
-        <a href="partner-redington.html" class="mob-nested-link"><img src="images/redington-logo.png" alt="Redington" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Redington</a>
-        <a href="partner-ingram-micro.html" class="mob-nested-link"><img src="images/Ingram_Micro_logo.jpg" alt="Ingram Micro" style="width:16px;height:16px;margin-right:12px;object-fit:contain;border-radius:2px;"/> Ingram Micro</a>
-      </div>
+      <a href="/partners" class="mob-sub-link" style="color:#008BF8 !important; font-weight:700 !important;">All Partners</a>
+      <div style="padding:12px 20px 4px;font-size:12px;font-weight:700;color:#6B7E8F;text-transform:uppercase;letter-spacing:0.05em;">3PI</div>
+      <a href="/partner-saasify" class="mob-sub-link"><img src="images/saasify-logo.png" alt="SaaSify" style="width:18px;height:18px;margin-right:12px;object-fit:contain;border-radius:3px;"/> SaaSify</a>
+      <a href="/partner-workspan" class="mob-sub-link"><img src="images/workspan-logo.jpeg" alt="Workspan" style="width:18px;height:18px;margin-right:12px;object-fit:contain;border-radius:3px;"/> Workspan</a>
     </div>
   </div>
   
   <div class="mob-accordion">
     <button class="mob-accordion-btn">Resources ${SVG.chevDown}</button>
     <div class="mob-accordion-content">
-      <a href="results.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#F0F4F8 !important;">${SVG.casestudy}</div> Case Studies
-      </a>
-      <a href="show.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#EBF5FF !important;">${SVG.play}</div> The Jen GTM Show
-      </a>
-      <a href="webinars.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#F0F4F8 !important;">${SVG.webinar}</div> Webinars
-      </a>
-      <a href="blog.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#F0F4F8 !important;">${SVG.blog}</div> Blog
-      </a>
-      <a href="newsletter.html" class="mob-sub-link">
-         <div class="mob-icon-wrap" style="background:#FEF3E8 !important;">${SVG.mail}</div> The Nova Brief
-      </a>
+      <a href="/results" class="mob-sub-link">Case Studies</a>
+      <a href="/show" class="mob-sub-link">The Jen GTM Show</a>
+      <a href="/webinars" class="mob-sub-link">Webinars</a>
+      <a href="/blog" class="mob-sub-link">Blog</a>
+      <a href="/newsletter" class="mob-sub-link" style="color:#FA0F9C !important;">The Nova Brief</a>
     </div>
   </div>
   
-  <a href="contact.html" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:none !important; display:block !important;">Contact</a>
+  <a href="/contact" class="mob-link" style="padding:18px 20px !important; font-weight:600 !important; text-decoration:none !important; color:#0F1923 !important; border-bottom:none !important; display:block !important;">Contact</a>
   
   <div style="padding:24px 20px 80px !important; display:block !important;">
     <a href="${CALENDLY}" target="_blank" rel="noopener"
@@ -291,7 +246,7 @@ const FOOTER_HTML = `
   <div class="container" style="padding-top:64px;padding-bottom:32px">
     <div class="footer-grid">
       <div>
-        <a href="index.html" aria-label="SaaSNova Home" style="display:inline-block;margin-bottom:16px;">
+        <a href="/" aria-label="SaaSNova Home" style="display:inline-block;margin-bottom:16px;">
           <img src="images/logo-white.png" alt="SaaSNova" style="height:36px;width:auto;object-fit:contain"/>
         </a>
         <p class="footer-tagline" style="margin-bottom:24px">The world's first GTM execution engine for SaaS ISVs scaling through AWS, Azure, and GCP Marketplace.</p>
@@ -327,26 +282,26 @@ const FOOTER_HTML = `
       
       <div>
         <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">SERVICES</div>
-        <a href="services.html" class="footer-link">All Services</a>
-        <a href="ignite.html" class="footer-link">Ignite</a>
-        <a href="supernova.html" class="footer-link">SuperNova</a>
-        <a href="novax.html" class="footer-link">NovaX</a>
+        <a href="/services" class="footer-link">All Services</a>
+        <a href="/ignite" class="footer-link">Ignite</a>
+        <a href="/supernova" class="footer-link">SuperNova</a>
+        <a href="/novax" class="footer-link">NovaX</a>
       </div>
       
       <div>
         <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">COMPANY</div>
-        <a href="about.html" class="footer-link">About &amp; Team</a>
-        <a href="results.html" class="footer-link">Case Studies</a>
-        <a href="show.html" class="footer-link">The Jen GTM Show</a>
-        <a href="partners.html" class="footer-link">Partners</a>
-        <a href="contact.html" class="footer-link">Contact</a>
+        <a href="/about" class="footer-link">About &amp; Team</a>
+        <a href="/results" class="footer-link">Case Studies</a>
+        <a href="/show" class="footer-link">The Jen GTM Show</a>
+        <a href="/partners" class="footer-link">Partners</a>
+        <a href="/contact" class="footer-link">Contact</a>
       </div>
       
       <div>
         <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">RESOURCES</div>
-        <a href="webinars.html" class="footer-link">Webinars</a>
-        <a href="blog.html" class="footer-link">Blog</a>
-        <a href="newsletter.html" class="footer-link">The Nova Brief</a>
+        <a href="/webinars" class="footer-link">Webinars</a>
+        <a href="/blog" class="footer-link">Blog</a>
+        <a href="/newsletter" class="footer-link">The Nova Brief</a>
         
         <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-top:40px;margin-bottom:20px;">CONTACT</div>
         <a href="mailto:jen@saasnova.ai" class="footer-link" style="text-transform:none;">jen@saasnova.ai</a>
@@ -360,8 +315,8 @@ const FOOTER_HTML = `
     <div class="footer-bottom" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
       <span class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);">&copy; 2026 SaaSNova. All rights reserved.</span>
       <div style="display:flex;gap:24px;flex-wrap:wrap">
-        <a href="privacy.html" class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Privacy Policy</a>
-        <a href="terms.html" class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Terms of Use</a>
+        <a href="/privacy" class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Privacy Policy</a>
+        <a href="/terms" class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Terms of Use</a>
       </div>
     </div>
   </div>
@@ -408,18 +363,23 @@ document.addEventListener('click', e => {
     mobBtn.classList.toggle('open');
     mobBtn.nextElementSibling.classList.toggle('open');
   }
-  const nestedBtn = e.target.closest('.mob-nested-btn');
-  if(nestedBtn) {
-    nestedBtn.classList.toggle('open');
-    nestedBtn.nextElementSibling.classList.toggle('open');
-  }
 });
 
-// Active Link Setup
-const page = window.location.pathname.split('/').pop() || 'index.html';
+// Active Link Setup (handles extensionless URLs robustly)
+const path = window.location.pathname;
+const isHome = path === '/' || path === '/index.html';
+
 document.querySelectorAll('.nav-link').forEach(l => {
   const href = l.getAttribute('href');
-  if(href && href === page) l.classList.add('active');
+  if (!href) return;
+  if (href === '/') {
+    if (isHome) l.classList.add('active');
+  } else {
+    // If the window path exactly matches the clean url href
+    if (path.replace('.html', '') === href) {
+      l.classList.add('active');
+    }
+  }
 });
 
 // Intersection Observer for Reveal Animations
@@ -562,3 +522,14 @@ function handleNewsletterSubmit(e) {
     if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
   });
 }
+
+/* ══════════════════════════════════════════════════════
+   GLOBAL INJECTOR FOR POPUP
+   This runs automatically on every single page!
+   ══════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const popupScript = document.createElement('script');
+  popupScript.src = 'popup.js';
+  popupScript.defer = true;
+  document.body.appendChild(popupScript);
+});

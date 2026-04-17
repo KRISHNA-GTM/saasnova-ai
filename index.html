@@ -175,18 +175,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 .cta-primary {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 15px 30px; border-radius: 14px; background: linear-gradient(135deg, #FA0F9C 0%, #C8008A 100%);
-  color: #fff; font-weight: 800; font-size: 15px; text-decoration: none; transition: all 0.25s cubic-bezier(.4,0,.2,1);
+  padding: 15px 28px; border-radius: 14px; background: linear-gradient(135deg, #FA0F9C 0%, #C8008A 100%);
+  color: #fff; font-weight: 800; font-size: clamp(13px, 3.5vw, 15px); text-decoration: none; transition: all 0.25s cubic-bezier(.4,0,.2,1);
   box-shadow: 0 4px 16px rgba(250,15,156,.30), inset 0 1px 0 rgba(255,255,255,.15);
   position: relative; overflow: hidden; letter-spacing: -.01em; text-align: center;
+  white-space: normal; line-height: 1.3;
 }
 .cta-primary:hover {
   transform: translateY(-2px) scale(1.01); box-shadow: 0 10px 28px rgba(250,15,156,.38); color:#fff;
 }
 .cta-secondary {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 14px 26px; border-radius: 14px; background: rgba(0,139,248,.08); color: #008BF8; font-weight: 700; font-size: 15px;
+  padding: 14px 26px; border-radius: 14px; background: rgba(0,139,248,.08); color: #008BF8; font-weight: 700; font-size: clamp(13px, 3.5vw, 15px);
   text-decoration: none; border: 1.5px solid rgba(0,139,248,.25); transition: all 0.25s cubic-bezier(.4,0,.2,1); text-align: center;
+  white-space: normal; line-height: 1.3;
 }
 .cta-secondary:hover {
   background: rgba(0,139,248,.12); border-color: rgba(0,139,248,.5); transform: translateY(-2px); color:#008BF8;
@@ -455,7 +457,7 @@ h1, h2, h3, h4, h5, h6 {
 .prog-section { margin-bottom: 20px; }
 .prog-section h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
 .prog-section ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.prog-section li { font-size: 13.5px; color: #1E293B; font-weight: 500; line-height: 1.5; display: flex; align-items: flex-start; gap: 8px; }
+.prog-section li { font-size: 13px; color: #1E293B; font-weight: 500; line-height: 1.5; display: flex; align-items: flex-start; gap: 8px; }
 .prog-section li::before { font-weight: 800; font-size: 12px; margin-top: 1px; flex-shrink: 0; }
 
 .card-ignite .prog-section h4 { color: var(--blue); }
@@ -602,8 +604,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Blog & Events */
 .sn-blog-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--border-light); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; transition: all 0.3s ease; height: 100%; }
 .sn-blog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.06); }
-.sn-blog-card-img { width: 100%; aspect-ratio: 16/9; background: #F1F5F9; overflow: hidden; }
-.sn-blog-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.sn-blog-card-img { width: 100%; aspect-ratio: 1671 / 940; background: #0A1628; overflow: hidden; }
+.sn-blog-card-img img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease; display: block; }
 .sn-blog-card:hover .sn-blog-card-img img { transform: scale(1.05); }
 .sn-blog-card-content { padding: 24px; display: flex; flex-direction: column; flex: 1; }
 .sn-blog-card-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; background: rgba(0,139,248,0.1); color: var(--blue); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
@@ -669,10 +671,10 @@ h1, h2, h3, h4, h5, h6 {
       <div class="sn-hero-ctas">
         <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws" target="_blank" class="cta-primary">
           <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="white" stroke-width="1.8"/><path d="M5 2v2M11 2v2M2 7h12" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
-          Book a Call
+          Book a 30-min Execution Strategy Session
         </a>
         <a href="services.html" class="cta-secondary">
-          Explore Services <svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
+          Explore GTM Services <svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
         </a>
       </div>
     </div>
@@ -803,10 +805,10 @@ h1, h2, h3, h4, h5, h6 {
       <div class="sn-hero-ctas" style="justify-content: flex-start;">
         <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws" target="_blank" rel="noopener" class="cta-primary">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="white" stroke-width="1.4"/><path d="M5 2v2M11 2v2M2 7h12" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg>
-          Book a 30-Min Discovery Call
+          Book a 30-min Execution Strategy Session
         </a>
         <a href="services.html" class="cta-secondary">
-          Explore Services <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
+          Explore GTM Services <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
         </a>
       </div>
     </div>
@@ -935,13 +937,13 @@ h1, h2, h3, h4, h5, h6 {
 </section>
 <div class="wave-d2w"><svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:48px;display:block;width:100%;background:#0A1628"><path d="M0,0 C360,48 1080,48 1440,0 L1440,48 L0,48 Z" fill="#ffffff"/></svg></div>
 
-<!-- 6. SERVICES -->
+<!-- 6. SERVICES OVERVIEW (Links to deep-dives) -->
 <section class="sn-programs" style="background:#ffffff; padding: 64px 0;">
   <div class="container">
     <div style="text-align:center;margin-bottom:60px">
       <div class="section-tag st-blue" style="margin-bottom:12px">Services</div>
       <h2 class="reveal" style="margin-bottom:10px">Pick your stage,<br/>We customize the execution.</h2>
-      <p class="reveal" style="max-width:580px;margin:0 auto;font-size:17px;color:var(--text-secondary)">Start at the stage that matches your GTM maturity. Execution is customize to your cloud mix and revenue targets.</p>
+      <p class="reveal" style="max-width:580px;margin:0 auto;font-size:17px;color:var(--text-secondary)">Start at the stage that matches your GTM maturity. Execution is customized to your cloud mix and revenue targets.</p>
     </div>
 
     <div class="reveal sn-prog-grid">
@@ -957,11 +959,11 @@ h1, h2, h3, h4, h5, h6 {
           <div class="prog-section" style="margin-bottom:24px">
             <h4 style="font-size:14px; color:var(--text-primary); margin-bottom:12px; font-weight:700;">What You Get</h4>
             <ul style="font-size:13px; color:var(--text-secondary); line-height:1.6; padding-left:18px; margin:0;">
-              <li>Validated co‑sell opportunities</li>
-              <li>First cloud‑attributable signal</li>
-              <li>PRM Implemented & consumption visibility</li>
-              <li>GTM evidence report for investors</li>
-              <li>Co‑sell system hygiene review</li>
+              <li>Cloud‑ready ICP + persona definition</li>
+              <li>“Better Together” messaging</li>
+              <li>PRM implemented with baseline tagging</li>
+              <li>Cloud GTM gap assessment + 90‑day plan</li>
+              <li>Cloud‑readiness evidence for investors</li>
               <li>ISV Accelerate readiness proof</li>
             </ul>
           </div>
@@ -970,7 +972,7 @@ h1, h2, h3, h4, h5, h6 {
             <h4 style="font-size:14px; color:var(--text-primary); margin-bottom:12px; font-weight:700;">Impact</h4>
             <ul style="font-size:13px; color:var(--text-secondary); line-height:1.6; padding-left:18px; margin:0;">
               <li>Stronger cloud‑readiness foundation</li>
-              <li>Hygiene established for ACE/PRM/tagging and PCM</li>
+              <li>Hygiene established for ACE/PRM/tagging</li>
               <li>Early pipeline visibility</li>
               <li>Stronger investor confidence</li>
             </ul>
@@ -987,7 +989,7 @@ h1, h2, h3, h4, h5, h6 {
 
         <div style="display:flex;gap:12px;">
           <a href="ignite.html" class="btn btn-secondary btn-sm" style="flex:1;justify-content:center">Details</a>
-          <a href="https://calendly.com/jen-saasnova/..." target="_blank" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Book a Call</a>
+          <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Book a Call</a>
         </div>
       </div>
 
@@ -1032,7 +1034,7 @@ h1, h2, h3, h4, h5, h6 {
 
         <div style="display:flex;gap:12px;">
           <a href="supernova.html" class="btn btn-secondary btn-sm" style="flex:1;justify-content:center; color:var(--orange); background:rgba(241,153,83,0.1);">Details</a>
-          <a href="https://calendly.com/jen-saasnova/..." target="_blank" class="btn btn-primary btn-sm" style="flex:1;justify-content:center; background:var(--orange);">Book a Call</a>
+          <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="flex:1;justify-content:center; background:var(--orange);">Book a Call</a>
         </div>
       </div>
 
@@ -1078,7 +1080,7 @@ h1, h2, h3, h4, h5, h6 {
 
         <div style="display:flex;gap:12px;">
           <a href="novax.html" class="btn btn-secondary btn-sm" style="flex:1;justify-content:center; color:var(--pink); background:rgba(250,15,156,0.1);">Details</a>
-          <a href="https://calendly.com/jen-saasnova/..." target="_blank" class="btn btn-primary btn-sm" style="flex:1;justify-content:center; background:var(--pink);">Book a Call</a>
+          <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="flex:1;justify-content:center; background:var(--pink);">Book a Call</a>
         </div>
       </div>
 
@@ -1091,7 +1093,7 @@ h1, h2, h3, h4, h5, h6 {
   <div class="container">
     <div style="text-align:center;margin-bottom:40px">
       <div class="section-tag st-blue" style="margin-bottom:12px">Why SaaSNova</div>
-      <h2 style="color:var(--text-primary);margin-bottom:10px; font-size:clamp(32px, 4vw, 48px); font-weight:800; letter-spacing:-0.02em;">Not Advice. Not Theory. Execution.</h2>
+      <h2 style="color:var(--text-primary);margin-bottom:10px; font-size:clamp(32px, 4vw, 48px); font-weight:800; letter-spacing:-0.02em;">Not Advice, Not Theory, Execution.</h2>
       <p style="color:var(--text-secondary);max-width:520px;margin:0 auto;font-size:17px;text-align:center">Other vendors give you frameworks and dashboards. We embed as your cloud GTM operator and go execute.</p>
     </div>
     
@@ -1218,8 +1220,8 @@ h1, h2, h3, h4, h5, h6 {
         <h2 style="color:#fff;margin-top:6px;margin-bottom:14px">Why execution produces pipeline that advice never will.</h2>
         <p style="color:rgba(255,255,255,.62);font-size:17px;line-height:1.8;margin-bottom:22px">Jen Dawson on the exact execution gap that keeps ISVs from generating co-sell pipeline on AWS, Azure, and GCP. No frameworks. No theory. Just what actually works.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <a href="show" class="btn btn-primary">Watch All Episodes</a>
-          <a href="https://www.youtube.com/@SaaSNova-jen" target="_blank" rel="noopener" class="btn btn-outline-white">Subscribe on YouTube</a>
+          <a href="show.html" class="btn btn-primary">Watch All Episodes</a>
+          <a href="https://www.youtube.com/@SaaSNovaGTM" target="_blank" rel="noopener" class="btn btn-outline-white">Subscribe on YouTube</a>
         </div>
       </div>
       <div class="reveal delay-1">
@@ -1232,7 +1234,7 @@ h1, h2, h3, h4, h5, h6 {
             <div style="font-weight:600;font-size:14px;color:#fff">Jen Dawson, Founder &amp; CEO</div>
             <div style="font-size:12px;color:rgba(255,255,255,.4)">Cloud GTM practitioner · 100+ ISVs activated</div>
           </div>
-          <a href="show" style="margin-left:auto;font-size:13px;font-weight:600;color:var(--blue);white-space:nowrap;flex-shrink:0">All Episodes </a>
+          <a href="show.html" style="margin-left:auto;font-size:13px;font-weight:600;color:var(--blue);white-space:nowrap;flex-shrink:0">All Episodes </a>
         </div>
       </div>
     </div>
@@ -1255,14 +1257,13 @@ h1, h2, h3, h4, h5, h6 {
       
       <!-- Card 1: PRM Deadline -->
       <a href="blog-aws-prm-deadline.html" class="sn-blog-card reveal delay-1">
-        <!-- Ensured identical class formatting without inline overrides to maintain exact 1671/940 ratio -->
         <div class="sn-blog-card-img">
-          <img src="images/blogs/aws prm blog 2 cover.png" alt="AWS PRM Deadline" onerror="this.src='https://placehold.co/1671x940/F1F5F9/94A3B8?text=Blog+Cover'"/>
+          <img src="images/blogs/Blog 4 PRM.png" alt="AWS PRM Deadline" onerror="this.src='https://placehold.co/1671x940/0A1628/ffffff?text=Blog+Cover'"/>
         </div>
         <div class="sn-blog-card-content">
           <div><span class="sn-blog-card-tag" style="background:rgba(255,153,0,.1); color:#FF9900;">AWS APN Compliance</span></div>
-          <h4 class="sn-blog-card-title">The July 31 AWS Deadline for PRM: How to Measure Attribution</h4>
-          <p class="sn-blog-card-desc">By July 31, 2026, the way AWS "sees" your value changes forever. Learn the execution fixes.</p>
+          <h4 class="sn-blog-card-title">The July 31 AWS PRM Deadline: How to Measure Attribution and Keep Funding</h4>
+          <p class="sn-blog-card-desc">Visibility is the new currency inside AWS. By July 31, 2026, AWS will measure partner impact through PRM. Learn the execution fixes to maintain eligibility.</p>
           <div class="sn-blog-card-cta">Read More <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
       </a>
@@ -1270,10 +1271,10 @@ h1, h2, h3, h4, h5, h6 {
       <!-- Card 2: Silent Listing -->
       <a href="blog-cloud-marketplace-listing-silent-fix.html" class="sn-blog-card reveal delay-2">
         <div class="sn-blog-card-img">
-          <img src="images/blogs/cloud-marketplace-listing.png" alt="Why Your Cloud Marketplace Listing Is Silent" onerror="this.src='https://placehold.co/1671x940/F1F5F9/94A3B8?text=Blog+Cover'"/>
+          <img src="images/blogs/cloud-marketplace-listing.png" alt="Why Your Cloud Marketplace Listing Is Silent" onerror="this.src='https://placehold.co/1671x940/0A1628/ffffff?text=Blog+Cover'"/>
         </div>
         <div class="sn-blog-card-content">
-          <div><span class="sn-blog-card-tag" style="background:rgba(0,139,248,.1); color:var(--blue);">Marketplace Activation</span></div>
+          <div><span class="sn-blog-card-tag" style="background:rgba(0,139,248,.1); color:var(--blue);">ISV Marketplace Activation</span></div>
           <h4 class="sn-blog-card-title">Why Your Cloud Marketplace Listing Is Silent And What Actually Fixes It</h4>
           <p class="sn-blog-card-desc">Listed on AWS, Azure, or GCP with zero co-sell pipeline? Learn the 3 execution gaps keeping ISVs silent.</p>
           <div class="sn-blog-card-cta">Read More <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -1283,12 +1284,12 @@ h1, h2, h3, h4, h5, h6 {
       <!-- Card 3: AWS Alignment -->
       <a href="blog-aws-alignment.html" class="sn-blog-card reveal delay-3">
         <div class="sn-blog-card-img">
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1671&q=80" alt="AWS Doesn't Reward Progress, It Rewards Alignment"/>
+          <img src="images/blogs/Blog kr.png" alt="Why AWS Marketplace GTM Fails for Most SaaS Companies" onerror="this.src='https://placehold.co/1671x940/0A1628/ffffff?text=Blog+Cover'"/>
         </div>
         <div class="sn-blog-card-content">
           <div><span class="sn-blog-card-tag" style="background:rgba(241,153,83,.1); color:var(--orange);">AWS Execution Strategy</span></div>
-          <h4 class="sn-blog-card-title">AWS Doesn't Reward Progress. It Rewards Alignment.</h4>
-          <p class="sn-blog-card-desc">Getting listed on AWS was the easy part. Why fragmented execution costs you, and what moves the needle.</p>
+          <h4 class="sn-blog-card-title">Why AWS Marketplace GTM Fails for Most SaaS Companies</h4>
+          <p class="sn-blog-card-desc">Six months after launch, most SaaS companies have the same AWS Marketplace result: zero pipeline. Here's why.</p>
           <div class="sn-blog-card-cta">Read More <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
       </a>
@@ -1307,7 +1308,7 @@ h1, h2, h3, h4, h5, h6 {
         <h2 style="color:#fff;margin-top:0">Where SaaSNova is showing up.</h2>
         <p style="color:rgba(255,255,255,.55);margin-top:7px;font-size:16px;max-width:480px">Cloud marketplace GTM happens at events as much as it does in portals. Field relationships start with presence.</p>
       </div>
-      <a href="partners" class="btn btn-outline-white">Partner With Us</a>
+      <a href="partners.html" class="btn btn-outline-white">Partner With Us</a>
     </div>
     <div class="reveal sn-event-grid">
       <div class="event-card-dark">
@@ -1373,9 +1374,9 @@ h1, h2, h3, h4, h5, h6 {
          style="padding:16px 36px;border-radius:999px;background:#fff;color:var(--blue);font-weight:800;font-size:16px;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.15);transition:all .2s;text-align:center;"
          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(0,0,0,.2)'"
          onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,.15)'">
-        Book a Discovery Call
+        Book a 30-min Execution Strategy Session
       </a>
-      <a href="contact"
+      <a href="contact.html"
          style="padding:15px 27px;border-radius:999px;background:transparent;color:#fff;font-weight:700;font-size:15px;border:1.5px solid rgba(255,255,255,.4);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:background .2s"
          onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">
         Send a Message
@@ -1408,23 +1409,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reveal').forEach(r => r.classList.add('visible'));
   }
 
-  // 2. Interactive Testimonial Logic
+  // 2. Interactive Testimonial Logic & Auto-Rotator
   try {
     const testData = [
       {
         id: 'safe', logo: 'images/Safe one Light-logo.svg', name: 'Safe Security',
         quotes: [
           { tab: 'Nicola Sanna', text: '"SaaSNova was instrumental in accelerating SAFE’s AWS Marketplace strategy. They helped us compress months of internal effort into weeks, sharpen our enterprise positioning, and launch TPRM with a procurement-ready workflow."', author: 'Nicola Sanna', role: 'President' },
-          { tab: 'Gary Cronk', text: '"SaaSNova isn\'t a platform, they\'re the operator behind our AWS Marketplace success. They bring the GTM clarity, commercial alignment, and end-to-end ownership that no tool can provide."', author: 'Gary Cronk', role: 'Director, Strategic Partners' },
+          { tab: 'Michael Nagao', text: '"SaaSNova helped us move through AWS programs, Marketplace requirements, and internal alignment in a fraction of the time it normally takes, compressing months of work into weeks."', author: 'Michael Nagao', role: 'SVP Worldwide Channel' },
           { tab: 'Jagdish Upadhyay', text: '"The joint AWS partnership page is a critical proof point for SAFE, and Jen’s wireframe was thorough, thoughtfully structured, and partner‑ready from day one."', author: 'Jagdish Upadhyay', role: 'VP of Marketing' },
-          { tab: 'Michael Nagao', text: '"SaaSNova helped us move through AWS programs, Marketplace requirements, and internal alignment in a fraction of the time it normally takes, compressing months of work into weeks."', author: 'Michael Nagao', role: 'SVP Worldwide Channel' }
-        ]
-      },
-      {
-        id: 'arctic', logo: 'images/arcticwolf.png', name: 'Arctic Wolf Networks',
-        quotes: [
-          { tab: 'Megan Flanagan', text: '"The structure of the pilot program exceeded all expectations. The data-driven full funnel planning model challenged us to think in ways we haven\'t thought of before."', author: 'Megan Flanagan', role: 'VP Marketing' },
-          { tab: 'Odin Olson', text: '"It was great to hear what has been done well with an AWS best ISV. The co-sell scoring discussion was eye-opening to us."', author: 'Odin Olson', role: 'VP Partnerships & Alliances' }
+          { tab: 'Gary Cronk', text: '"SaaSNova isn\'t a platform, they\'re the operator behind our AWS Marketplace success. They bring the GTM clarity, commercial alignment, and end-to-end ownership that no tool can provide."', author: 'Gary Cronk', role: 'Director, Strategic Partners' }
         ]
       },
       {
@@ -1435,9 +1429,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
       },
       {
-        id: 'nexla', logo: 'images/nexla-logo.png', name: 'Nexla',
+        id: 'arctic', logo: 'images/arcticwolf.png', name: 'Arctic Wolf Networks',
         quotes: [
-          { tab: 'Jayashree Rajan', text: '"SaaSNova didn\'t just clarify our AWS GTM motion, they exposed issues we didn\'t even know were blocking us. Their operator-level mastery of Marketplace, ACE, co-sell, and partner programs is unmatched."', author: 'Jayashree Rajan', role: 'CMO' }
+          { tab: 'Megan Flanagan', text: '"The structure of the pilot program exceeded all expectations. The data-driven full funnel planning model challenged us to think in ways we haven\'t thought of before."', author: 'Megan Flanagan', role: 'VP Marketing' },
+          { tab: 'Odin Olson', text: '"It was great to hear what has been done well with an AWS best ISV. The co-sell scoring discussion was eye-opening to us."', author: 'Odin Olson', role: 'VP Partnerships & Alliances' }
         ]
       },
       {
@@ -1448,21 +1443,27 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
       },
       {
+        id: 'freshworks', logo: 'images/freshworks-logo-png.png', name: 'Freshworks',
+        quotes: [
+          { tab: 'Abhishek GP', text: '"Jen is one of the most dynamic and driven leaders I’ve worked with Freshwork. She built the alignment and relationships needed to secure a three‑year strategic collaboration with AWS and set the foundation for a scalable co‑sell motion. She consistently turns challenges into opportunities."', author: 'Abhishek GP', role: 'VP of Growth at Atlan (and former Head of Growth at Freshworks)' }
+        ]
+      },
+      {
+        id: 'pharmacoevidence', logo: 'images/pharmocoevidence-logo.png', name: 'Pharmacoevidence',
+        quotes: [
+          { tab: 'Rajdeep Kaur', text: '“SaaSNova brought a level of clarity and execution we had never experienced before. Jen helped us navigate AWS Marketplace listings, modernize our architecture, and build a precise, end‑to‑end path toward the AWS GenAI Competency. What sets SaaSNova apart is the operator‑led partnership, fast, structured, and relentlessly outcome‑driven. They accelerated end‑to‑end cloud GTM and Marketplace execution that would have taken us months into just a few weeks, elevating Pharmacoevidence’s global credibility.”', author: 'Rajdeep Kaur', role: 'Associate Director & Lead, AI Sciences' }
+        ]
+      },
+      {
         id: 'dataminr', logo: 'images/dataminr-logo.png', name: 'Dataminr',
         quotes: [
           { tab: 'Fraser Charles', text: '"The architecture gave Dataminr the credibility sellers and AWS senior leaders needed to lean in."', author: 'Fraser Charles', role: 'Senior Director, Partner Ecosystems' }
         ]
       },
       {
-        id: 'pharmacoevidence', logo: 'images/pharmocoevidence-logo.png', name: 'Pharmacoevidence',
+        id: 'nexla', logo: 'images/nexla-logo.png', name: 'Nexla',
         quotes: [
-          { tab: 'Rajdeep Kaur', text: '"SaaSNova brought a level of clarity and execution we had never experienced before... They accelerated end‑to‑end cloud GTM and Marketplace execution that would have taken us months into just a few weeks."', author: 'Rajdeep Kaur', role: 'Associate Director & Lead' }
-        ]
-      },
-      {
-        id: 'freshworks', logo: 'images/freshworks-logo-png.png', name: 'Freshworks',
-        quotes: [
-          { tab: 'Abhishek GP', text: '"Jen is one of the most dynamic and driven leaders I’ve worked with Freshwork. She built the alignment and relationships needed to secure a three‑year strategic collaboration with AWS and set the foundation for a scalable co‑sell motion. She consistently turns challenges into opportunities."', author: 'Abhishek GP', role: 'VP of Growth at Atlan (and former Head of Growth at Freshworks)' }
+          { tab: 'Jayashree Rajan', text: '"SaaSNova didn\'t just clarify our AWS GTM motion, they exposed issues we didn\'t even know were blocking us. Their operator-level mastery of Marketplace, ACE, co-sell, and partner programs is unmatched."', author: 'Jayashree Rajan', role: 'CMO' }
         ]
       }
     ];
@@ -1472,23 +1473,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const quoteText = document.getElementById('test-quote-text');
     const quoteName = document.getElementById('test-quote-name');
     const quoteRole = document.getElementById('test-quote-role');
+    const quoteWrap = document.getElementById('test-quote-wrap');
 
     let currentCompanyIndex = 0;
+    let currentQuoteIndex = 0;
+    let autoRotateTimer = null;
+    let isHovered = false;
+
+    // Pause timer when reading
+    if(quoteWrap) {
+      quoteWrap.addEventListener('mouseenter', () => isHovered = true);
+      quoteWrap.addEventListener('mouseleave', () => isHovered = false);
+    }
 
     function renderTabs(companyData) {
       tabsContainer.innerHTML = '';
-      if(companyData.quotes.length <= 1) return; // No tabs needed for single quote
+      if(companyData.quotes.length <= 1) return;
       
       companyData.quotes.forEach((q, idx) => {
         const btn = document.createElement('button');
-        btn.className = `test-tab-btn ${idx === 0 ? 'active' : ''}`;
+        btn.className = `test-tab-btn ${idx === currentQuoteIndex ? 'active' : ''}`;
         btn.textContent = q.tab;
         btn.onclick = () => {
-          document.querySelectorAll('.test-tab-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          renderQuote(q);
+          currentQuoteIndex = idx;
+          updateTabActiveState();
+          renderQuote(companyData.quotes[idx]);
         };
         tabsContainer.appendChild(btn);
+      });
+    }
+
+    function updateTabActiveState() {
+      document.querySelectorAll('.test-tab-btn').forEach((b, idx) => {
+        b.classList.toggle('active', idx === currentQuoteIndex);
       });
     }
 
@@ -1504,19 +1521,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
       quoteText.style.animation = 'testFade 0.4s ease forwards';
       quoteName.parentElement.style.animation = 'testFade 0.4s ease forwards';
+
+      // Schedule next rotation
+      scheduleNextRotation(quoteData.text.length);
+    }
+
+    function scheduleNextRotation(textLength) {
+      clearTimeout(autoRotateTimer);
+      
+      // Snappier rotation: 8s short, 11s medium, 14s long
+      let duration = 8000; 
+      if (textLength > 150) duration = 11000;
+      if (textLength > 300) duration = 14000;
+      
+      autoRotateTimer = setTimeout(advanceRotation, duration);
+    }
+
+    function advanceRotation() {
+      if (isHovered) {
+         // User is reading, check again shortly
+         autoRotateTimer = setTimeout(advanceRotation, 2000);
+         return;
+      }
+      
+      const company = testData[currentCompanyIndex];
+      // If there are more quotes in the current company tab, go to next quote
+      if (currentQuoteIndex < company.quotes.length - 1) {
+         currentQuoteIndex++;
+         updateTabActiveState();
+         renderQuote(company.quotes[currentQuoteIndex]);
+      } else {
+         // Move to next company entirely
+         let nextCompIndex = (currentCompanyIndex + 1) % testData.length;
+         selectCompany(nextCompIndex);
+      }
     }
 
     function selectCompany(index) {
       currentCompanyIndex = index;
+      currentQuoteIndex = 0;
+      
       document.querySelectorAll('.test-logo-bubble').forEach((el, idx) => {
         el.classList.toggle('active', idx === index);
       });
+      
       const data = testData[index];
       renderTabs(data);
       renderQuote(data.quotes[0]);
     }
 
-    // Initialize Logos
+    // Initialize Logos UI
     if(logoContainer) {
         testData.forEach((company, idx) => {
           const bubble = document.createElement('div');
@@ -1532,7 +1586,7 @@ document.addEventListener('DOMContentLoaded', () => {
           logoContainer.appendChild(bubble);
         });
 
-        // Initial load
+        // Trigger the initial layout
         if(testData.length > 0) selectCompany(0);
     }
 

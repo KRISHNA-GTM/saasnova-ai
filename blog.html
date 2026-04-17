@@ -15,6 +15,25 @@
 <meta name="description" content="Actionable insights on co-sell execution, marketplace listing, and field team motions across AWS, Azure, and GCP."/>
 
 <style>
+/* ── MOBILE OVERFLOW & RESPONSIVE FIXES ── */
+body {
+  max-width: 100%;
+  overflow-x: clip; 
+  margin: 0;
+  padding: 0;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.blog-hero h1, .blog-hero p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 /* BLOG HERO */
 .blog-hero {
   margin-top:64px;
@@ -79,7 +98,7 @@
   overflow:hidden;box-shadow:0 8px 40px rgba(0,139,248,.1);
 }
 
-/* Flawless 1671x940 Scaling with Contain */
+/* Flawless Scaling with Contain to prevent cutting */
 .blog-feat-visual {
   width: 50%;
   position:relative;overflow:hidden;
@@ -88,7 +107,7 @@
 }
 .blog-feat-visual img {
   width: 100%; height: 100%;
-  object-fit: contain; /* Changed from cover to contain to prevent cutting */
+  object-fit: contain;
   display: block;
 }
 .blog-feat-content {
@@ -110,7 +129,6 @@
 }
 .blog-card:hover {transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,139,248,.1);border-color:rgba(0,139,248,.2);}
 
-/* Flawless 1671x940 Scaling for Grid */
 .blog-card-visual {
   width:100%; height: auto;
   aspect-ratio: 1671 / 940;
@@ -119,7 +137,7 @@
 }
 .blog-card-visual img {
   width: 100%; height: 100%;
-  object-fit: contain; /* Guaranteed to show entire image */
+  object-fit: contain; 
   display: block;
 }
 .blog-card-body {padding:20px;flex:1;display:flex;flex-direction:column;}
@@ -156,10 +174,10 @@
       SaaSNova Blog
     </div>
     <h1 class="reveal delay-1" style="color:#ffffff">
-      Cloud GTM intelligence.<br/>Written by a practitioner.
+      Cloud GTM intelligence,<br/>Written by a practitioner.
     </h1>
     <p class="reveal delay-2" style="max-width:580px;margin:0 auto">
-      Actionable insights on co-sell execution, marketplace listing, field team motions, and board-ready proof, across AWS, Azure, and GCP. From Jen Dawson. Not an agency.
+      Actionable insights on co-sell execution, marketplace listing, field team motions, and board-ready proof, across AWS, Azure, and GCP.
     </p>
   </div>
 </section>
@@ -177,14 +195,14 @@
     <div style="margin-bottom:24px">
       <span class="eyebrow" style="color:var(--blue)">Featured Post</span>
     </div>
-    <a href="blog-aws-prm-deadline.html" class="blog-featured-card reveal" style="text-decoration:none;color:inherit;">
+    <a href="blog-aws-prm-deadline.html" class="blog-featured-card reveal" data-cat="aws" style="text-decoration:none;color:inherit;">
       <div class="blog-feat-visual">
-        <img src="images/blogs/aws prm blog 2 cover.png" alt="AWS PRM Deadline" />
+        <img src="images/blogs/Blog 4 PRM.png" alt="AWS PRM Deadline" />
       </div>
       <div class="blog-feat-content">
         <span style="display:inline-block;padding:3px 10px;border-radius:var(--r-full);background:rgba(255,153,0,.1);color:#FF9900;font-size:11px;font-weight:700;margin-bottom:14px">AWS APN Compliance</span>
         <h2 style="font-size:clamp(20px,2.4vw,27px);margin-bottom:12px;line-height:1.3">The July 31 AWS PRM Deadline: How to Measure Attribution and Keep Funding</h2>
-        <p style="font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:20px">By July 31, 2026, the way AWS "sees" your value changes forever. Learn the execution fixes to maintain co-sell eligibility and avoid compliance drops.</p>
+        <p style="font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:20px">Visibility is the new currency inside AWS. By July 31, 2026, AWS will measure partner impact through PRM. Learn the execution fixes to maintain eligibility.</p>
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:8px">
             <img src="images/jen-dp.jpg" alt="Jen Dawson" style="width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:top"/>
@@ -204,7 +222,7 @@
     <div class="blog-grid">
 
       <!-- POST 1: SILENT LISTING -->
-      <a href="blog-cloud-marketplace-listing-silent-fix.html" class="blog-card reveal delay-1" data-cat="aws isv">
+      <a href="blog-cloud-marketplace-listing-silent-fix.html" class="blog-card reveal delay-1" data-cat="isv">
         <div class="blog-card-visual">
           <img src="images/blogs/cloud-marketplace-listing.png" alt="Cloud Marketplace Listing" />
         </div>
@@ -220,17 +238,16 @@
       </a>
 
       <!-- POST 2: AWS ALIGNMENT -->
-      <a href="blog-aws-alignment.html" class="blog-card reveal delay-2" data-cat="aws isv">
+      <a href="blog-aws-alignment.html" class="blog-card reveal delay-2" data-cat="aws">
         <div class="blog-card-visual">
-          <!-- Placeholder AWS Alignment image perfectly scaling to 1671x940 -->
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1671&h=940&q=80" alt="AWS Doesn't Reward Progress, It Rewards Alignment" />
+          <img src="images/blogs/Blog kr.png" alt="Why AWS Marketplace GTM Fails for Most SaaS Companies" />
         </div>
         <div class="blog-card-body">
           <div class="blog-card-cat" style="color:var(--orange)">AWS Execution Strategy</div>
-          <div class="blog-card-h">AWS Doesn't Reward Progress. It Rewards Alignment.</div>
-          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">Getting listed on AWS was the easy part. Why fragmented execution costs you, and what moves the needle.</p>
+          <div class="blog-card-h">Why AWS Marketplace GTM Fails for Most SaaS Companies</div>
+          <p class="text-sm" style="color:var(--text-muted);line-height:1.65;margin-bottom:12px">Six months after launch, most SaaS companies have the same AWS Marketplace result: zero pipeline. Here's why.</p>
           <div class="blog-card-meta">
-            <span style="font-size:12px;color:var(--text-muted)">April 2026 &middot; 5 min</span>
+            <span style="font-size:12px;color:var(--text-muted)">Jan 2026 &middot; 5 min</span>
             <span style="font-size:13px;font-weight:600;color:var(--blue)">Read </span>
           </div>
         </div>
@@ -256,10 +273,10 @@
   <div class="container-sm" style="position:relative">
     <span class="eyebrow" style="color:rgba(0,139,248,.7);margin-bottom:12px;display:block">From the Practitioner</span>
     <h2 style="color:#fff;margin-bottom:12px; font-size: clamp(28px, 4vw, 40px);">Reading about execution<br/>isn't the same as doing it.</h2>
-    <p style="color:rgba(255,255,255,.62);font-size:17px;max-width:440px;margin:0 auto 28px">Book a discovery call and get a written GTM readiness assessment for your ISV, on your target clouds.</p>
+    <p style="color:rgba(255,255,255,.62);font-size:17px;max-width:440px;margin:0 auto 28px">Book a Execution strategy call and get a written GTM readiness assessment for your ISV, on your target clouds.</p>
     <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03"
        target="_blank" rel="noopener" class="btn btn-primary btn-lg">
-      Book a 30-Min Discovery Call
+      Book a 30-min Execution Strategy Session
     </a>
   </div>
 </section>
@@ -267,14 +284,37 @@
 <div id="footer-placeholder"></div>
 <script src="shared.js"></script>
 <script>
+// Filter Posts logic
 function filterPost(btn, cat) {
   document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  
+  // Filter Grid items
   document.querySelectorAll('.blog-card[data-cat]').forEach(card => {
     const cats = card.dataset.cat ? card.dataset.cat.split(' ') : [];
     card.style.display = (cat === 'all' || cats.includes(cat)) ? '' : 'none';
   });
+
+  // Filter Featured post dynamically
+  const featured = document.querySelector('.blog-featured-card');
+  if (featured && featured.dataset.cat) {
+    const featCats = featured.dataset.cat.split(' ');
+    const section = featured.closest('.blog-featured');
+    if (section) {
+      section.style.display = (cat === 'all' || featCats.includes(cat)) ? '' : 'none';
+    }
+  }
 }
+
+// Check URL parameters for active tags from blog posts
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const tag = params.get('tag');
+  if (tag) {
+    const btn = document.querySelector(`.blog-filter-btn[onclick*="'${tag}'"]`);
+    if (btn) btn.click();
+  }
+});
 </script>
 </body>
 </html>

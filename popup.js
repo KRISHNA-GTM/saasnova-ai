@@ -1,25 +1,120 @@
 /* ═══════════════════════════════════════════════════
-   SaaSNova Lead Popup, popup.js  v1.0
-   Triggers 15s after page load. Once per session.
-   Skips /contact and /newsletter pages.
-   Submits to Netlify Forms as "popup-capture".
+   SaaSNova Lead Popup, popup.js  v2.1
+   Bundles its own CSS and auto-creates the Root Container.
    ═══════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
   const SKIP_PATHS  = ['/contact', '/newsletter', 'contact.html', 'newsletter.html'];
   const SESSION_KEY = 'sn_popup_shown';
-  const DELAY_MS    = 15000;
+  
+  // Set to 20 seconds for users who stay on the page
+  const DELAY_MS    = 20000; 
 
   function shouldShow() {
+    // Shows only once per session
     if (sessionStorage.getItem(SESSION_KEY)) return false;
+    
     const path = window.location.pathname.toLowerCase() + window.location.href.toLowerCase();
     return !SKIP_PATHS.some(p => path.includes(p));
   }
 
+  function injectCSS() {
+    const styles = `
+      #sn-popup-overlay {
+        position: fixed; inset: 0;
+        background: rgba(10,22,40,.68);
+        backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+        z-index: 100000;
+        display: flex; align-items: center; justify-content: center;
+        padding: 16px;
+        opacity: 0; pointer-events: none;
+        transition: opacity .28s ease;
+        font-family: 'Inter', sans-serif;
+      }
+      #sn-popup-overlay.sn-popup-visible { opacity: 1; pointer-events: all; }
+      #sn-popup-overlay.sn-popup-closing { opacity: 0; pointer-events: none; }
+
+      #sn-popup-card {
+        background: #fff; border-radius: 24px; padding: 36px 36px 32px;
+        max-width: 440px; width: 100%; position: relative;
+        box-shadow: 0 24px 80px rgba(15,25,35,.24); border: 1px solid #E8EEF4;
+        transform: translateY(20px) scale(.97);
+        transition: transform .3s cubic-bezier(.34,1.4,.64,1);
+        box-sizing: border-box;
+        overflow: hidden; /* Fixes the top gradient line spilling out of corners */
+      }
+      #sn-popup-overlay.sn-popup-visible #sn-popup-card { transform: translateY(0) scale(1); }
+      #sn-popup-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #008BF8, #FA0F9C); }
+
+      #sn-popup-close {
+        position: absolute; top: 16px; right: 16px;
+        width: 32px; height: 32px; border-radius: 50%;
+        background: #F7F9FC; border: 1px solid #E8EEF4;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer; color: #6B7E8F; transition: all .15s ease;
+      }
+      #sn-popup-close:hover { background: #E8EEF4; color: #0F1923; }
+
+      #sn-popup-badge {
+        display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 999px;
+        background: rgba(241,153,83,.12); color: #C85000;
+        font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+        margin-bottom: 14px;
+      }
+      #sn-popup-headline {
+        font-size: clamp(18px,3vw,22px); font-weight: 800; color: #0F1923; line-height: 1.2; margin-bottom: 10px; margin-top:0;
+      }
+      #sn-popup-sub {
+        font-size: 14px; color: #3D4E5C; line-height: 1.72; margin-bottom: 14px; margin-top:0;
+      }
+      #sn-popup-proof {
+        display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+        font-size: 12px; font-weight: 600; color: #6B7E8F; margin-bottom: 20px;
+      }
+      #sn-popup-fields { display: flex; gap: 10px; margin-bottom: 10px; width: 100%; box-sizing: border-box; }
+      #sn-popup-email {
+        flex: 1; padding: 12px 14px; border: 1.5px solid #E8EEF4; border-radius: 12px;
+        font-size: 14px; font-family: inherit; color: #0F1923;
+        background: #F7F9FC; outline: none; transition: all .15s ease;
+        width: 100%; box-sizing: border-box;
+      }
+      #sn-popup-email:focus { border-color: #008BF8; background: #fff; }
+
+      #sn-popup-submit {
+        width: 100%; padding: 14px 20px; background: #FA0F9C; color: white;
+        border: none; border-radius: 12px; font-size: 15px; font-weight: 700;
+        cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+        transition: all .15s ease; box-sizing: border-box;
+      }
+      #sn-popup-submit:hover { background: #D90085; transform: translateY(-1px); }
+
+      #sn-popup-success {
+        flex-direction: column; align-items: center; justify-content: center;
+        padding: 20px 0 8px; text-align: center; gap: 10px;
+      }
+      #sn-popup-success-text { font-size: 18px; font-weight: 700; color: #0F1923; }
+      #sn-popup-success-sub  { font-size: 14px; color: #6B7E8F; }
+
+      @media (max-width: 540px) {
+        #sn-popup-card { padding: 28px 20px 24px; border-radius: 20px 20px 0 0; }
+        #sn-popup-overlay { align-items: flex-end; padding: 0; }
+        #sn-popup-fields { flex-direction: column; }
+      }
+    `;
+    const styleEl = document.createElement('style');
+    styleEl.innerHTML = styles;
+    document.head.appendChild(styleEl);
+  }
+
   function buildPopup() {
-    const root = document.getElementById('sn-popup-root');
-    if (!root) return;
+    // Automatically create the Root Div so it never fails
+    let root = document.getElementById('sn-popup-root');
+    if (!root) {
+      root = document.createElement('div');
+      root.id = 'sn-popup-root';
+      document.body.appendChild(root);
+    }
 
     root.innerHTML = `
       <div id="sn-popup-overlay" role="dialog" aria-modal="true" aria-label="Subscribe to The Nova Brief" aria-hidden="true">
@@ -29,7 +124,7 @@
           </button>
           <div id="sn-popup-badge">The Nova Brief</div>
           <h2 id="sn-popup-headline">Get the cloud GTM intelligence your competitors are already reading.</h2>
-          <p id="sn-popup-sub">Weekly co-sell tactics, field motion intelligence, and marketplace execution across AWS, Azure, and GCP. From Jen Dawson, practitioner-grade, not agency copy.</p>
+          <p id="sn-popup-sub">Weekly co-sell tactics, field motion intelligence, and marketplace execution across AWS, Azure, and GCP. From Jen Dawson, practitioner.</p>
           <div id="sn-popup-proof">
             <span>Trusted by 100+ ISVs</span>
             <span aria-hidden="true">·</span>
@@ -39,7 +134,7 @@
             <input type="hidden" name="form-name" value="popup-capture"/>
             <input type="text" name="bot-field" style="display:none" aria-hidden="true" tabindex="-1"/>
             <div id="sn-popup-fields">
-              <input type="email" name="email" id="sn-popup-email" placeholder="Enter your work email" autocomplete="email" required style="width:100%"/>
+              <input type="email" name="email" id="sn-popup-email" placeholder="Enter your work email" autocomplete="email" required/>
             </div>
             <button type="submit" id="sn-popup-submit">
               Get The Nova Brief
@@ -72,7 +167,7 @@
     overlay.classList.add('sn-popup-visible');
     overlay.setAttribute('aria-hidden', 'false');
     sessionStorage.setItem(SESSION_KEY, '1');
-    setTimeout(() => { const n = document.getElementById('sn-popup-name'); if (n) n.focus(); }, 300);
+    setTimeout(() => { const n = document.getElementById('sn-popup-email'); if (n) n.focus(); }, 300);
   }
 
   function closePopup() {
@@ -103,6 +198,7 @@
 
   function init() {
     if (!shouldShow()) return;
+    injectCSS();
     buildPopup();
     setTimeout(openPopup, DELAY_MS);
   }

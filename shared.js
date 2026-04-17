@@ -18,6 +18,15 @@ const SVG = {
 
 const NAV_HTML = `
 <style>
+  /* Layout Fallbacks & Mobile Nav Fixes */
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+  #hamburger { display: none; background: transparent; border: none; cursor: pointer; padding: 8px; }
+  
+  @media (max-width: 992px) {
+    .nav-links, .nav-cta { display: none !important; }
+    #hamburger { display: flex !important; align-items: center; justify-content: center; }
+  }
+
   /* Alignment Fix: Pushes links to the right */
   .nav-links { margin-left: auto; margin-right: 32px; }
   
@@ -43,53 +52,6 @@ const NAV_HTML = `
   .mob-nested-content.open { max-height: 600px; }
   .mob-nested-link { display: flex; align-items: center; padding: 12px 20px 12px 64px; color: var(--text-secondary); font-size: 15px; font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.03); }
   .mob-nested-link:last-child { border-bottom: none; }
-
-  /* --- Mobile Menu Container Styles --- */
-  #mob-menu {
-    position: fixed;
-    top: 70px; /* Adjust this to match the exact height of your navbar */
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 70px);
-    background: #ffffff;
-    z-index: 999;
-    overflow-y: auto;
-    
-    /* Hide off-screen to the right by default */
-    transform: translateX(100%); 
-    visibility: hidden;
-    opacity: 0;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease, visibility 0.3s;
-  }
-
-  /* When JS adds the .open class */
-  #mob-menu.open {
-    transform: translateX(0);
-    visibility: visible;
-    opacity: 1;
-  }
-
-  /* --- Responsive Visibility --- */
-  #hamburger {
-    display: none; /* Hidden on desktop */
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 8px; /* Touch target size */
-  }
-
-  @media (max-width: 992px) {
-    /* Hide desktop nav elements on mobile */
-    .nav-links, .nav-cta {
-      display: none !important; 
-    }
-    /* Show the hamburger icon on mobile and push to the right */
-    #hamburger {
-      display: block !important; 
-      margin-left: auto; /* Forces the icon to the right side */
-      z-index: 1001; /* Keeps it clickable */
-    }
-  }
 </style>
 
 <nav id="nav">
@@ -453,16 +415,17 @@ function initScrollFab() {
       .sn-fab-label { font-size: 14px; font-weight: 600; white-space: nowrap; }
       .sn-fab-up .sn-fab-icon { transform: rotate(180deg); }
       
-      /* Adjusted spacing for mobile screens so it sits properly at the bottom right */
+      /* Mobile Fix: Hides text completely & turns button into a perfect circle */
       @media (max-width: 640px) {
-        .sn-scroll-fab { bottom: 20px; right: 20px; }
+        .sn-scroll-fab { bottom: 20px; right: 20px; padding: 10px; border-radius: 50%; justify-content: center; }
+        .sn-fab-label { display: none; }
       }
     </style>
     <button id="sn-scroll-fab" class="sn-scroll-fab" aria-label="Scroll down">
       <div class="sn-fab-icon">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <span class="sn-scroll-fab">Scroll Down</span>
+      <span class="sn-fab-label">Scroll Down</span>
     </button>
   `;
   document.body.insertAdjacentHTML('beforeend', fabHTML);
@@ -505,12 +468,12 @@ function initScrollFab() {
       isUp = true;
       fab.classList.add('sn-fab-up');
       fab.setAttribute('aria-label', 'Back to top');
-      if(label) label.textContent = 'Back to Top';
+      label.textContent = 'Back to Top';
     } else if (!isAtBottom && isUp) {
       isUp = false;
       fab.classList.remove('sn-fab-up');
       fab.setAttribute('aria-label', 'Scroll down');
-      if(label) label.textContent = 'Scroll Down';
+      label.textContent = 'Scroll Down';
     }
   }
   

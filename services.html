@@ -14,6 +14,80 @@
 <meta name="description" content="Three cloud marketplace GTM programs for SaaS ISVs: Ignite, SuperNova, and NovaX. Customized to your cloud mix, listing status, and internal readiness. AWS, Azure, GCP."/>
 
 <style>
+  /* ── AGGRESSIVE MOBILE OVERFLOW & CUT-OFF FIXES ── */
+  *, *::before, *::after { box-sizing: border-box !important; }
+  html, body { overflow-x: hidden !important; width: 100%; position: relative; margin: 0; padding: 0; }
+  
+  /* Fix Grid/Flex blowouts on narrow screens */
+  .container { width: 100% !important; max-width: 1200px; margin: 0 auto; padding: 0 20px !important; overflow-x: hidden !important; }
+  .container-sm { width: 100% !important; max-width: 800px; margin: 0 auto; padding: 0 20px !important; overflow-x: hidden !important; }
+  .program-row, .program-row > div { min-width: 0 !important; max-width: 100% !important; }
+  
+  /* Responsive typography fallbacks */
+  h1 { font-size: clamp(32px, 8vw, 56px) !important; line-height: 1.2 !important; }
+  h2 { font-size: clamp(28px, 6vw, 40px) !important; line-height: 1.3 !important; }
+
+  /* ── FIX TEXT CUTTING OFF IN CARDS (Checklists) ── */
+  .card { 
+    width: 100% !important; 
+    max-width: 100% !important; 
+    overflow-wrap: break-word !important; 
+    box-sizing: border-box !important;
+  }
+  .check-list {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .check-item { 
+    display: flex !important; 
+    align-items: flex-start !important; 
+    gap: 12px !important; 
+    white-space: normal !important; 
+    word-break: break-word !important;
+    overflow-wrap: break-word !important; 
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-right: 8px !important; /* Safety padding to keep text off the exact edge */
+  }
+  .check-dot { 
+    flex-shrink: 0 !important; 
+    min-width: 16px !important; /* Keep the icon from shrinking away */
+    margin-top: 4px; /* Align dot with the first line of wrapped text */
+  }
+
+  /* ── FIX BUTTON OVERFLOW ON NARROW SCREENS ── */
+  .deep-dive-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 24px;
+    border-radius: 8px; /* Assuming standard rounded corners */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+    white-space: normal !important; /* Forces text to wrap instead of overflowing */
+    word-break: break-word;
+    line-height: 1.4;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .deep-dive-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+
+  /* Ultra-narrow phone safety (Galaxy Z Fold sizes ~280-360px) */
+  @media (max-width: 400px) {
+    .card { padding: 24px 20px !important; }
+    .container, .container-sm { padding: 0 16px !important; }
+    .check-item { gap: 10px !important; font-size: 14px !important; }
+    .deep-dive-btn { padding: 12px 16px !important; font-size: 14px !important; } /* Shrinks padding for extra room */
+  }
+
   /* ── PROGRAM COMPARISON MATRIX CSS ── */
   .matrix-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 20px; padding-bottom: 16px; }
   .matrix-table { width: 100%; min-width: 800px; border-collapse: separate; border-spacing: 0; background: #fff; border-radius: 16px; border: 1px solid var(--border-light); overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.03); }
@@ -48,6 +122,63 @@
 
   /* Smooth scrolling for anchor links */
   html { scroll-behavior: smooth; }
+
+  /* ── RESPONSIVE FIXES FOR MOBILE/TABLET ── */
+  @media (max-width: 992px) {
+    /* Stacks the Gateway sections on mobile/tablet so they don't squish */
+    .program-row {
+      grid-template-columns: 1fr !important;
+      gap: 32px !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    /* Transforms the Matrix Table into stacked cards on mobile */
+    .matrix-wrapper { overflow-x: hidden; margin-bottom: 0; padding-bottom: 0; width: 100%; }
+    .matrix-table { min-width: 100%; display: block; background: transparent; border: none; box-shadow: none; }
+    .matrix-table thead { display: none; }
+    .matrix-table tbody, .matrix-table tr { display: block; width: 100%; }
+    
+    .matrix-tr { 
+      background: #fff; 
+      margin-bottom: 24px; 
+      border-radius: 12px; 
+      border: 1px solid var(--border-light); 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+      overflow: hidden; 
+    }
+    
+    .matrix-td { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: flex-start; /* Changed to start so multiline text wraps cleanly */
+      padding: 14px 16px; 
+      border-bottom: 1px solid var(--border-light); 
+      text-align: right; 
+      gap: 16px; 
+      word-break: break-word; /* Prevents overflow from long text */
+    }
+    .matrix-td:last-child { border-bottom: none; }
+    
+    .matrix-td.col-label { 
+      background: #F8FAFC; 
+      justify-content: flex-start; 
+      text-align: left; 
+      font-size: 16px; 
+      border-bottom: 2px solid var(--border-light); 
+    }
+    
+    /* Adds program labels back into the row for mobile */
+    .matrix-td.col-ignite::before { content: "Ignite"; font-weight: 700; color: var(--blue); flex-shrink: 0; }
+    .matrix-td.col-supernova::before { content: "SuperNova"; font-weight: 700; color: var(--orange); flex-shrink: 0; }
+    .matrix-td.col-novax::before { content: "NovaX"; font-weight: 700; color: var(--pink); flex-shrink: 0; }
+    
+    .matrix-td.col-ignite, .matrix-td.col-supernova, .matrix-td.col-novax { 
+      border-left: none; 
+      border-right: none; 
+      background: #fff; 
+    }
+  }
 </style>
 </head>
 <body>
@@ -58,7 +189,8 @@
   <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 70% at 90% 20%,rgba(0,139,248,.2) 0%,transparent 55%),radial-gradient(ellipse 40% 50% at 5% 80%,rgba(250,15,156,.12) 0%,transparent 50%)"></div>
   <div class="container-sm text-center" style="position:relative">
     <span class="eyebrow eyebrow-dark reveal">SaaSNova Programs</span>
-    <h1 class="reveal delay-1" style="margin-top:var(--sp-1);color:#ffffff">Choose where you are.<br/>Execution is adjusted<br/>to your starting point.</h1>
+    <!-- Removed <br/> tags and added text-wrap: balance to fix awkward wrapping on small screens -->
+    <h1 class="reveal delay-1" style="margin-top:var(--sp-1);color:#ffffff; text-wrap: balance;">Choose where you are. Execution is adjusted to your starting point.</h1>
     <p class="reveal delay-2 mt-3" style="margin:var(--sp-2) auto 0;font-size:18px;color:rgba(255,255,255,.65);max-width:560px">All programs are customized based on your cloud mix, listing status, and internal readiness. Three starting points. One execution standard.</p>
     <div class="flex-gap-2 flex-center reveal delay-3" style="margin-top:var(--sp-4)">
       <a href="https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03" target="_blank" rel="noopener" class="btn btn-primary">Book a Discovery Call</a>
@@ -73,7 +205,7 @@
   <div class="container">
     <div style="text-align:center;margin-bottom:32px">
         <h3 class="reveal" style="font-size:20px; font-weight:800; color:var(--text-primary); margin-bottom:8px;">Program Comparison at a Glance</h3>
-        <p class="reveal delay-1" style="font-size:14px; color:var(--text-secondary);">TL;DR: Don't waste time. Find your program fit instantly.</p>
+        <p class="reveal delay-1" style="font-size:14px; color:var(--text-secondary);">Quickly compare programs to find the right fit for your current GTM stage.</p>
     </div>
     <div class="reveal delay-2" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
         <!-- Ignite TLDR -->
@@ -116,7 +248,7 @@
   <div class="container">
 
     <!-- IGNITE -->
-    <div id="ignite" style="display:grid;grid-template-columns:1fr 1.1fr;gap:var(--sp-8);align-items:center;padding:var(--sp-8) 0;border-bottom:1px solid var(--border-light)">
+    <div id="ignite" class="program-row" style="display:grid;grid-template-columns:1fr 1.1fr;gap:var(--sp-8);align-items:center;padding:var(--sp-8) 0;border-bottom:1px solid var(--border-light)">
       
       <!-- IGNITE LEFT (Description & Ideal Stage) -->
       <div class="reveal">
@@ -140,14 +272,15 @@
           <h3 style="font-size:24px;margin-bottom:16px;line-height:1.3;color:var(--text-primary);">Establish your foundation and prove cloud viability.</h3>
           <p style="font-size:16px;color:var(--text-secondary);line-height:1.7;margin-bottom:32px">Ignite bridges the gap between a dormant marketplace listing and active co-sell pipeline. We establish the foundational hygiene, validate your first opportunities, and produce the investor-ready evidence needed to prove cloud GTM viability.</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;">
-            <a href="ignite.html" class="btn btn-secondary" style="flex:1;justify-content:center;padding:14px 24px; color:var(--blue);background:rgba(53, 194, 241, 0.1);padding:14px 24px;">Explore Ignite Deep Dive &rarr;</a>
+            <!-- Fixed overflowing button with deep-dive-btn class -->
+            <a href="ignite.html" class="deep-dive-btn" style="color:var(--blue);background:rgba(0,139,248,0.1);">Explore Ignite Deep Dive &rarr;</a>
           </div>
         </div>
       </div>
     </div>
 
     <!-- SUPERNOVA -->
-    <div id="supernova" style="display:grid;grid-template-columns:1fr 1.1fr;gap:var(--sp-8);align-items:center;padding:var(--sp-8) 0;border-bottom:1px solid var(--border-light)">
+    <div id="supernova" class="program-row" style="display:grid;grid-template-columns:1fr 1.1fr;gap:var(--sp-8);align-items:center;padding:var(--sp-8) 0;border-bottom:1px solid var(--border-light)">
       
       <!-- SUPERNOVA LEFT -->
       <div class="reveal">
@@ -174,14 +307,15 @@
           <h3 style="font-size:24px;margin-bottom:16px;line-height:1.3;color:var(--text-primary);">Penetrate the US market with cloud-attributed revenue.</h3>
           <p style="font-size:16px;color:var(--text-secondary);line-height:1.7;margin-bottom:32px">Designed specifically for international ISVs breaking into the US market. We navigate the complexities of US channel partners, drive targeted field engagement, and build the attribution models necessary to secure your US foothold.</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;">
-            <a href="supernova.html" class="btn btn-secondary" style="flex:1;justify-content:center;color:var(--orange);background:rgba(241,153,83,0.1);padding:14px 24px;">Explore SuperNova Deep Dive &rarr;</a>
+            <!-- Fixed overflowing button with deep-dive-btn class -->
+            <a href="supernova.html" class="deep-dive-btn" style="color:var(--orange);background:rgba(241,153,83,0.1);">Explore SuperNova Deep Dive &rarr;</a>
           </div>
         </div>
       </div>
     </div>
 
     <!-- NOVAX -->
-    <div id="novax" style="display:grid;grid-template-columns:1fr 1.1fr;gap:var(--sp-8);align-items:center;padding:var(--sp-8) 0">
+    <div id="novax" class="program-row" style="display:grid;grid-template-columns:1fr 1.1fr;gap:var(--sp-8);align-items:center;padding:var(--sp-8) 0">
       
       <!-- NOVAX LEFT -->
       <div class="reveal">
@@ -205,7 +339,8 @@
           <h3 style="font-size:24px;margin-bottom:16px;line-height:1.3;color:var(--text-primary);">Operationalize and scale a multi-cloud GTM engine.</h3>
           <p style="font-size:16px;color:var(--text-secondary);line-height:1.7;margin-bottom:32px">For established ISVs ready for sustained execution. NovaX provides ongoing, fractional alliance leadership across multiple clouds, scaling partner-led pipeline and automating lifecycle workflows for high-volume growth.</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;">
-            <a href="novax.html" class="btn btn-secondary" style="flex:1;justify-content:center;color:var(--pink);background:rgba(250,15,156,0.1);padding:14px 24px;">Explore NovaX Deep Dive &rarr;</a>
+            <!-- Fixed overflowing button with deep-dive-btn class -->
+            <a href="novax.html" class="deep-dive-btn" style="color:var(--pink);background:rgba(250,15,156,0.1);">Explore NovaX Deep Dive &rarr;</a>
           </div>
         </div>
       </div>
@@ -214,7 +349,7 @@
   </div>
 </section>
 
-<!-- ══ PROGRAM COMPARISON MATRIX (REPLACES HOME PAGE TABLE) ══ -->
+<!-- ══ PROGRAM COMPARISON MATRIX ══ -->
 <section id="compare-matrix" style="background:linear-gradient(160deg,#F8F9FF 0%,#EFF4FF 100%); padding:80px 0; border-top:1px solid var(--border-light); border-bottom:1px solid var(--border-light);">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px">

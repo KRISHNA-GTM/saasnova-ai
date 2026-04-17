@@ -71,20 +71,11 @@ h1, h2, h3, h4, h5, h6 {
   background:rgba(0,0,0,0.03);
 }
 
-/* Failsafe for injected nav bars - specifically targeting stray floating buttons on tablet */
+/* Nav Placeholder Fix */
 #nav-placeholder {
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
-}
-@media (max-width: 1024px) {
-  #nav-placeholder [class*="btn"], 
-  #nav-placeholder [class*="cta"], 
-  #nav-placeholder [class*="button"],
-  #nav-placeholder a[href*="contact"],
-  #nav-placeholder button:not(.menu-toggle) {
-    display: none !important;
-  }
 }
 
 /* ══════════════════════════════════════════

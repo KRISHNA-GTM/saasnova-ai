@@ -83,9 +83,11 @@ const NAV_HTML = `
     .nav-links, .nav-cta {
       display: none !important; 
     }
-    /* Show the hamburger icon on mobile */
+    /* Show the hamburger icon on mobile and push to the right */
     #hamburger {
-      display: block; 
+      display: block !important; 
+      margin-left: auto; /* Forces the icon to the right side */
+      z-index: 1001; /* Keeps it clickable */
     }
   }
 </style>
@@ -460,7 +462,7 @@ function initScrollFab() {
       <div class="sn-fab-icon">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <span class="sn-fab-label">Scroll Down</span>
+      <span class="sn-scroll-fab">Scroll Down</span>
     </button>
   `;
   document.body.insertAdjacentHTML('beforeend', fabHTML);
@@ -503,12 +505,12 @@ function initScrollFab() {
       isUp = true;
       fab.classList.add('sn-fab-up');
       fab.setAttribute('aria-label', 'Back to top');
-      label.textContent = 'Back to Top';
+      if(label) label.textContent = 'Back to Top';
     } else if (!isAtBottom && isUp) {
       isUp = false;
       fab.classList.remove('sn-fab-up');
       fab.setAttribute('aria-label', 'Scroll down');
-      label.textContent = 'Scroll Down';
+      if(label) label.textContent = 'Scroll Down';
     }
   }
   

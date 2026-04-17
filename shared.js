@@ -22,9 +22,20 @@ const NAV_HTML = `
   .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
   #hamburger { display: none; background: transparent; border: none; cursor: pointer; padding: 8px; }
   
-  @media (max-width: 992px) {
-    .nav-links, .nav-cta { display: none !important; }
-    #hamburger { display: flex !important; align-items: center; justify-content: center; }
+  /* Bulletproof Mobile Override for Nav */
+  @media (max-width: 1024px) {
+    #nav .nav-links, #nav .nav-cta { display: none !important; }
+    #nav #hamburger { 
+      display: flex !important; 
+      align-items: center !important; 
+      justify-content: center !important; 
+      width: 44px !important; 
+      height: 44px !important; 
+      background: #EEF2F8 !important; /* Light gray box so it's obvious */
+      border-radius: 8px !important;
+      border: 1px solid #D0DAE6 !important;
+      margin-left: auto !important;
+    }
   }
 
   /* Alignment Fix: Pushes links to the right */
@@ -415,10 +426,23 @@ function initScrollFab() {
       .sn-fab-label { font-size: 14px; font-weight: 600; white-space: nowrap; }
       .sn-fab-up .sn-fab-icon { transform: rotate(180deg); }
       
-      /* Mobile Fix: Hides text completely & turns button into a perfect circle */
-      @media (max-width: 640px) {
-        .sn-scroll-fab { bottom: 20px; right: 20px; padding: 10px; border-radius: 50%; justify-content: center; }
-        .sn-fab-label { display: none; }
+      /* Bulletproof Mobile Override for FAB */
+      @media (max-width: 1024px) {
+        #sn-scroll-fab {
+          width: 50px !important;
+          height: 50px !important;
+          padding: 0 !important;
+          border-radius: 50% !important;
+          justify-content: center !important;
+          bottom: 24px !important;
+          right: 24px !important;
+        }
+        #sn-scroll-fab .sn-fab-label { 
+          display: none !important; 
+        }
+        #sn-scroll-fab .sn-fab-icon {
+          margin: 0 !important;
+        }
       }
     </style>
     <button id="sn-scroll-fab" class="sn-scroll-fab" aria-label="Scroll down">

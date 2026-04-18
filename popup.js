@@ -1,19 +1,19 @@
 /* ═══════════════════════════════════════════════════
-   SaaSNova Lead Popup, popup.js  v2.1
-   Bundles its own CSS and auto-creates the Root Container.
+   SaaSNova Lead Popup, popup.js  v3.0
+   Bundles its own CSS, uses HubSpot API, and strict LocalStorage
    ═══════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
   const SKIP_PATHS  = ['/contact', '/newsletter', 'contact.html', 'newsletter.html'];
-  const SESSION_KEY = 'sn_popup_shown';
+  const STORAGE_KEY = 'sn_popup_dismissed'; // Upgraded to permanent storage
   
   // Set to 20 seconds for users who stay on the page
   const DELAY_MS    = 20000; 
 
   function shouldShow() {
-    // Shows only once per session
-    if (sessionStorage.getItem(SESSION_KEY)) return false;
+    // Shows only once EVER per device
+    if (localStorage.getItem(STORAGE_KEY)) return false;
     
     const path = window.location.pathname.toLowerCase() + window.location.href.toLowerCase();
     return !SKIP_PATHS.some(p => path.includes(p));
@@ -42,7 +42,7 @@
         transform: translateY(20px) scale(.97);
         transition: transform .3s cubic-bezier(.34,1.4,.64,1);
         box-sizing: border-box;
-        overflow: hidden; /* Fixes the top gradient line spilling out of corners */
+        overflow: hidden; 
       }
       #sn-popup-overlay.sn-popup-visible #sn-popup-card { transform: translateY(0) scale(1); }
       #sn-popup-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #008BF8, #FA0F9C); }
@@ -108,7 +108,6 @@
   }
 
   function buildPopup() {
-    // Automatically create the Root Div so it never fails
     let root = document.getElementById('sn-popup-root');
     if (!root) {
       root = document.createElement('div');
@@ -130,9 +129,8 @@
             <span aria-hidden="true">·</span>
             <span>No spam. Unsubscribe anytime.</span>
           </div>
-          <form id="sn-popup-form" name="popup-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="popup-capture"/>
-            <input type="text" name="bot-field" style="display:none" aria-hidden="true" tabindex="-1"/>
+          <!-- Cleaned up form tag without Netlify attributes -->
+          <form id="sn-popup-form">
             <div id="sn-popup-fields">
               <input type="email" name="email" id="sn-popup-email" placeholder="Enter your work email" autocomplete="email" required/>
             </div>
@@ -166,7 +164,6 @@
     if (!overlay) return;
     overlay.classList.add('sn-popup-visible');
     overlay.setAttribute('aria-hidden', 'false');
-    sessionStorage.setItem(SESSION_KEY, '1');
     setTimeout(() => { const n = document.getElementById('sn-popup-email'); if (n) n.focus(); }, 300);
   }
 
@@ -175,6 +172,10 @@
     if (!overlay) return;
     overlay.classList.remove('sn-popup-visible');
     overlay.classList.add('sn-popup-closing');
+    
+    // Permanently block popup for this user
+    localStorage.setItem(STORAGE_KEY, 'true');
+    
     setTimeout(() => { overlay.classList.remove('sn-popup-closing'); overlay.setAttribute('aria-hidden', 'true'); }, 280);
   }
 
@@ -182,18 +183,42 @@
     e.preventDefault();
     const form = e.target;
     const btn  = document.getElementById('sn-popup-submit');
+    const emailInput = document.getElementById('sn-popup-email').value;
+    
+    const originalContent = btn.innerHTML;
     btn.textContent = 'Subscribing…';
     btn.disabled = true;
+
+    // HubSpot Forms API endpoint
+    const portalId = '245898555';
+    const formId = 'e4927508-b90d-43f3-bc79-4369c8887661';
+    const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+
     try {
-      await fetch('/', {
+      const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString()
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: [{ name: 'email', value: emailInput }],
+          context: { pageUri: window.location.href, pageName: document.title }
+        })
       });
-    } catch (_) { /* fail silently, still show success */ }
-    form.style.display = 'none';
-    document.getElementById('sn-popup-success').style.display = 'flex';
-    setTimeout(closePopup, 3200);
+
+      if (!response.ok) throw new Error("HubSpot API rejected");
+
+      form.style.display = 'none';
+      document.getElementById('sn-popup-success').style.display = 'flex';
+      
+      // Permanently block popup from ever showing again after successful subscribe
+      localStorage.setItem(STORAGE_KEY, 'true');
+      
+      setTimeout(closePopup, 3200);
+    } catch (err) {
+      console.error(err);
+      btn.innerHTML = originalContent;
+      btn.disabled = false;
+      alert('HubSpot blocked the submission. Please ensure reCAPTCHA is turned off.');
+    }
   }
 
   function init() {

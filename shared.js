@@ -368,7 +368,7 @@ const FOOTER_HTML = `
         <div class="footer-col-title" style="color: #FA0F9C;">THE NOVA BRIEF</div>
         <p style="font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:16px;">Insights and GTM intelligence delivered directly to your inbox.</p>
         
-        <!-- Native UI Form integrated with NEW HubSpot API ID JS -->
+        <!-- Native UI Form integrated with PAID HubSpot API ID JS -->
         <form id="footer-hs-form" onsubmit="handleFooterNewsletterSubmit(event)" style="display:flex;gap:8px;margin-bottom:24px;max-width:320px;width:100%;">
           <input type="email" name="email" placeholder="The Nova Brief" required style="flex:1; width:100%; padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(255,255,255,0.05);color:#fff;font-size:14px;outline:none;"/>
           <button type="submit" class="btn btn-primary" style="padding:10px 18px;font-size:14px;background:var(--pink, #FA0F9C);color:white;font-weight:bold;border:none;border-radius:8px;cursor:pointer;">Join</button>
@@ -394,7 +394,7 @@ const FOOTER_HTML = `
 </footer>
 `;
 
-// HubSpot API logic for the Custom Footer form using NEW Form credentials
+// HubSpot API logic for the Custom Footer form using PAID Form credentials
 window.handleFooterNewsletterSubmit = function(e) {
   e.preventDefault();
   const form = e.target;
@@ -405,9 +405,9 @@ window.handleFooterNewsletterSubmit = function(e) {
   btn.textContent = 'Joining...';
   btn.disabled = true;
 
-  // NEW HubSpot Forms API Details
-  const portalId = '245898555';
-  const formId = 'e4927508-b90d-43f3-bc79-4369c8887661';
+  // REVERTED to Paid Account HubSpot Forms API Details
+  const portalId = '245317385';
+  const formId = '80375307-028c-4c4f-819c-96dc9e0f6727';
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
 
   fetch(url, {
@@ -588,12 +588,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
   initScrollFab();
   
-  // POPUP 1-Session Rule
-  if (!sessionStorage.getItem('saasnova_popup_shown')) {
+  // POPUP PERMANENT Rule: Checks LocalStorage so it never annoys them again
+  if (!localStorage.getItem('sn_popup_dismissed')) {
     const popupScript = document.createElement('script');
     popupScript.src = 'popup.js';
     popupScript.defer = true;
     document.body.appendChild(popupScript);
-    sessionStorage.setItem('saasnova_popup_shown', 'true');
   }
 });

@@ -63,7 +63,7 @@
 <div id="footer-placeholder"></div>
 <script src="shared.js"></script>
 
-<!-- API SUBMISSION SCRIPT: Captures lead directly to NEW HubSpot form without changing the UI -->
+<!-- API SUBMISSION SCRIPT: Connected to the PAID account -->
 <script>
 function handleNewsletterPageSubmit(e) {
   e.preventDefault();
@@ -74,8 +74,9 @@ function handleNewsletterPageSubmit(e) {
   btn.textContent = 'Subscribing…';
   btn.disabled = true;
 
-  const portalId = '245898555';
-  const formId = 'e4927508-b90d-43f3-bc79-4369c8887661';
+  // REVERTED to Paid Account HubSpot Forms API endpoint
+  const portalId = '245317385';
+  const formId = '80375307-028c-4c4f-819c-96dc9e0f6727';
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
 
   fetch(url, {
@@ -88,7 +89,6 @@ function handleNewsletterPageSubmit(e) {
   })
   .then(async (response) => {
     if (!response.ok) {
-      // If HubSpot rejects it (e.g. because of reCAPTCHA), force an error!
       const errorText = await response.text();
       throw new Error("HubSpot API rejected the submission: " + errorText);
     }

@@ -129,7 +129,6 @@
             <span aria-hidden="true">·</span>
             <span>No spam. Unsubscribe anytime.</span>
           </div>
-          <!-- Cleaned up form tag without Netlify attributes -->
           <form id="sn-popup-form">
             <div id="sn-popup-fields">
               <input type="email" name="email" id="sn-popup-email" placeholder="Enter your work email" autocomplete="email" required/>
@@ -189,9 +188,9 @@
     btn.textContent = 'Subscribing…';
     btn.disabled = true;
 
-    // HubSpot Forms API endpoint
-    const portalId = '245898555';
-    const formId = 'e4927508-b90d-43f3-bc79-4369c8887661';
+    // REVERTED to Paid Account HubSpot Forms API endpoint
+    const portalId = '245317385';
+    const formId = '80375307-028c-4c4f-819c-96dc9e0f6727';
     const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
 
     try {
@@ -204,7 +203,10 @@
         })
       });
 
-      if (!response.ok) throw new Error("HubSpot API rejected");
+      if (!response.ok) {
+         const errText = await response.text();
+         throw new Error("HubSpot API rejected: " + errText);
+      }
 
       form.style.display = 'none';
       document.getElementById('sn-popup-success').style.display = 'flex';

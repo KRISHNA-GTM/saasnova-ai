@@ -271,18 +271,22 @@ function handleContactSubmit(e) {
   })
   .then(async (response) => {
     if (!response.ok) {
+       // If HubSpot rejects it, we catch the EXACT error and throw it to the alert below!
        const errTxt = await response.text();
-       throw new Error("HubSpot rejected the submission: " + errTxt);
+       throw new Error(errTxt);
     }
     
     // Success: Replace form with the styled success message
-    form.innerHTML = '<div style="padding:var(--sp-4);text-align:center;background:rgba(52,168,83,.06);border-radius:var(--r-xl);border:1px solid rgba(52,168,83,.2)"><div style="font-size:32px;margin-bottom:8px;color:#34a853;">✓</div><div style="font-weight:700;font-size:18px;color:var(--text-primary);margin-bottom:6px">Message sent.</div><p style="color:var(--text-muted)">Founder Jen Dawson reviews every submission personally and responds within 24 hours.</p></div>';
+    form.innerHTML = '<div style="padding:var(--sp-4);text-align:center;background:rgba(52,168,83,.06);border-radius:var(--r-xl);border:1px solid rgba(52,168,83,.2)"><div style="font-size:32px;margin-bottom:8px;color:#34a853;">✓</div><div style=\"font-weight:700;font-size:18px;color:var(--text-primary);margin-bottom:6px\">Message sent.</div><p style=\"color:var(--text-muted)\">Founder Jen Dawson reviews every submission personally and responds within 24 hours.</p></div>';
   })
   .catch((err) => {
-    // Error: Reset button and alert user
+    // Error: Reset button and show the detailed error alert
     btn.textContent = 'Send Message';
     btn.disabled = false;
-    alert('HubSpot blocked the submission. Please make sure reCAPTCHA is turned OFF in your HubSpot form settings.');
+    
+    // This will now show the EXACT reason HubSpot is rejecting it on your screen
+    alert("HubSpot Error Details:\n\n" + err.message);
+    
     console.error('HubSpot Error:', err);
   });
 }

@@ -228,21 +228,21 @@ function handleContactSubmit(e) {
   const formData = new FormData(form);
   const inquiryType = formData.get('inquiry_type') || '';
   
-  // Standard fields that exist natively
+  // Map fields precisely to HubSpot's API requirements
   const fields = [
     { name: 'firstname', value: formData.get('first_name') || '' },
     { name: 'lastname', value: formData.get('last_name') || '' },
-    // The partnership form specifically asked for a field called "name", so we merge them:
-    { name: 'name', value: `${formData.get('first_name') || ''} ${formData.get('last_name') || ''}`.trim() },
     { name: 'email', value: formData.get('email') || '' },
     { name: 'company', value: formData.get('company') || '' },
+    // HubSpot's API requires the "0-2/" prefix for Company Object properties!
+    { name: '0-2/name', value: formData.get('company') || 'Not Provided' },
     { name: 'message', value: formData.get('message') || '' }
   ];
 
-  // Specific required fields demanded by the HubSpot errors
+  // Specific required fields demanded by the HubSpot errors with 0-2/ prefix
   if (inquiryType === 'Service Inquiry') {
-    fields.push({ name: 'target_cloud_marketplaces', value: formData.get('target_cloud') || '' });
-    fields.push({ name: 'current_marketplace_status', value: formData.get('marketplace_status') || '' });
+    fields.push({ name: '0-2/target_cloud_marketplaces', value: formData.get('target_cloud') || 'Not yet decided' });
+    fields.push({ name: '0-2/current_marketplace_status', value: formData.get('marketplace_status') || 'Not yet listed' });
   }
 
   // SMART ROUTING

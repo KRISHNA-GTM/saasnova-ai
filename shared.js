@@ -417,12 +417,17 @@ window.handleFooterNewsletterSubmit = function(e) {
       fields: [{ name: 'email', value: emailInput }],
       context: { pageUri: window.location.href, pageName: document.title }
     })
-  }).then(res => {
+  }).then(async (response) => {
+    if (!response.ok) {
+       const errTxt = await response.text();
+       throw new Error("HubSpot rejected the submission: " + errTxt);
+    }
     form.innerHTML = '<div style="color:#10B981; font-weight:600; font-size:14px; padding:10px 0;">✓ Subscribed successfully!</div>';
   }).catch(err => {
     btn.textContent = originalText;
     btn.disabled = false;
-    alert('Something went wrong. Please try again.');
+    console.error(err);
+    alert('HubSpot blocked the submission. Please make sure reCAPTCHA is turned off in your HubSpot form settings.');
   });
 };
 

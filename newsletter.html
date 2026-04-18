@@ -22,7 +22,6 @@
 <body>
 <div id="nav-placeholder"></div>
 
-<!-- FIX: Removed flex vertical centering and massive min-height. Replaced with clean 80px top padding -->
 <section style="margin-top:64px;background:linear-gradient(135deg,#FFF9F0 0%,#F5F0FF 100%);padding:80px 0 100px;border-bottom:1px solid #F0E4D4">
   <div class="container-sm text-center" style="width:100%">
     <span class="eyebrow reveal" style="color:var(--orange)">The Nova Brief</span>
@@ -75,7 +74,6 @@ function handleNewsletterPageSubmit(e) {
   btn.textContent = 'Subscribing…';
   btn.disabled = true;
 
-  // NEW HubSpot Forms API endpoint
   const portalId = '245898555';
   const formId = 'e4927508-b90d-43f3-bc79-4369c8887661';
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
@@ -88,14 +86,20 @@ function handleNewsletterPageSubmit(e) {
       context: { pageUri: window.location.href, pageName: document.title }
     })
   })
-  .then(() => {
-    // Show beautiful success message inside the original UI card
+  .then(async (response) => {
+    if (!response.ok) {
+      // If HubSpot rejects it (e.g. because of reCAPTCHA), force an error!
+      const errorText = await response.text();
+      throw new Error("HubSpot API rejected the submission: " + errorText);
+    }
+    // Only show success if response is 200 OK
     form.innerHTML = '<div style="padding:var(--sp-4);text-align:center"><div style="font-weight:700;font-size:18px;color:#10B981;margin-bottom:6px">✓ You are subscribed.</div><p style="color:var(--text-muted)">First issue coming soon. No spam, unsubscribe any time.</p></div>';
   })
-  .catch(() => {
+  .catch((err) => {
+    console.error(err);
     btn.textContent = 'Subscribe to The Nova Brief';
     btn.disabled = false;
-    alert("Oops! Something went wrong. Please try again.");
+    alert("HubSpot blocked the submission. Please ensure reCAPTCHA is turned OFF in the HubSpot Form Settings.");
   });
 }
 </script>

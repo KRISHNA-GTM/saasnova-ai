@@ -14,6 +14,28 @@
 <meta name="description" content="Three cloud marketplace GTM services for SaaS ISVs: Ignite, SuperNova, and NovaX. Customized to your cloud mix, listing status, and internal readiness. AWS, Azure, GCP."/>
 
 <style>
+  /* ── CUSTOM SCROLLBAR (Overrides Windows 11 pop-in behavior) ── */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F8FAFC; 
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1; 
+    border-radius: 8px;
+    border: 3px solid #F8FAFC; /* Creates a padding effect around the thumb */
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8; 
+  }
+  /* Firefox Fallback */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #F8FAFC;
+  }
+
   /* ── AGGRESSIVE MOBILE OVERFLOW & CUT-OFF FIXES ── */
   *, *::before, *::after { box-sizing: border-box !important; }
   html, body { overflow-x: hidden !important; width: 100%; position: relative; margin: 0; padding: 0; }

@@ -1460,12 +1460,19 @@ document.addEventListener('DOMContentLoaded', () => {
           { tab: 'Fraser Charles', text: '"The architecture gave Dataminr the credibility sellers and AWS senior leaders needed to lean in."', author: 'Fraser Charles', role: 'Senior Director, Partner Ecosystems' }
         ]
       },
+          {
+        id: 'workspan', logo: 'images/workspan-logo.jpeg', name: 'WorkSpan',
+        quotes: [
+          { tab: 'Amit Sinha', text: '"Jen is one of the most effective GTM operators I’ve worked with. Across Freshworks, Postman, and Workspan, she brought a level of clarity, structure, and execution discipline that consistently moved our AWS partner motions forward. She has a rare ability to turn complex, ambiguous GTM challenges into aligned, high‑velocity execution. Her impact is immediate, repeatable, and deeply felt across every team she works with."', author: 'Amit Sinha', role: 'President' }
+        ]
+      },
       {
         id: 'nexla', logo: 'images/nexla-logo.png', name: 'Nexla',
         quotes: [
           { tab: 'Jayashree Rajan', text: '"SaaSNova didn\'t just clarify our AWS GTM motion, they exposed issues we didn\'t even know were blocking us. Their operator-level mastery of Marketplace, ACE, co-sell, and partner programs is unmatched."', author: 'Jayashree Rajan', role: 'CMO' }
         ]
-      }
+      },
+  
     ];
 
     const logoContainer = document.getElementById('test-logo-container');
@@ -1595,24 +1602,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-/* ── NEWSLETTER INLINE FORM ── */
-function handleNewsletterSubmit(e) {
-  e.preventDefault();
-  var form = e.target;
-  var btn = form.querySelector('[type="submit"]');
-  if (btn) { btn.textContent = 'Subscribing...'; btn.disabled = true; }
-  fetch('/', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams(new FormData(form)).toString()
-  }).then(function(){
-    form.style.display = 'none';
-    var thanks = form.parentNode.querySelector('.newsletter-thanks');
-    if (thanks) thanks.style.display = 'flex';
-  }).catch(function(){
-    if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
-  });
-}
+
 </script>
 </body>
 </html>

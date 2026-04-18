@@ -26,13 +26,7 @@
 
 <style>
 /* ── MOBILE OVERFLOW & RESPONSIVE FIXES ── */
-html {
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: clip; /* Stops the document from expanding past viewport horizontally */
-}
 body {
-  width: 100%;
   max-width: 100%;
   overflow-x: clip; /* clip preserves position: sticky while preventing horizontal scroll */
   margin: 0;
@@ -51,35 +45,6 @@ img {
 }
 .blog-main, .blog-sidebar {
   min-width: 0; /* Extremely important to prevent flex container stretching */
-}
-
-/* Ensure containers have padding to prevent text from touching screen edges */
-.container-sm, .container {
-  width: 100%;
-  max-width: 1100px; /* Base max-width */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 16px !important;
-  padding-right: 16px !important;
-  box-sizing: border-box;
-}
-
-section {
-  width: 100%;
-  max-width: 100vw;
-  box-sizing: border-box;
-}
-
-.wave-d2w {
-  width: 100%;
-  max-width: 100vw;
-  overflow: hidden;
-  line-height: 0;
-}
-
-.wave-d2w svg {
-  width: 100%;
-  display: block;
 }
 
 /* ── RESPONSIVE GRID FOR RELATED READING ── */
@@ -103,7 +68,7 @@ section {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 var(--sp-4, 24px); /* Fallback added */
+  padding: 0 var(--sp-3);
 }
 
 /* ── SIDEBAR ── */
@@ -303,7 +268,7 @@ section {
 
 @media (max-width: 640px) {
   .blog-post-wrap {
-    padding: 0 16px !important; /* Force fallback padding */
+    padding: 0 16px; /* Ensuring fallback padding */
   }
 }
 </style>
@@ -408,29 +373,22 @@ section {
         <h2 id="live-webinar">Join the live webinar: April 28, Tuesday at 10 AM PST</h2>
 
         <div style="background:var(--light-100);padding:var(--sp-5);border-radius:var(--r-2xl);border:1px solid var(--border-light);margin:var(--sp-4) 0 var(--sp-6)">
-          <span style="display:inline-block;padding:4px 12px;background:rgba(255,153,0,.15);color:#CC7A00;font-size:11px;font-weight:700;border-radius:99px;margin-bottom:12px;letter-spacing:0.05em">COMING SOON</span>
-          <h3 style="margin-bottom:12px;font-size:22px;">We're hosting a live webinar with @SaaSify</h3>
+          <span style="display:inline-block;padding:4px 12px;background:rgba(255,153,0,.15);color:#CC7A00;font-size:11px;font-weight:700;border-radius:99px;margin-bottom:12px;letter-spacing:0.05em">LIVE WEBINAR</span>
+          <h3 style="margin-bottom:12px;font-size:22px;">We're hosting a live webinar with SaaSify</h3>
           <p style="margin-bottom:16px;">Join us on Tuesday, April 28 at 10 AM PST to walk through the PRM activation process, show real implementation examples, and answer partner questions live. Seats are limited; register now to secure your spot.</p>
           
           <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;background:#fff;padding:20px;border-radius:var(--r-xl);border:1px solid var(--border-light)">
             
-            <div style="width:140px;height:140px;background:#f5f8ff;border:2px dashed var(--blue);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;color:var(--text-muted);padding:10px;flex-shrink:0;margin:0 auto">
-              <span style="font-size:24px;display:block;margin-bottom:8px">🖼️</span>
-              QR Code Image<br>(SaaSNova × SaaSify)
+            <div style="width:140px;height:140px;background:#fff;border:1px solid var(--border-light);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;padding:10px;flex-shrink:0;margin:0 auto">
+              <img src="images/SaaSify X SaaSNova qr Prm webinar.svg" alt="Register for Webinar QR" style="width:100%;height:100%;object-fit:contain;"/>
             </div>
 
             <!-- Fix: Added flex-basis so it wraps below the image on mobile -->
             <div style="flex: 1 1 250px; min-width: 0;">
-              <h4 style="font-size:16px;margin-bottom:8px;">Registration Opening Soon</h4>
-              <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">Scan the QR code or enter your email below to join the waitlist. We will mail you as soon as registration is officially open.</p>
+              <h4 style="font-size:16px;margin-bottom:8px;">Registration is Open</h4>
+              <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">Scan the QR code to secure your spot or click the button below to register on our landing page.</p>
               
-              <form onsubmit="event.preventDefault(); document.getElementById('waitlist-success').style.display='block'; this.style.display='none';" style="display:flex;gap:8px;width:100%;max-width:350px;flex-wrap:wrap">
-                <input type="email" placeholder="Your work email" required style="flex:1 1 120px;min-width:0;padding:10px 14px;border:1px solid var(--border-light);border-radius:var(--r-md);font-family:inherit;font-size:14px;outline:none"/>
-                <button type="submit" class="btn btn-primary btn-sm" style="flex: 0 0 auto; white-space:nowrap">Get Notified</button>
-              </form>
-              <div id="waitlist-success" style="display:none;color:rgba(52,168,83,1);font-weight:600;font-size:14px;padding:10px 0;">
-                Thanks! We've added you to the waitlist and will notify you soon.
-              </div>
+              <a href="https://saasify.ai/aws-prm-deadline-webinar/" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="white-space:nowrap; text-decoration: none; display: inline-flex;">Register Now</a>
             </div>
 
           </div>

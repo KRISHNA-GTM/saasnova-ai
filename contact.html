@@ -13,12 +13,11 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="style.css">
 <title>Contact SaaSNova, Book a Discovery Call</title>
 <meta name="description" content="Book a discovery call with Jen Dawson. Get a GTM readiness assessment across AWS, Azure, and GCP. No sales team. Jen reviews every submission personally."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;900&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css"/>
 <style>
   /* Intent Toggle Styles */
   input[type="radio"]:checked + .intent-box {
@@ -37,7 +36,7 @@
   <div class="container-sm" style="position:relative">
     <span class="eyebrow reveal" style="color:rgba(255,255,255,.5)">Get Started</span>
     <h1 class="reveal delay-1" style="margin-top:var(--sp-1)">Book a Discovery Call</h1>
-    <p class="reveal delay-2 mt-3" style="font-size:18px;max-width:520px;margin:var(--sp-2) auto 0">Jen Dawson reviews every submission personally and responds within 24 hours. A direct conversation about your cloud marketplace situation.</p>
+    <p class="reveal delay-2 mt-3" style="font-size:18px;max-width:520px;margin:var(--sp-2) auto 0">Founder Jen Dawson reviews every submission personally and responds within 24 hours. A direct conversation about your cloud marketplace situation.</p>
   </div>
 </section>
 <div style="background:linear-gradient(135deg,var(--blue) 0%,#6344CC 50%,var(--pink) 100%);line-height:0"><svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:48px;display:block;width:100%"><path d="M0,0 C360,48 1080,48 1440,0 L1440,48 L0,48 Z" fill="#fff"/></svg></div>
@@ -67,10 +66,9 @@
             <span style="font-weight:600;font-size:14px">Or send a message directly</span>
           </div>
           <div style="padding:var(--sp-4)">
-            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleContactSubmit(event)">
-              <input type="hidden" name="form-name" value="contact"/>
-              <input type="text" name="bot-field" style="display:none" aria-hidden="true" tabindex="-1"/>
-
+            <!-- Custom UI connected to HubSpot via JavaScript -->
+            <form id="saasnova-contact-form" onsubmit="handleContactSubmit(event)">
+              
               <div style="margin-bottom: 20px;">
                 <label style="display:block;font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text-primary)">Nature of Inquiry</label>
                 <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -93,10 +91,10 @@
               </div>
 
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2)">
-                <div class="form-field"><label class="form-label">First Name</label><input type="text" class="form-input" name="first_name" placeholder="Jane"/></div>
-                <div class="form-field"><label class="form-label">Last Name</label><input type="text" class="form-input" name="last_name" placeholder="Smith"/></div>
+                <div class="form-field"><label class="form-label">First Name</label><input type="text" class="form-input" name="first_name" required placeholder="Jane"/></div>
+                <div class="form-field"><label class="form-label">Last Name</label><input type="text" class="form-input" name="last_name" required placeholder="Smith"/></div>
               </div>
-              <div class="form-field"><label class="form-label">Work Email</label><input type="email" class="form-input" name="email" placeholder="jane@company.com"/></div>
+              <div class="form-field"><label class="form-label">Work Email</label><input type="email" class="form-input" name="email" required placeholder="jane@company.com"/></div>
               <div class="form-field"><label class="form-label">Company</label><input type="text" class="form-input" name="company" placeholder="Acme Corp"/></div>
               
               <div id="form-isv-fields">
@@ -105,11 +103,11 @@
                   <div style="position:relative">
                     <select class="form-select" name="target_cloud">
                       <option value="">Select...</option>
-                      <option>AWS Marketplace</option>
-                      <option>Azure Marketplace</option>
-                      <option>GCP Marketplace</option>
-                      <option>Multi-cloud (two or more)</option>
-                      <option>Not yet decided</option>
+                      <option value="AWS Marketplace">AWS Marketplace</option>
+                      <option value="Azure Marketplace">Azure Marketplace</option>
+                      <option value="GCP Marketplace">GCP Marketplace</option>
+                      <option value="Multi-cloud (two or more)">Multi-cloud (two or more)</option>
+                      <option value="Not yet decided">Not yet decided</option>
                     </select>
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none"><path d="M3 4.5l3 3 3-3" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/></svg>
                   </div>
@@ -119,17 +117,17 @@
                   <div style="position:relative">
                     <select class="form-select" name="marketplace_status">
                       <option value="">Select...</option>
-                      <option>Listed, no co-sell traction</option>
-                      <option>Listed on multiple clouds</option>
-                      <option>Listing in progress</option>
-                      <option>Not yet listed</option>
+                      <option value="Listed, no co-sell traction">Listed, no co-sell traction</option>
+                      <option value="Listed on multiple clouds">Listed on multiple clouds</option>
+                      <option value="Listing in progress">Listing in progress</option>
+                      <option value="Not yet listed">Not yet listed</option>
                     </select>
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none"><path d="M3 4.5l3 3 3-3" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round"/></svg>
                   </div>
                 </div>
               </div>
 
-              <div class="form-field"><label class="form-label" id="message-label">What is your biggest cloud GTM challenge?</label><textarea name="message" class="form-textarea" id="message-area" placeholder="e.g. Listed on AWS and Azure but no co-sell traction and nothing board-ready to show..."></textarea></div>
+              <div class="form-field"><label class="form-label" id="message-label">What is your biggest cloud GTM challenge?</label><textarea name="message" required class="form-textarea" id="message-area" placeholder="e.g. Listed on AWS and Azure but no co-sell traction and nothing board-ready to show..."></textarea></div>
               <button type="submit" class="btn btn-primary w-full">Send Message</button>
             </form>
           </div>
@@ -183,6 +181,7 @@
 </section>
 
 <div id="footer-placeholder"></div>
+<script src="shared.js"></script>
 
 <script>
 // Dynamic Form Logic based on Intent Selection
@@ -199,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Function to update placeholders and hide/show irrelevant fields
   function updateFormContent() {
     if (partnerRadio.checked) {
-      msgLabel.textContent = "Tell us about your platform or network";
+      msgLabel.textContent = "Tell us what you’re looking to explore together.";
       msgArea.placeholder = "e.g. We provide cloud listing infrastructure and want to explore aligning our platforms with SaaSNova's execution motion...";
       isvFields.style.display = 'none'; // Hide ISV specific questions for partners
     } else {
@@ -222,25 +221,61 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// HubSpot API Submission Script
 function handleContactSubmit(e) {
   e.preventDefault();
   const form = e.target;
   const btn = form.querySelector('[type="submit"]');
   btn.textContent = 'Sending…';
   btn.disabled = true;
-  fetch('/', {
+
+  // Extract all the data from the custom UI
+  const formData = new FormData(form);
+  
+  // Map our UI field names to standard HubSpot internal properties
+  const fields = [
+    { name: 'firstname', value: formData.get('first_name') || '' },
+    { name: 'lastname', value: formData.get('last_name') || '' },
+    { name: 'email', value: formData.get('email') || '' },
+    { name: 'company', value: formData.get('company') || '' },
+    { name: 'message', value: formData.get('message') || '' },
+    { name: 'inquiry_type', value: formData.get('inquiry_type') || '' }
+  ];
+
+  // Only pass these specific dropdowns if it's a Service Inquiry
+  if (formData.get('inquiry_type') === 'Service Inquiry') {
+    fields.push({ name: 'target_cloud', value: formData.get('target_cloud') || '' });
+    fields.push({ name: 'marketplace_status', value: formData.get('marketplace_status') || '' });
+  }
+
+  // HubSpot Form API Details
+  const portalId = '245317385';
+  const formId = 'aa170816-bdf0-44f2-a14c-97dd671d1762';
+  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+
+  // Send the payload behind the scenes
+  fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(new FormData(form)).toString()
-  }).then(() => {
-    form.innerHTML = '<div style="padding:var(--sp-4);text-align:center;background:rgba(52,168,83,.06);border-radius:var(--r-xl);border:1px solid rgba(52,168,83,.2)"><div style="font-size:32px;margin-bottom:8px">✓</div><div style="font-weight:700;font-size:18px;color:var(--text-primary);margin-bottom:6px">Message sent.</div><p style="color:var(--text-muted)">Jen Dawson reviews every submission personally and responds within 24 hours.</p></div>';
-  }).catch(() => {
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      fields: fields,
+      context: { pageUri: window.location.href, pageName: document.title }
+    })
+  })
+  .then((response) => {
+    if (!response.ok) throw new Error('Network response not ok');
+    
+    // Success: Replace form with the styled success message
+    form.innerHTML = '<div style="padding:var(--sp-4);text-align:center;background:rgba(52,168,83,.06);border-radius:var(--r-xl);border:1px solid rgba(52,168,83,.2)"><div style="font-size:32px;margin-bottom:8px;color:#34a853;">✓</div><div style="font-weight:700;font-size:18px;color:var(--text-primary);margin-bottom:6px">Message sent.</div><p style="color:var(--text-muted)">Founder Jen Dawson reviews every submission personally and responds within 24 hours.</p></div>';
+  })
+  .catch((err) => {
+    // Error: Reset button and alert user
     btn.textContent = 'Send Message';
     btn.disabled = false;
-    alert('Something went wrong. Please email jen@saasnova.ai directly.');
+    alert('Something went wrong submitting to HubSpot. Please email jen@saasnova.ai directly.');
+    console.error('HubSpot Error:', err);
   });
 }
 </script>
-<script src="shared.js"></script>
 </body>
 </html>

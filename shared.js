@@ -22,7 +22,6 @@ const SVG = {
 // ── DESKTOP NAV & GLOBAL STYLES ──
 const NAV_STYLE_AND_DESKTOP = `
 <style>
-  /* Layout Fallbacks & Mobile Nav Fixes */
   .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
   #hamburger { display: none; background: transparent; border: none; cursor: pointer; padding: 8px; }
   
@@ -41,64 +40,22 @@ const NAV_STYLE_AND_DESKTOP = `
     }
   }
 
-  /* Alignment Fix: Pushes links to the right */
   .nav-links { margin-left: auto; margin-right: 32px; }
 
-  /* Nested Dropdown styles for the 3PI Flyout menu */
   .dropdown-submenu { position: relative; }
-  .dropdown-submenu::after {
-    content: ''; position: absolute; top: 0; right: -10px; bottom: 0; width: 10px;
-  }
-  .submenu-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 10px 16px; font-size: 14px; font-weight: 600; color: #3D4E5C;
-    border-radius: 8px; cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
-  }
+  .dropdown-submenu::after { content: ''; position: absolute; top: 0; right: -10px; bottom: 0; width: 10px; }
+  .submenu-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; font-size: 14px; font-weight: 600; color: #3D4E5C; border-radius: 8px; cursor: pointer; transition: background 0.15s ease, color 0.15s ease; }
   .submenu-item:hover { background: #F8FAFC; color: #0F1923; }
-  .dropdown-menu-sub {
-    position: absolute; top: -6px; left: 100%; margin-left: 2px;
-    background: #fff; border: 1px solid #E8EEF4; border-radius: 12px;
-    box-shadow: 0 12px 32px rgba(15,25,35,.12); padding: 6px; min-width: 180px;
-    opacity: 0; visibility: hidden; transform: translateX(-8px);
-    transition: all 0.2s ease; z-index: 10;
-  }
-  .dropdown-submenu:hover .dropdown-menu-sub {
-    opacity: 1; visibility: visible; transform: translateX(0);
-  }
+  .dropdown-menu-sub { position: absolute; top: -6px; left: 100%; margin-left: 2px; background: #fff; border: 1px solid #E8EEF4; border-radius: 12px; box-shadow: 0 12px 32px rgba(15,25,35,.12); padding: 6px; min-width: 180px; opacity: 0; visibility: hidden; transform: translateX(-8px); transition: all 0.2s ease; z-index: 10; }
+  .dropdown-submenu:hover .dropdown-menu-sub { opacity: 1; visibility: visible; transform: translateX(0); }
 
-  /* Premium Dropdown Item with Subtitles */
-  .premium-dd-item {
-    display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px;
-    border-radius: 10px; text-decoration: none; transition: all 0.2s ease;
-  }
-  .premium-dd-item:hover {
-    background: #F8FAFC; transform: translateX(4px);
-  }
-  .dd-icon-wrap {
-    display: flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
-  }
+  .premium-dd-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; text-decoration: none; transition: all 0.2s ease; }
+  .premium-dd-item:hover { background: #F8FAFC; transform: translateX(4px); }
+  .dd-icon-wrap { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; }
 
   /* ── NUCLEAR CACHE BUSTER FOR MOBILE MENU ── */
-  #sn-mob-menu {
-    display: none !important;
-    position: fixed !important;
-    top: 64px !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    background: #ffffff !important;
-    z-index: 9999 !important;
-    padding: 24px !important;
-    flex-direction: column !important;
-    gap: 2px !important;
-    overflow-y: auto !important;
-    border-top: 1px solid #E8EEF4 !important;
-  }
-  #sn-mob-menu.open {
-    display: flex !important;
-  }
-
+  #sn-mob-menu { display: none !important; position: fixed !important; top: 64px !important; left: 0 !important; right: 0 !important; bottom: 0 !important; background: #ffffff !important; z-index: 9999 !important; padding: 24px !important; flex-direction: column !important; gap: 2px !important; overflow-y: auto !important; border-top: 1px solid #E8EEF4 !important; }
+  #sn-mob-menu.open { display: flex !important; }
   .mob-accordion { border-bottom: 1px solid rgba(0,0,0,0.04) !important; display: block !important; visibility: visible !important; }
   .mob-accordion-btn { display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; padding: 18px 20px !important; font-size: 18px !important; font-weight: 600 !important; color: #0F1923 !important; background: none !important; border: none !important; cursor: pointer !important; text-align: left !important; visibility: visible !important; font-family: inherit !important;}
   .mob-accordion-btn svg { transition: transform 0.3s ease !important; color: #6B7E8F !important; }
@@ -297,8 +254,6 @@ const NAV_MOBILE = `
     <button class="mob-accordion-btn">Partners ${SVG.chevDown}</button>
     <div class="mob-accordion-content">
       <a href="partners.html" class="mob-sub-link" style="color:#008BF8 !important; font-weight:700 !important;">All Partners</a>
-      
-      <!-- Nested Accordion for 3PI Programs on Mobile -->
       <div class="mob-accordion" style="border-bottom:none !important; display:block !important;">
         <button class="mob-accordion-btn" style="padding: 14px 20px 14px 24px !important; font-size:15px !important; color:#3D4E5C !important;">3PI Programs ${SVG.chevDown}</button>
         <div class="mob-accordion-content" style="background: #f1f5f9 !important;">
@@ -306,7 +261,6 @@ const NAV_MOBILE = `
           <a href="partner-workspan.html" class="mob-sub-link" style="padding-left: 40px !important;"><img src="images/workspan-logo.jpeg" alt="Workspan" style="width:18px;height:18px;margin-right:12px;object-fit:contain;border-radius:3px;"/> Workspan</a>
         </div>
       </div>
-
     </div>
   </div>
   
@@ -333,15 +287,40 @@ const NAV_MOBILE = `
 </div>
 `;
 
+// ── BULLETPROOF RESPONSIVE FOOTER ──
 const FOOTER_HTML = `
+<style>
+  #footer { background-color: #0F1923; color: #ffffff; font-family: 'Inter', sans-serif; overflow: hidden; width: 100%; }
+  .footer-container { max-width: 1200px; margin: 0 auto; padding: 64px 24px 32px; width: 100%; box-sizing: border-box; }
+  
+  /* Bulletproof Grid: Adjusted ratios so column 1 and 4 have enough space */
+  .footer-grid { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1.5fr; gap: 40px; width: 100%; }
+  
+  /* Desktop Layout Fixes */
+  @media (max-width: 1024px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 48px; }
+  }
+  
+  /* Mobile Layout Fixes: Absolute fix for right-side blank space */
+  @media (max-width: 768px) {
+    .footer-container { padding: 48px 24px 32px; }
+    .footer-grid { display: flex; flex-direction: column; gap: 48px; width: 100%; }
+    .footer-grid > div { width: 100%; max-width: 100%; display: block; }
+  }
+  
+  .footer-col-title { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,0.4); margin-bottom: 20px; text-transform: uppercase; }
+  .footer-link { display: block; color: rgba(255,255,255,0.7); text-decoration: none; margin-bottom: 12px; font-size: 14px; transition: color 0.2s; }
+  .footer-link:hover { color: #ffffff; }
+</style>
 <footer id="footer" role="contentinfo">
-  <div class="container" style="padding-top:64px;padding-bottom:32px">
+  <div class="footer-container">
     <div class="footer-grid">
+      <!-- Column 1: Brand & Logos -->
       <div>
         <a href="index.html" aria-label="SaaSNova Home" style="display:inline-block;margin-bottom:16px;">
           <img src="images/logo-white.png" alt="SaaSNova" style="height:36px;width:auto;object-fit:contain"/>
         </a>
-        <p class="footer-tagline" style="margin-bottom:24px">The world's first GTM execution engine for SaaS ISVs scaling through AWS, Azure, and GCP Marketplace.</p>
+        <p style="margin-bottom:24px; color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.6;">The world's first GTM execution engine for SaaS ISVs scaling through AWS, Azure, and GCP Marketplace.</p>
         
         <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)">
@@ -355,12 +334,6 @@ const FOOTER_HTML = `
           </div>
         </div>
 
-        <!-- HubSpot Form Integration (Footer) -->
-        <div style="margin-bottom: 24px; max-width: 320px;">
-          <script src="https://js-na2.hsforms.net/forms/embed/245317385.js" defer></script>
-          <div class="hs-form-frame" data-region="na2" data-form-id="80375307-028c-4c4f-819c-96dc9e0f6727" data-portal-id="245317385"></div>
-        </div>
-
         <div style="display:flex;gap:16px;align-items:center;">
           <a href="#" style="color:#0A66C2;" aria-label="LinkedIn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -371,16 +344,18 @@ const FOOTER_HTML = `
         </div>
       </div>
       
+      <!-- Column 2: Services -->
       <div>
-        <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">SERVICES</div>
+        <div class="footer-col-title">SERVICES</div>
         <a href="services.html" class="footer-link">All Services</a>
         <a href="ignite.html" class="footer-link">Ignite</a>
         <a href="supernova.html" class="footer-link">SuperNova</a>
         <a href="novax.html" class="footer-link">NovaX</a>
       </div>
       
+      <!-- Column 3: Company -->
       <div>
-        <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">COMPANY</div>
+        <div class="footer-col-title">COMPANY</div>
         <a href="about.html" class="footer-link">About &amp; Team</a>
         <a href="results.html" class="footer-link">Case Studies</a>
         <a href="show.html" class="footer-link">The Jen GTM Show</a>
@@ -388,40 +363,73 @@ const FOOTER_HTML = `
         <a href="contact.html" class="footer-link">Contact</a>
       </div>
       
+      <!-- Column 4: Newsletter & Contact -->
       <div>
-        <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-bottom:20px;">RESOURCES</div>
-        <a href="blog.html" class="footer-link">Blog</a>
-        <a href="show.html" class="footer-link">The Jen GTM Show</a>
-        <a href="results.html" class="footer-link">Case Studies</a>
-        <a href="webinars.html" class="footer-link">Webinars</a>
-        <a href="newsletter.html" class="footer-link">The Nova Brief</a>
+        <div class="footer-col-title" style="color: #FA0F9C;">THE NOVA BRIEF</div>
+        <p style="font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:16px;">Insights and GTM intelligence delivered directly to your inbox.</p>
         
-        <div class="footer-col-title" style="letter-spacing:1px;font-size:12px;margin-top:40px;margin-bottom:20px;">CONTACT</div>
+        <!-- Native UI Form integrated with NEW HubSpot API ID JS -->
+        <form id="footer-hs-form" onsubmit="handleFooterNewsletterSubmit(event)" style="display:flex;gap:8px;margin-bottom:24px;max-width:320px;width:100%;">
+          <input type="email" name="email" placeholder="The Nova Brief" required style="flex:1; width:100%; padding:10px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(255,255,255,0.05);color:#fff;font-size:14px;outline:none;"/>
+          <button type="submit" class="btn btn-primary" style="padding:10px 18px;font-size:14px;background:var(--pink, #FA0F9C);color:white;font-weight:bold;border:none;border-radius:8px;cursor:pointer;">Join</button>
+        </form>
+        
+        <div class="footer-col-title" style="margin-top:40px;margin-bottom:20px;">CONTACT</div>
         <a href="mailto:jen@saasnova.ai" class="footer-link" style="text-transform:none;">jen@saasnova.ai</a>
         <a href="tel:+12017555369" class="footer-link" style="text-transform:none;">+1 (201) 755-5369</a>
         <a href="mailto:operations@saasnova.ai" class="footer-link" style="text-transform:none;">operations@saasnova.ai</a>
       </div>
     </div>
     
-    <hr class="divider-dark" style="margin:48px 0 24px; border:none; height:1px; background:linear-gradient(90deg, #008BF8 0%, #FA0F9C 50%, rgba(255,255,255,0.05) 100%);"/>
+    <hr style="margin:48px 0 24px; border:none; height:1px; background:linear-gradient(90deg, #008BF8 0%, #FA0F9C 50%, rgba(255,255,255,0.05) 100%); width: 100%;"/>
     
-    <div class="footer-bottom" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-      <span class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);">&copy; 2026 SaaSNova. All rights reserved.</span>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px; width: 100%;">
+      <span style="font-size:14px;color:rgba(255,255,255,0.45);">&copy; 2026 SaaSNova. All rights reserved.</span>
       <div style="display:flex;gap:24px;flex-wrap:wrap">
-        <a href="privacy.html" class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Privacy Policy</a>
-        <a href="terms.html" class="footer-legal" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Terms of Use</a>
+        <a href="privacy.html" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Privacy Policy</a>
+        <a href="terms.html" style="font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;">Terms of Use</a>
       </div>
     </div>
   </div>
 </footer>
 `;
 
+// HubSpot API logic for the Custom Footer form using NEW Form credentials
+window.handleFooterNewsletterSubmit = function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+  const emailInput = form.querySelector('input[name="email"]').value;
+  
+  const originalText = btn.textContent;
+  btn.textContent = 'Joining...';
+  btn.disabled = true;
+
+  // NEW HubSpot Forms API Details
+  const portalId = '245898555';
+  const formId = 'e4927508-b90d-43f3-bc79-4369c8887661';
+  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      fields: [{ name: 'email', value: emailInput }],
+      context: { pageUri: window.location.href, pageName: document.title }
+    })
+  }).then(res => {
+    form.innerHTML = '<div style="color:#10B981; font-weight:600; font-size:14px; padding:10px 0;">✓ Subscribed successfully!</div>';
+  }).catch(err => {
+    btn.textContent = originalText;
+    btn.disabled = false;
+    alert('Something went wrong. Please try again.');
+  });
+};
+
 // DOM Injections
 const navEl = document.getElementById('nav-placeholder');
 if(navEl) navEl.innerHTML = NAV_STYLE_AND_DESKTOP;
 
-// CRITICAL FIX: Append the mobile menu directly to the BODY tag to completely bypass 
-// any malformed or unclosed HTML tags (like <a> or <p>) located in index.html that were deleting <div> elements.
 if (!document.getElementById('sn-mob-menu')) {
   document.body.insertAdjacentHTML('beforeend', NAV_MOBILE);
 }
@@ -458,7 +466,7 @@ document.addEventListener('click', e => {
   }
 });
 
-// Active Link Setup (handles extensionless URLs robustly)
+// Active Link Setup
 const path = window.location.pathname;
 const isHome = path === '/' || path.endsWith('/index.html') || path.endsWith('krishna-gtm.github.io/') || path.endsWith('saasnova-ai/');
 
@@ -468,14 +476,13 @@ document.querySelectorAll('.nav-link').forEach(l => {
   if (href === 'index.html' || href === '/') {
     if (isHome) l.classList.add('active');
   } else {
-    // If the window path includes the specific html file
     if (path.includes(href)) {
       l.classList.add('active');
     }
   }
 });
 
-// Intersection Observer for Reveal Animations
+// Intersection Observer for Animations
 const revObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(e.isIntersecting) {
@@ -511,23 +518,10 @@ function initScrollFab() {
       .sn-fab-label { font-size: 14px; font-weight: 600; white-space: nowrap; }
       .sn-fab-up .sn-fab-icon { transform: rotate(180deg); }
       
-      /* Bulletproof Mobile Override for FAB */
       @media (max-width: 1024px) {
-        #sn-scroll-fab {
-          width: 50px !important;
-          height: 50px !important;
-          padding: 0 !important;
-          border-radius: 50% !important;
-          justify-content: center !important;
-          bottom: 24px !important;
-          right: 24px !important;
-        }
-        #sn-scroll-fab .sn-fab-label { 
-          display: none !important; 
-        }
-        #sn-scroll-fab .sn-fab-icon {
-          margin: 0 !important;
-        }
+        #sn-scroll-fab { width: 50px !important; height: 50px !important; padding: 0 !important; border-radius: 50% !important; justify-content: center !important; bottom: 24px !important; right: 24px !important; }
+        #sn-scroll-fab .sn-fab-label { display: none !important; }
+        #sn-scroll-fab .sn-fab-icon { margin: 0 !important; }
       }
     </style>
     <button id="sn-scroll-fab" class="sn-scroll-fab" aria-label="Scroll down">
@@ -554,14 +548,12 @@ function initScrollFab() {
       const sections = getSections();
       const scrollY = window.scrollY + window.innerHeight * 0.3; 
       let nextSectionIndex = -1;
-      
       for (let i = 0; i < sections.length; i++) {
         if (sections[i].offsetTop > scrollY) {
           nextSectionIndex = i;
           break;
         }
       }
-
       if (nextSectionIndex !== -1) {
         sections[nextSectionIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
@@ -572,7 +564,6 @@ function initScrollFab() {
 
   function onScroll() {
     const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 150);
-
     if (isAtBottom && !isUp) {
       isUp = true;
       fab.classList.add('sn-fab-up');
@@ -585,44 +576,19 @@ function initScrollFab() {
       label.textContent = 'Scroll Down';
     }
   }
-  
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-// Document Ready Initialization
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
-  
-  // Initialize the Scroll FAB
   initScrollFab();
-});
-
-/* ── NEWSLETTER INLINE FORM ── */
-function handleNewsletterSubmit(e) {
-  e.preventDefault();
-  var form = e.target;
-  var btn = form.querySelector('[type="submit"]');
-  if (btn) { btn.textContent = 'Subscribing...'; btn.disabled = true; }
-  fetch('/', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams(new FormData(form)).toString()
-  }).then(function(){
-    form.style.display = 'none';
-    var thanks = form.parentNode.querySelector('.newsletter-thanks');
-    if (thanks) thanks.style.display = 'flex';
-  }).catch(function(){
-    if (btn) { btn.textContent = 'Try again'; btn.disabled = false; }
-  });
-}
-
-/* ══════════════════════════════════════════════════════
-   GLOBAL INJECTOR FOR POPUP
-   This runs automatically on every single page!
-   ══════════════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
-  const popupScript = document.createElement('script');
-  popupScript.src = 'popup.js';
-  popupScript.defer = true;
-  document.body.appendChild(popupScript);
+  
+  // POPUP 1-Session Rule
+  if (!sessionStorage.getItem('saasnova_popup_shown')) {
+    const popupScript = document.createElement('script');
+    popupScript.src = 'popup.js';
+    popupScript.defer = true;
+    document.body.appendChild(popupScript);
+    sessionStorage.setItem('saasnova_popup_shown', 'true');
+  }
 });

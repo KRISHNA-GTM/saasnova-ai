@@ -194,33 +194,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const msgArea = document.getElementById('message-area');
   const isvFields = document.getElementById('form-isv-fields');
 
-  // Function to update placeholders and hide/show irrelevant fields
   function updateFormContent() {
     if (partnerRadio.checked) {
       msgLabel.textContent = "Tell us what you’re looking to explore together.";
       msgArea.placeholder = "e.g. We provide cloud listing infrastructure and want to explore aligning our platforms with SaaSNova's execution motion...";
-      isvFields.style.display = 'none'; // Hide ISV specific questions for partners
+      isvFields.style.display = 'none';
     } else {
       msgLabel.textContent = "What is your biggest cloud GTM challenge?";
       msgArea.placeholder = "e.g. Listed on AWS and Azure but no co-sell traction and nothing board-ready to show...";
-      isvFields.style.display = 'block'; // Show ISV specific questions
+      isvFields.style.display = 'block';
     }
   }
 
-  // Set initial state from URL if present
   if (intentParam === 'partnership' && partnerRadio) {
     partnerRadio.checked = true;
   }
 
-  // Listen for clicks on the toggle buttons
   if (serviceRadio && partnerRadio) {
     serviceRadio.addEventListener('change', updateFormContent);
     partnerRadio.addEventListener('change', updateFormContent);
-    updateFormContent(); // Run once on load to establish baseline
+    updateFormContent(); 
   }
 });
 
-// HubSpot API Submission Script
+// BULLETPROOF HubSpot API Submission Script
 function handleContactSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -228,31 +225,42 @@ function handleContactSubmit(e) {
   btn.textContent = 'Sending…';
   btn.disabled = true;
 
-  // Extract all the data from the custom UI
   const formData = new FormData(form);
+  const inquiryType = formData.get('inquiry_type') || '';
   
-  // Map our UI field names to standard HubSpot internal properties
+  // 1. Only send the standard, guaranteed fields to HubSpot
   const fields = [
     { name: 'firstname', value: formData.get('first_name') || '' },
     { name: 'lastname', value: formData.get('last_name') || '' },
     { name: 'email', value: formData.get('email') || '' },
-    { name: 'company', value: formData.get('company') || '' },
-    { name: 'message', value: formData.get('message') || '' },
-    { name: 'inquiry_type', value: formData.get('inquiry_type') || '' }
+    { name: 'company', value: formData.get('company') || '' }
   ];
 
-  // Only pass these specific dropdowns if it's a Service Inquiry
-  if (formData.get('inquiry_type') === 'Service Inquiry') {
-    fields.push({ name: 'target_cloud', value: formData.get('target_cloud') || '' });
-    fields.push({ name: 'marketplace_status', value: formData.get('marketplace_status') || '' });
+  // 2. Pack the custom dropdown answers INTO the message box so HubSpot never rejects them!
+  let finalMessage = "--- " + inquiryType.toUpperCase() + " ---\\n\\n";
+
+  if (inquiryType === 'Service Inquiry') {
+    finalMessage += "Target Cloud: " + (formData.get('target_cloud') || 'Not specified') + "\\n";
+    finalMessage += "Marketplace Status: " + (formData.get('marketplace_status') || 'Not specified') + "\\n\\n";
   }
 
-  // HubSpot Form API Details
+  finalMessage += "MESSAGE:\\n" + (formData.get('message') || '');
+
+  fields.push({ name: 'message', value: finalMessage });
+
+  // 3. SMART ROUTING
   const portalId = '245317385';
-  const formId = 'aa170816-bdf0-44f2-a14c-97dd671d1762';
+  let formId = '';
+
+  if (inquiryType === 'Partnership Inquiry') {
+    formId = '3427559f-e65d-4cfd-b29b-26ba43a79822'; // New Partnership Form ID
+  } else {
+    formId = 'aa170816-bdf0-44f2-a14c-97dd671d1762'; // Service Inquiry Form ID
+  }
+
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
 
-  // Send the payload behind the scenes
+  // 4. Send the payload behind the scenes
   fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -263,18 +271,20 @@ function handleContactSubmit(e) {
   })
   .then(async (response) => {
     if (!response.ok) {
+       // If it fails, capture the ACTUAL error text from HubSpot
        const errTxt = await response.text();
-       throw new Error("HubSpot rejected the submission: " + errTxt);
+       throw new Error(errTxt);
     }
     
-    // Success: Replace form with the styled success message
+    // Success UI
     form.innerHTML = '<div style="padding:var(--sp-4);text-align:center;background:rgba(52,168,83,.06);border-radius:var(--r-xl);border:1px solid rgba(52,168,83,.2)"><div style="font-size:32px;margin-bottom:8px;color:#34a853;">✓</div><div style="font-weight:700;font-size:18px;color:var(--text-primary);margin-bottom:6px">Message sent.</div><p style="color:var(--text-muted)">Founder Jen Dawson reviews every submission personally and responds within 24 hours.</p></div>';
   })
   .catch((err) => {
-    // Error: Reset button and alert user
     btn.textContent = 'Send Message';
     btn.disabled = false;
-    alert('HubSpot blocked the submission. Please make sure reCAPTCHA is turned OFF in your HubSpot form settings.');
+    
+    // Show the REAL error returned by the server, removing my hardcoded message
+    alert("HubSpot blocked the submission. Error Details:\\n\\n" + err.message);
     console.error('HubSpot Error:', err);
   });
 }

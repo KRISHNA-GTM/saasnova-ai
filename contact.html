@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// HubSpot API Submission Script
+// HubSpot API Submission Script - SMART ROUTING
 function handleContactSubmit(e) {
   e.preventDefault();
   const form = e.target;
@@ -230,6 +230,7 @@ function handleContactSubmit(e) {
 
   // Extract all the data from the custom UI
   const formData = new FormData(form);
+  const inquiryType = formData.get('inquiry_type') || '';
   
   // Map our UI field names to standard HubSpot internal properties
   const fields = [
@@ -238,18 +239,25 @@ function handleContactSubmit(e) {
     { name: 'email', value: formData.get('email') || '' },
     { name: 'company', value: formData.get('company') || '' },
     { name: 'message', value: formData.get('message') || '' },
-    { name: 'inquiry_type', value: formData.get('inquiry_type') || '' }
+    { name: 'inquiry_type', value: inquiryType }
   ];
 
   // Only pass these specific dropdowns if it's a Service Inquiry
-  if (formData.get('inquiry_type') === 'Service Inquiry') {
+  if (inquiryType === 'Service Inquiry') {
     fields.push({ name: 'target_cloud', value: formData.get('target_cloud') || '' });
     fields.push({ name: 'marketplace_status', value: formData.get('marketplace_status') || '' });
   }
 
-  // HubSpot Form API Details
   const portalId = '245317385';
-  const formId = 'aa170816-bdf0-44f2-a14c-97dd671d1762';
+  let formId = '';
+
+  // SMART ROUTING: Choose the correct Form ID based on the radio button selected
+  if (inquiryType === 'Partnership Inquiry') {
+    formId = '3427559f-e65d-4cfd-b29b-26ba43a79822'; // New Partnership Form
+  } else {
+    formId = 'aa170816-bdf0-44f2-a14c-97dd671d1762'; // Service Inquiry Form
+  }
+
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
 
   // Send the payload behind the scenes

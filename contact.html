@@ -228,39 +228,35 @@ function handleContactSubmit(e) {
   const formData = new FormData(form);
   const inquiryType = formData.get('inquiry_type') || '';
   
-  // 1. Only send the standard, guaranteed fields to HubSpot
+  // Standard fields that exist natively
   const fields = [
     { name: 'firstname', value: formData.get('first_name') || '' },
     { name: 'lastname', value: formData.get('last_name') || '' },
+    // The partnership form specifically asked for a field called "name", so we merge them:
+    { name: 'name', value: `${formData.get('first_name') || ''} ${formData.get('last_name') || ''}`.trim() },
     { name: 'email', value: formData.get('email') || '' },
-    { name: 'company', value: formData.get('company') || '' }
+    { name: 'company', value: formData.get('company') || '' },
+    { name: 'message', value: formData.get('message') || '' }
   ];
 
-  // 2. Pack the custom dropdown answers INTO the message box so HubSpot never rejects them!
-  let finalMessage = "--- " + inquiryType.toUpperCase() + " ---\\n\\n";
-
+  // Specific required fields demanded by the HubSpot errors
   if (inquiryType === 'Service Inquiry') {
-    finalMessage += "Target Cloud: " + (formData.get('target_cloud') || 'Not specified') + "\\n";
-    finalMessage += "Marketplace Status: " + (formData.get('marketplace_status') || 'Not specified') + "\\n\\n";
+    fields.push({ name: 'target_cloud_marketplaces', value: formData.get('target_cloud') || '' });
+    fields.push({ name: 'current_marketplace_status', value: formData.get('marketplace_status') || '' });
   }
 
-  finalMessage += "MESSAGE:\\n" + (formData.get('message') || '');
-
-  fields.push({ name: 'message', value: finalMessage });
-
-  // 3. SMART ROUTING
+  // SMART ROUTING
   const portalId = '245317385';
   let formId = '';
 
   if (inquiryType === 'Partnership Inquiry') {
-    formId = '3427559f-e65d-4cfd-b29b-26ba43a79822'; // New Partnership Form ID
+    formId = '3427559f-e65d-4cfd-b29b-26ba43a79822'; // Partnership Form ID
   } else {
     formId = 'aa170816-bdf0-44f2-a14c-97dd671d1762'; // Service Inquiry Form ID
   }
 
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
 
-  // 4. Send the payload behind the scenes
   fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -271,7 +267,7 @@ function handleContactSubmit(e) {
   })
   .then(async (response) => {
     if (!response.ok) {
-       // If it fails, capture the ACTUAL error text from HubSpot
+       // Capture real error from HubSpot
        const errTxt = await response.text();
        throw new Error(errTxt);
     }
@@ -283,8 +279,8 @@ function handleContactSubmit(e) {
     btn.textContent = 'Send Message';
     btn.disabled = false;
     
-    // Show the REAL error returned by the server, removing my hardcoded message
-    alert("HubSpot blocked the submission. Error Details:\\n\\n" + err.message);
+    // Alert the real reason to the user/developer
+    alert("HubSpot blocked the submission. Error Details:\n\n" + err.message);
     console.error('HubSpot Error:', err);
   });
 }

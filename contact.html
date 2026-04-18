@@ -117,7 +117,6 @@
                   <div style="position:relative">
                     <select class="form-select" name="marketplace_status">
                       <option value="">Select...</option>
-                      <option value="Listed, no co-sell traction">Listed, no co-sell traction</option>
                       <option value="Listed on multiple clouds">Listed on multiple clouds</option>
                       <option value="Listing in progress">Listing in progress</option>
                       <option value="Not yet listed">Not yet listed</option>
@@ -262,8 +261,11 @@ function handleContactSubmit(e) {
       context: { pageUri: window.location.href, pageName: document.title }
     })
   })
-  .then((response) => {
-    if (!response.ok) throw new Error('Network response not ok');
+  .then(async (response) => {
+    if (!response.ok) {
+       const errTxt = await response.text();
+       throw new Error("HubSpot rejected the submission: " + errTxt);
+    }
     
     // Success: Replace form with the styled success message
     form.innerHTML = '<div style="padding:var(--sp-4);text-align:center;background:rgba(52,168,83,.06);border-radius:var(--r-xl);border:1px solid rgba(52,168,83,.2)"><div style="font-size:32px;margin-bottom:8px;color:#34a853;">✓</div><div style="font-weight:700;font-size:18px;color:var(--text-primary);margin-bottom:6px">Message sent.</div><p style="color:var(--text-muted)">Founder Jen Dawson reviews every submission personally and responds within 24 hours.</p></div>';
@@ -272,7 +274,7 @@ function handleContactSubmit(e) {
     // Error: Reset button and alert user
     btn.textContent = 'Send Message';
     btn.disabled = false;
-    alert('Something went wrong submitting to HubSpot. Please email jen@saasnova.ai directly.');
+    alert('HubSpot blocked the submission. Please make sure reCAPTCHA is turned OFF in your HubSpot form settings.');
     console.error('HubSpot Error:', err);
   });
 }

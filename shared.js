@@ -1,4 +1,18 @@
 /* SaaSNova V5, shared.js */
+/* --- GOOGLE ANALYTICS (G-185EJ40PT4) INJECTION --- */
+(function() {
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-185EJ40PT4';
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag; // Expose globally
+  gtag('js', new Date());
+  gtag('config', 'G-185EJ40PT4');
+})();
+/* ------------------------------------------------- */
 
 const CALENDLY = "https://calendly.com/jen-saasnova/founder-strategy-session-scale-your-gtm-via-aws?month=2026-03";
 

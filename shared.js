@@ -148,7 +148,7 @@ const NAV_STYLE_AND_DESKTOP = `
               <div class="dd-icon-wrap" style="background:rgba(100,116,139,0.08); color:var(--text-muted);">${SVG.part3PI}</div>
               <div style="flex:1;">
                 <div style="font-weight:700; color:var(--text-primary); margin-bottom:2px; display:flex; justify-content:space-between; align-items:center;">
-                  3PI Programs <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1.5L7 5L3 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  3PI Partners <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M3 1.5L7 5L3 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
                 <div style="font-size:12px; color:var(--text-muted); font-weight:500;">SaaSify, Workspan</div>
               </div>
